@@ -104,7 +104,7 @@ Download Hadith Kids and help your child grow up with the Sunnah.
 
 **Target audience:** Ages 5 and under, 6–8, 9–12 (choose the ones you want). The app is **not** designed to appeal to older audiences only, so it joins the Families program.
 
-**Content rating questionnaire:** Category *Reference, News, or Educational*. Answer **No** to violence, sexual content, profanity, drugs, gambling, user-to-user communication and sharing of location. The leaderboard shows only a nickname, a preset cartoon character and a governorate chosen from a list; children can't send messages to each other.
+**Content rating questionnaire:** Category *All Other App Types*. Answer **No** to everything (violence, fear, sexuality, language, controlled substances, gambling, user interaction, location sharing, digital purchases, web browser) except **Yes** to "primarily a news or educational product". The leaderboard shows only a nickname, a preset cartoon character and a governorate chosen from a list; children can't send messages to each other.
 
 **News app:** No. **Government app:** No. **Financial features:** None. **Health:** No.
 

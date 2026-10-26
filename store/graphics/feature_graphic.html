@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@600;800&display=block" rel="stylesheet">
+<style>
+  html, body { margin:0; width:1024px; height:500px; overflow:hidden; }
+  body { font-family:"Baloo Bhaijaan 2", "SF Arabic Rounded", sans-serif; }
+  svg { display:block; }
+</style>
+</head>
+<body>
+<svg width="1024" height="500" viewBox="0 0 1024 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1E2A5E"/>
+      <stop offset="1" stop-color="#2B3A78"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#F5B731" stop-opacity=".35"/>
+      <stop offset="1" stop-color="#F5B731" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1024" height="500" fill="url(#sky)"/>
+
+  <!-- stars -->
+  <g fill="#FFF1B8">
+    <path d="M90 70 l7 16 17 1 -13 11 4 17 -15 -9 -15 9 4 -17 -13 -11 17 -1z"/>
+    <path d="M560 60 l4 9 10 1 -8 6 3 10 -9 -5 -9 5 3 -10 -8 -6 10 -1z" opacity=".75"/>
+    <path d="M985 300 l5 11 12 1 -9 8 3 12 -11 -6 -11 6 3 -12 -9 -8 12 -1z" opacity=".8"/>
+    <path d="M60 300 l4 9 10 1 -8 6 3 10 -9 -5 -9 5 3 -10 -8 -6 10 -1z" opacity=".6"/>
+    <path d="M470 330 l3 7 8 1 -6 5 2 8 -7 -4 -7 4 2 -8 -6 -5 8 -1z" opacity=".55"/>
+    <path d="M720 70 l3 7 8 1 -6 5 2 8 -7 -4 -7 4 2 -8 -6 -5 8 -1z" opacity=".6"/>
+  </g>
+
+  <!-- moon -->
+  <circle cx="955" cy="72" r="40" fill="#F5B731"/>
+  <circle cx="975" cy="57" r="36" fill="#1F2B60"/>
+
+  <!-- lantern, same drawing as the app icon -->
+  <circle cx="210" cy="235" r="170" fill="url(#glow)"/>
+  <g transform="translate(210 235) scale(.52) translate(-512 -480)">
+    <circle cx="512" cy="190" r="32" fill="none" stroke="#C47A12" stroke-width="14"/>
+    <path d="M512 222 L622 308 L402 308 Z" fill="#E09A1E"/>
+    <rect x="387" y="304" width="250" height="44" rx="22" fill="#C47A12"/>
+    <rect x="367" y="346" width="290" height="324" rx="70" fill="#F5B731"/>
+    <rect x="367" y="346" width="50" height="324" rx="25" fill="#FFF3CC" opacity=".3"/>
+    <rect x="408" y="388" width="208" height="230" rx="56" fill="#FFF3CC"/>
+    <path d="M440 488 q22 -32 44 0 M524 488 q22 -32 44 0" fill="none" stroke="#1F2B60" stroke-width="16" stroke-linecap="round"/>
+    <circle cx="440" cy="528" r="20" fill="#F7A99A"/>
+    <circle cx="584" cy="528" r="20" fill="#F7A99A"/>
+    <path d="M472 524 h80 q-4 40 -40 40 q-36 0 -40 -40z" fill="#1F2B60"/>
+    <path d="M488 544 q24 16 48 0" fill="none" stroke="#F06A50" stroke-width="10" stroke-linecap="round"/>
+    <rect x="387" y="668" width="250" height="44" rx="22" fill="#C47A12"/>
+    <path d="M450 710 L574 710 L512 785 Z" fill="#E09A1E"/>
+  </g>
+
+  <!-- river waves -->
+  <path d="M0 418 C 220 380, 420 392, 560 414 S 860 440, 1024 392 L1024 500 L0 500 Z" fill="#0E7C74"/>
+  <path d="M0 452 C 240 426, 470 434, 620 450 S 880 470, 1024 438 L1024 500 L0 500 Z" fill="#3CC6A8"/>
+
+  <!-- text -->
+  <text x="930" y="215" text-anchor="start" direction="rtl" font-size="92" font-weight="800" fill="#FFFFFF">أحاديث الصغار</text>
+  <text x="930" y="285" text-anchor="start" direction="rtl" font-size="38" font-weight="600" fill="#FFE7A3">احفظ الأحاديث بالحكايات والألعاب ⭐</text>
+  <text x="930" y="340" text-anchor="start" direction="rtl" font-size="30" font-weight="600" fill="#C9D3F5" opacity=".9">Hadith Kids</text>
+</svg>
+</body>
+</html>
