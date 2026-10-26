@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="200" viewBox="0 0 320 200">
+                  <rect width="320" height="200" fill="#DDF4FF"></rect>
+                  <path d="M0 40H320M0 80H320M0 120H320M60 0V128M140 0V128M220 0V128M300 0V128" stroke="#C6E6F7" stroke-width="2"></path>
+                  <rect y="170" width="320" height="30" fill="#BFDDF0"></rect>
+                  <rect x="160" y="144" width="130" height="56" fill="#BDEBE3"></rect><rect x="150" y="128" width="150" height="16" rx="6" fill="#FFFFFF" stroke="#9CC3E0" stroke-width="3"></rect>
+                  <path d="M236 128V98h-22v10" stroke="#8B98B5" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"></path><path d="M214 112V124" stroke="#6EC6F0" stroke-width="4" stroke-linecap="round"></path>
+                  <rect x="256" y="120" width="22" height="9" rx="4" fill="#F5B82E"></rect>
+                  <circle cx="130" cy="100" r="21" fill="#EE7FA0"></circle><path d="M110 106Q130 130 150 106L150 122Q130 132 110 122Z" fill="#EE7FA0"></path>
+                  <circle cx="130" cy="103" r="14" fill="#F2C29B"></circle><circle cx="125" cy="102" r="2.2" fill="#1D2B5E"></circle><circle cx="135" cy="102" r="2.2" fill="#1D2B5E"></circle><path d="M125 108q5 5 10 0" stroke="#1D2B5E" stroke-width="2.5" fill="none" stroke-linecap="round"></path>
+                  <rect x="115" y="122" width="30" height="40" rx="12" fill="#33478A"></rect><rect x="119" y="159" width="9" height="21" rx="4" fill="#1D2B5E"></rect><rect x="132" y="159" width="9" height="21" rx="4" fill="#1D2B5E"></rect>
+                  <path d="M142 130L200 122M142 136L202 130" stroke="#33478A" stroke-width="8" stroke-linecap="round"></path><circle cx="204" cy="122" r="6" fill="#F2C29B"></circle><circle cx="206" cy="130" r="6" fill="#F2C29B"></circle>
+                  <circle cx="200" cy="104" r="6" fill="#FFFFFF" stroke="#9CC3E0" stroke-width="2"></circle><circle cx="186" cy="94" r="4" fill="#FFFFFF" stroke="#9CC3E0" stroke-width="2"></circle><circle cx="226" cy="108" r="5" fill="#FFFFFF" stroke="#9CC3E0" stroke-width="2"></circle><circle cx="212" cy="88" r="7" fill="#FFFFFF" stroke="#9CC3E0" stroke-width="2"></circle>
+                </svg>

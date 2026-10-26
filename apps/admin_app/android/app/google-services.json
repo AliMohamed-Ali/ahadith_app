@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "262095966926",
+    "project_id": "ahadith-6d664",
+    "storage_bucket": "ahadith-6d664.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:262095966926:android:ab6a08ecb12fabcea2b69f",
+        "android_client_info": {
+          "package_name": "com.ahadith.admin_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5AxC8HcHj3qJx6WRbMUyeo3_ZD4pxbMA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:262095966926:android:027c44de980a5ed9a2b69f",
+        "android_client_info": {
+          "package_name": "com.ahadith.kids_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5AxC8HcHj3qJx6WRbMUyeo3_ZD4pxbMA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

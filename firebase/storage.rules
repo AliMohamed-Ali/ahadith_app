@@ -1,0 +1,19 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // الصوت والفيديو والصور: يقرأها الجميع، ويرفعها المدير فقط
+    match /media/{allPaths=**} {
+      allow read: if true;
+      allow delete: if request.auth != null
+        && firestore.exists(/databases/(default)/documents/admins/$(request.auth.uid));
+      allow create, update: if request.auth != null
+        && firestore.exists(/databases/(default)/documents/admins/$(request.auth.uid))
+        && request.resource.size < 50 * 1024 * 1024
+        && request.resource.contentType.matches('(audio|video|image)/.*');
+    }
+    // صور الأطفال لا تُرفع أبدًا (تبقى على الجهاز فقط)
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

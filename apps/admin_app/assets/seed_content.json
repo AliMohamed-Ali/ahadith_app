@@ -1,0 +1,2442 @@
+{
+ "version": 1,
+ "config": {
+  "rewards": {
+   "perGame": 1,
+   "perKnow": 1,
+   "royal": {
+    "level": {
+     "on": true
+    },
+    "nawawi": {
+     "on": true,
+     "n": 10
+    },
+    "section": {
+     "on": true
+    },
+    "mission": {
+     "on": true
+    },
+    "tree": {
+     "on": true,
+     "n": 3
+    }
+   },
+   "fanoosLevels": [
+    0,
+    3,
+    6,
+    10,
+    16
+   ]
+  },
+  "shop": [
+   {
+    "id": "gold",
+    "nameAr": "ذهبي",
+    "nameEn": "Gold",
+    "hex": "#F5B82E",
+    "kind": "color",
+    "currency": "normal",
+    "price": 0
+   },
+   {
+    "id": "mint",
+    "nameAr": "نعناعي",
+    "nameEn": "Mint",
+    "hex": "#3CC7A8",
+    "kind": "color",
+    "currency": "normal",
+    "price": 3
+   },
+   {
+    "id": "pink",
+    "nameAr": "وردي",
+    "nameEn": "Pink",
+    "hex": "#F27BA6",
+    "kind": "color",
+    "currency": "normal",
+    "price": 6
+   },
+   {
+    "id": "sky",
+    "nameAr": "سماوي",
+    "nameEn": "Sky",
+    "hex": "#4FA8F0",
+    "kind": "color",
+    "currency": "normal",
+    "price": 10
+   },
+   {
+    "id": "purple",
+    "nameAr": "بنفسجي",
+    "nameEn": "Purple",
+    "hex": "#9B7BEA",
+    "kind": "color",
+    "currency": "normal",
+    "price": 14
+   },
+   {
+    "id": "coral",
+    "nameAr": "مرجاني",
+    "nameEn": "Coral",
+    "hex": "#F0644A",
+    "kind": "color",
+    "currency": "normal",
+    "price": 18
+   },
+   {
+    "id": "royal",
+    "nameAr": "ملكي",
+    "nameEn": "Royal",
+    "hex": "#8B3FD9",
+    "kind": "color",
+    "currency": "royal",
+    "price": 1
+   },
+   {
+    "id": "rosegold",
+    "nameAr": "روز جولد",
+    "nameEn": "Rose gold",
+    "hex": "#E8A0B4",
+    "kind": "color",
+    "currency": "royal",
+    "price": 3
+   },
+   {
+    "id": "diamond",
+    "nameAr": "ألماسي",
+    "nameEn": "Diamond",
+    "hex": "#7FD8F0",
+    "kind": "color",
+    "currency": "royal",
+    "price": 5
+   },
+   {
+    "id": "bow",
+    "nameAr": "فيونكة",
+    "nameEn": "Bow",
+    "hex": "#E8573A",
+    "kind": "accessory",
+    "currency": "normal",
+    "price": 3
+   },
+   {
+    "id": "crown",
+    "nameAr": "تاج",
+    "nameEn": "Crown",
+    "hex": "#FFD95A",
+    "kind": "accessory",
+    "currency": "royal",
+    "price": 2
+   },
+   {
+    "id": "halo",
+    "nameAr": "هالة نجوم",
+    "nameEn": "Star halo",
+    "hex": "#FFE9A8",
+    "kind": "accessory",
+    "currency": "royal",
+    "price": 4
+   }
+  ]
+ },
+ "tabs": [
+  {
+   "id": "levels",
+   "nameAr": "المستويات",
+   "nameEn": "Levels",
+   "type": "hadith",
+   "mode": "levels",
+   "place": "home",
+   "color": "#F5B82E",
+   "visible": true,
+   "order": 1,
+   "system": true
+  },
+  {
+   "id": "nawawi",
+   "nameAr": "الأربعون النووية",
+   "nameEn": "The Forty Nawawi",
+   "type": "hadith",
+   "mode": "open",
+   "place": "home",
+   "color": "#1D2B5E",
+   "visible": true,
+   "order": 2,
+   "system": true
+  },
+  {
+   "id": "basics",
+   "nameAr": "ما لا يسع أطفال المسلمين جهله",
+   "nameEn": "What Every Muslim Child Should Know",
+   "type": "qa",
+   "mode": "open",
+   "place": "tab",
+   "color": "#7558D6",
+   "visible": true,
+   "order": 3,
+   "system": true
+  }
+ ],
+ "levels": [
+  {
+   "id": "level1",
+   "tabId": "levels",
+   "nameAr": "المستوى الأول",
+   "nameEn": "Level One",
+   "ageAr": "من ٤ إلى ٦ سنوات",
+   "ageEn": "Ages 4 to 6",
+   "color": "#FFD465",
+   "order": 1
+  },
+  {
+   "id": "level2",
+   "tabId": "levels",
+   "nameAr": "المستوى الثاني",
+   "nameEn": "Level Two",
+   "ageAr": "من ٧ إلى ١٠ سنوات",
+   "ageEn": "Ages 7 to 10",
+   "color": "#BDEBE3",
+   "order": 2
+  }
+ ],
+ "hadiths": [
+  {
+   "id": "h1",
+   "tabId": "levels",
+   "levelId": "level1",
+   "order": 1,
+   "titleAr": "النية",
+   "titleEn": "Intention",
+   "text": "إنما الأعمال بالنيات",
+   "translationEn": "Actions are only by intentions.",
+   "narratorAr": "عمر بن الخطاب",
+   "narratorGenAr": "عمر بن الخطاب",
+   "narratorEn": "Umar ibn al-Khattab",
+   "narratorFactAr": "صاحب النبي ﷺ وثاني الخلفاء، ويُلقّب بالفاروق.",
+   "narratorFactEn": "A close companion of the Prophet ﷺ and the second caliph, known as al-Faruq.",
+   "sourceAr": "متفق عليه",
+   "sourceEn": "Bukhari & Muslim",
+   "sourceFactAr": "يعني أن الإمام البخاري والإمام مسلم اتفقا على رواية هذا الحديث في كتابيهما، وهما أصح كتب الحديث.",
+   "sourceFactEn": "Both Imam Bukhari and Imam Muslim recorded this hadith in their books, the two most authentic hadith collections.",
+   "isnadInText": false,
+   "explainAr": "الله يرى ما في قلوبنا. إذا ساعدت أمك وأنت تحب أن يرضى الله عنك، تأخذ أجرًا كبيرًا.",
+   "explainEn": "Allah sees what is in our hearts. When you help your mom hoping to please Allah, you get a big reward.",
+   "story": {
+    "textAr": "رأت ليلى أمها متعبة، فقامت تساعدها في ترتيب السفرة. لم تفعل ذلك لتأخذ حلوى، بل لأنها تحب أن يرضى الله عنها.",
+    "textEn": "Layla saw that her mom was tired, so she helped set the table. She didn't do it to get candy, but because she wanted to please Allah.",
+    "sceneKey": "s1",
+    "imageUrl": ""
+   },
+   "game": {
+    "before": "إنما الأعمال",
+    "answer": "بالنيات",
+    "after": "",
+    "options": [
+     "بالألوان",
+     "بالنيات",
+     "بالأرقام"
+    ]
+   },
+   "missionAr": "قبل أن تساعد أحدًا اليوم، قل في نفسك: «أفعل هذا ليرضى الله عني»",
+   "missionEn": "Before helping someone today, say in your heart: \"I do this to please Allah\"",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "h2",
+   "tabId": "levels",
+   "levelId": "level1",
+   "order": 2,
+   "titleAr": "الهدوء",
+   "titleEn": "Stay Calm",
+   "text": "لا تغضب",
+   "translationEn": "Do not get angry.",
+   "narratorAr": "أبو هريرة",
+   "narratorGenAr": "أبي هريرة",
+   "narratorEn": "Abu Hurayrah",
+   "narratorFactAr": "أكثر الصحابة رواية للحديث، وسُمّي «أبا هريرة» لأنه كان يعتني بقطة صغيرة.",
+   "narratorFactEn": "He narrated more hadiths than any other companion. He was called \"Abu Hurayrah\" (father of the kitten) because he cared for a little cat.",
+   "sourceAr": "رواه البخاري",
+   "sourceEn": "Bukhari",
+   "sourceFactAr": "موجود في «صحيح البخاري»، أصح كتاب في الحديث، جمعه الإمام البخاري.",
+   "sourceFactEn": "Found in Sahih al-Bukhari, the most authentic hadith book, collected by Imam Bukhari.",
+   "isnadInText": false,
+   "explainAr": "عندما تغضب خذ نفسًا عميقًا واهدأ، ولا تضرب ولا تصرخ.",
+   "explainEn": "When you feel angry, take a deep breath and calm down. Do not hit or shout.",
+   "story": {
+    "textAr": "وقع برج المكعبات الذي بناه آدم، فشعر بالغضب. لكنه أخذ نفسًا عميقًا وقال: لا بأس، سأبنيه من جديد!",
+    "textEn": "Adam's block tower fell down and he felt angry. But he took a deep breath and said: It's okay, I'll build it again!",
+    "sceneKey": "s2",
+    "imageUrl": ""
+   },
+   "game": {
+    "before": "لا",
+    "answer": "تغضب",
+    "after": "",
+    "options": [
+     "تنام",
+     "تركض",
+     "تغضب"
+    ]
+   },
+   "missionAr": "إذا غضبت اليوم، خذ ثلاثة أنفاس عميقة قبل أن تتكلم",
+   "missionEn": "If you get angry today, take three deep breaths before you speak",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "h3",
+   "tabId": "levels",
+   "levelId": "level1",
+   "order": 3,
+   "titleAr": "الكلمة الطيبة",
+   "titleEn": "Kind Words",
+   "text": "الكلمة الطيبة صدقة",
+   "translationEn": "A good word is charity.",
+   "narratorAr": "أبو هريرة",
+   "narratorGenAr": "أبي هريرة",
+   "narratorEn": "Abu Hurayrah",
+   "narratorFactAr": "أكثر الصحابة رواية للحديث، وسُمّي «أبا هريرة» لأنه كان يعتني بقطة صغيرة.",
+   "narratorFactEn": "He narrated more hadiths than any other companion. He was called \"Abu Hurayrah\" (father of the kitten) because he cared for a little cat.",
+   "sourceAr": "متفق عليه",
+   "sourceEn": "Bukhari & Muslim",
+   "sourceFactAr": "يعني أن الإمام البخاري والإمام مسلم اتفقا على رواية هذا الحديث في كتابيهما، وهما أصح كتب الحديث.",
+   "sourceFactEn": "Both Imam Bukhari and Imam Muslim recorded this hadith in their books, the two most authentic hadith collections.",
+   "isnadInText": false,
+   "explainAr": "الكلمة الحلوة مثل «شكرًا» و«من فضلك» لها أجر مثل الصدقة.",
+   "explainEn": "Sweet words like \"thank you\" and \"please\" are rewarded just like giving charity.",
+   "story": {
+    "textAr": "أعطت مريم صديقتها قلمًا، فقالت لها صديقتها: شكرًا يا مريم! ففرحت مريم كثيرًا بالكلمة الحلوة.",
+    "textEn": "Maryam gave her friend a pencil. Her friend said: Thank you, Maryam! Maryam felt so happy from the kind word.",
+    "sceneKey": "s3",
+    "imageUrl": ""
+   },
+   "game": {
+    "before": "الكلمة الطيبة",
+    "answer": "صدقة",
+    "after": "",
+    "options": [
+     "صدقة",
+     "لعبة",
+     "قصة"
+    ]
+   },
+   "missionAr": "قل «شكرًا» و«من فضلك» خمس مرات اليوم",
+   "missionEn": "Say \"thank you\" and \"please\" five times today",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "h4",
+   "tabId": "levels",
+   "levelId": "level1",
+   "order": 4,
+   "titleAr": "الابتسامة",
+   "titleEn": "Smile",
+   "text": "تبسمك في وجه أخيك لك صدقة",
+   "translationEn": "Your smile in the face of your brother is charity.",
+   "narratorAr": "أبو ذر الغفاري",
+   "narratorGenAr": "أبي ذر الغفاري",
+   "narratorEn": "Abu Dharr al-Ghifari",
+   "narratorFactAr": "صحابي مشهور بالصدق وقول الحق.",
+   "narratorFactEn": "A companion famous for his honesty and for always speaking the truth.",
+   "sourceAr": "رواه الترمذي",
+   "sourceEn": "Tirmidhi",
+   "sourceFactAr": "موجود في «سنن الترمذي»، كتاب حديث مشهور جمعه الإمام الترمذي.",
+   "sourceFactEn": "Found in Sunan al-Tirmidhi, a well-known hadith book collected by Imam al-Tirmidhi.",
+   "isnadInText": false,
+   "explainAr": "ابتسامتك لأصحابك وأهلك تفرحهم، والله يعطيك عليها أجرًا.",
+   "explainEn": "Your smile makes your friends and family happy, and Allah rewards you for it.",
+   "story": {
+    "textAr": "دخل يوسف الفصل فوجد صديقه زين حزينًا، فابتسم له ابتسامة كبيرة. ابتسم زين أيضًا وصار يومه أجمل.",
+    "textEn": "Yusuf walked into class and saw his friend Zain looking sad, so he gave him a big smile. Zain smiled back and his day got brighter.",
+    "sceneKey": "s4",
+    "imageUrl": ""
+   },
+   "game": {
+    "before": "تبسمك في وجه",
+    "answer": "أخيك",
+    "after": "لك صدقة",
+    "options": [
+     "الشمس",
+     "المرآة",
+     "أخيك"
+    ]
+   },
+   "missionAr": "ابتسم في وجه ثلاثة أشخاص اليوم",
+   "missionEn": "Smile at three people today",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "h5",
+   "tabId": "levels",
+   "levelId": "level1",
+   "order": 5,
+   "titleAr": "الرحمة",
+   "titleEn": "Mercy",
+   "text": "من لا يَرحم لا يُرحم",
+   "translationEn": "Whoever does not show mercy will not be shown mercy.",
+   "narratorAr": "أبو هريرة",
+   "narratorGenAr": "أبي هريرة",
+   "narratorEn": "Abu Hurayrah",
+   "narratorFactAr": "أكثر الصحابة رواية للحديث، وسُمّي «أبا هريرة» لأنه كان يعتني بقطة صغيرة.",
+   "narratorFactEn": "He narrated more hadiths than any other companion. He was called \"Abu Hurayrah\" (father of the kitten) because he cared for a little cat.",
+   "sourceAr": "متفق عليه",
+   "sourceEn": "Bukhari & Muslim",
+   "sourceFactAr": "يعني أن الإمام البخاري والإمام مسلم اتفقا على رواية هذا الحديث في كتابيهما، وهما أصح كتب الحديث.",
+   "sourceFactEn": "Both Imam Bukhari and Imam Muslim recorded this hadith in their books, the two most authentic hadith collections.",
+   "isnadInText": false,
+   "explainAr": "كن رحيمًا بالصغار والحيوانات، فالله يرحم الرحماء.",
+   "explainEn": "Be gentle with little ones and animals. Allah is merciful to those who are merciful.",
+   "story": {
+    "textAr": "في يوم حار رأت سارة قطة عطشانة، فوضعت لها طبقًا من الماء. شربت القطة وقالت: مياو!",
+    "textEn": "On a hot day, Sara saw a thirsty cat, so she put out a bowl of water. The cat drank and said: Meow!",
+    "sceneKey": "s5",
+    "imageUrl": ""
+   },
+   "game": {
+    "before": "من لا يَرحم لا",
+    "answer": "يُرحم",
+    "after": "",
+    "options": [
+     "يَكتب",
+     "يُرحم",
+     "يَلعب"
+    ]
+   },
+   "missionAr": "ضع ماءً لعصفور أو قطة، أو ساعد من هو أصغر منك",
+   "missionEn": "Put out water for a bird or a cat, or help someone younger than you",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "h6",
+   "tabId": "levels",
+   "levelId": "level2",
+   "order": 1,
+   "titleAr": "حب الخير للناس",
+   "titleEn": "Love Good for Others",
+   "text": "لا يؤمن أحدكم حتى يحب لأخيه ما يحب لنفسه",
+   "translationEn": "None of you truly believes until he loves for his brother what he loves for himself.",
+   "narratorAr": "أنس بن مالك",
+   "narratorGenAr": "أنس بن مالك",
+   "narratorEn": "Anas ibn Malik",
+   "narratorFactAr": "خدم النبي ﷺ عشر سنين منذ كان ولدًا صغيرًا.",
+   "narratorFactEn": "He served the Prophet ﷺ for ten years, starting when he was a young boy.",
+   "sourceAr": "متفق عليه",
+   "sourceEn": "Bukhari & Muslim",
+   "sourceFactAr": "يعني أن الإمام البخاري والإمام مسلم اتفقا على رواية هذا الحديث في كتابيهما، وهما أصح كتب الحديث.",
+   "sourceFactEn": "Both Imam Bukhari and Imam Muslim recorded this hadith in their books, the two most authentic hadith collections.",
+   "isnadInText": false,
+   "explainAr": "إذا فرحت بشيء جميل، تمنَّ أن يكون لصديقك مثله، وشاركه فرحتك.",
+   "explainEn": "When something nice makes you happy, wish the same for your friend and share your joy.",
+   "story": {
+    "textAr": "حصل آدم على كرة جديدة، ورأى صديقه ليس معه كرة. فقال له: تعال نلعب معًا! وتمنّى أن يحصل صديقه على كرة مثلها.",
+    "textEn": "Adam got a new ball and saw that his friend didn't have one. He said: Come, let's play together! And he wished his friend could have one too.",
+    "sceneKey": "s6",
+    "imageUrl": ""
+   },
+   "game": {
+    "before": "لا يؤمن أحدكم حتى يحب لأخيه ما يحب",
+    "answer": "لنفسه",
+    "after": "",
+    "options": [
+     "لأبيه",
+     "لنفسه",
+     "لبيته"
+    ]
+   },
+   "missionAr": "شارك لعبتك أو طعامك مع أخيك أو صديقك",
+   "missionEn": "Share your toy or your food with your sibling or friend",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "h7",
+   "tabId": "levels",
+   "levelId": "level2",
+   "order": 2,
+   "titleAr": "لا نؤذي أحدًا",
+   "titleEn": "Harm No One",
+   "text": "المسلم من سلم المسلمون من لسانه ويده",
+   "translationEn": "A Muslim is the one from whose tongue and hand people are safe.",
+   "narratorAr": "عبد الله بن عمرو",
+   "narratorGenAr": "عبد الله بن عمرو",
+   "narratorEn": "Abdullah ibn Amr",
+   "narratorFactAr": "كان يكتب كلام النبي ﷺ ليحفظه.",
+   "narratorFactEn": "He used to write down the words of the Prophet ﷺ to keep them safe.",
+   "sourceAr": "متفق عليه",
+   "sourceEn": "Bukhari & Muslim",
+   "sourceFactAr": "يعني أن الإمام البخاري والإمام مسلم اتفقا على رواية هذا الحديث في كتابيهما، وهما أصح كتب الحديث.",
+   "sourceFactEn": "Both Imam Bukhari and Imam Muslim recorded this hadith in their books, the two most authentic hadith collections.",
+   "isnadInText": false,
+   "explainAr": "المسلم الحقيقي لا يؤذي أحدًا بكلام سيئ ولا بالضرب.",
+   "explainEn": "A true Muslim never hurts anyone with mean words or with his hands.",
+   "story": {
+    "textAr": "في الحديقة كان زين يلعب مع أصحابه بلطف. لم يدفع أحدًا ولم يقل كلمة تؤذي، فأحبّه الجميع.",
+    "textEn": "At the park, Zain played gently with his friends. He didn't push anyone or say hurtful words, so everyone loved him.",
+    "sceneKey": "s7",
+    "imageUrl": ""
+   },
+   "game": {
+    "before": "المسلم من سلم المسلمون من",
+    "answer": "لسانه",
+    "after": "ويده",
+    "options": [
+     "لسانه",
+     "بيته",
+     "كتابه"
+    ]
+   },
+   "missionAr": "العب اليوم دون أن تدفع أحدًا أو تقول كلمة مؤذية",
+   "missionEn": "Play today without pushing anyone or saying a hurtful word",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "h8",
+   "tabId": "levels",
+   "levelId": "level2",
+   "order": 3,
+   "titleAr": "الكلام الجميل",
+   "titleEn": "Speak Good",
+   "text": "من كان يؤمن بالله واليوم الآخر فليقل خيرًا أو ليصمت",
+   "translationEn": "Whoever believes in Allah and the Last Day, let him say good or stay silent.",
+   "narratorAr": "أبو هريرة",
+   "narratorGenAr": "أبي هريرة",
+   "narratorEn": "Abu Hurayrah",
+   "narratorFactAr": "أكثر الصحابة رواية للحديث، وسُمّي «أبا هريرة» لأنه كان يعتني بقطة صغيرة.",
+   "narratorFactEn": "He narrated more hadiths than any other companion. He was called \"Abu Hurayrah\" (father of the kitten) because he cared for a little cat.",
+   "sourceAr": "متفق عليه",
+   "sourceEn": "Bukhari & Muslim",
+   "sourceFactAr": "يعني أن الإمام البخاري والإمام مسلم اتفقا على رواية هذا الحديث في كتابيهما، وهما أصح كتب الحديث.",
+   "sourceFactEn": "Both Imam Bukhari and Imam Muslim recorded this hadith in their books, the two most authentic hadith collections.",
+   "isnadInText": false,
+   "explainAr": "قبل أن تتكلم فكّر: هل كلامي جميل؟ إن لم يكن جميلًا فالسكوت أفضل.",
+   "explainEn": "Before you speak, think: are my words kind? If not, staying quiet is better.",
+   "story": {
+    "textAr": "أرادت ليلى أن تقول لأخيها الصغير كلمة غير لطيفة، لكنها توقفت وفكّرت، ثم قالت: تعال نرسم معًا!",
+    "textEn": "Layla was about to say something unkind to her little brother, but she stopped and thought, then said: Come, let's draw together!",
+    "sceneKey": "s8",
+    "imageUrl": ""
+   },
+   "game": {
+    "before": "من كان يؤمن بالله واليوم الآخر فليقل",
+    "answer": "خيرًا",
+    "after": "أو ليصمت",
+    "options": [
+     "كثيرًا",
+     "سريعًا",
+     "خيرًا"
+    ]
+   },
+   "missionAr": "قبل أن تتكلم اليوم فكّر: هل كلامي جميل؟",
+   "missionEn": "Before you speak today, think: are my words kind?",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "h9",
+   "tabId": "levels",
+   "levelId": "level2",
+   "order": 4,
+   "titleAr": "آداب الطعام",
+   "titleEn": "Table Manners",
+   "text": "يا غلام، سمِّ الله، وكُل بيمينك، وكُل مما يليك",
+   "translationEn": "Young boy, say Bismillah, eat with your right hand, and eat from what is in front of you.",
+   "narratorAr": "عمر بن أبي سلمة",
+   "narratorGenAr": "عمر بن أبي سلمة",
+   "narratorEn": "Umar ibn Abi Salamah",
+   "narratorFactAr": "ابن أم سلمة زوجة النبي ﷺ، وعلّمه النبي آداب الطعام وهو طفل صغير.",
+   "narratorFactEn": "Son of Umm Salamah, the Prophet's ﷺ wife. The Prophet taught him table manners when he was a little boy.",
+   "sourceAr": "متفق عليه",
+   "sourceEn": "Bukhari & Muslim",
+   "sourceFactAr": "يعني أن الإمام البخاري والإمام مسلم اتفقا على رواية هذا الحديث في كتابيهما، وهما أصح كتب الحديث.",
+   "sourceFactEn": "Both Imam Bukhari and Imam Muslim recorded this hadith in their books, the two most authentic hadith collections.",
+   "isnadInText": false,
+   "explainAr": "نقول «بسم الله» قبل الأكل، ونأكل باليد اليمنى، ومن الطبق القريب منا.",
+   "explainEn": "We say \"Bismillah\" before eating, eat with our right hand, and eat from the side of the plate near us.",
+   "story": {
+    "textAr": "جلس يوسف إلى الطعام فقال: بسم الله، ثم أكل بيده اليمنى من الطبق الذي أمامه.",
+    "textEn": "Yusuf sat down to eat. He said \"Bismillah\", then ate with his right hand from the plate in front of him.",
+    "sceneKey": "s9",
+    "imageUrl": ""
+   },
+   "game": {
+    "before": "يا غلام، سمِّ الله، وكُل",
+    "answer": "بيمينك",
+    "after": "، وكُل مما يليك",
+    "options": [
+     "بسرعة",
+     "بيمينك",
+     "وحدك"
+    ]
+   },
+   "missionAr": "قل «بسم الله» وكُل بيمينك في كل وجبة اليوم",
+   "missionEn": "Say \"Bismillah\" and eat with your right hand at every meal today",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "h10",
+   "tabId": "levels",
+   "levelId": "level2",
+   "order": 5,
+   "titleAr": "النظافة",
+   "titleEn": "Cleanliness",
+   "text": "الطهور شطر الإيمان",
+   "translationEn": "Purity is half of faith.",
+   "narratorAr": "أبو مالك الأشعري",
+   "narratorGenAr": "أبي مالك الأشعري",
+   "narratorEn": "Abu Malik al-Ash'ari",
+   "narratorFactAr": "صحابي من قبيلة الأشعريين من اليمن.",
+   "narratorFactEn": "A companion from the Ash'ari tribe of Yemen.",
+   "sourceAr": "رواه مسلم",
+   "sourceEn": "Muslim",
+   "sourceFactAr": "موجود في «صحيح مسلم»، جمعه الإمام مسلم، وهو من أصح كتب الحديث.",
+   "sourceFactEn": "Found in Sahih Muslim, collected by Imam Muslim, one of the most authentic hadith books.",
+   "isnadInText": false,
+   "explainAr": "النظافة مهمة جدًا: نغسل أيدينا ونتوضأ ونحافظ على نظافة ملابسنا.",
+   "explainEn": "Being clean matters: we wash our hands, make wudu, and keep our clothes clean.",
+   "story": {
+    "textAr": "عادت مريم من اللعب، فغسلت يديها جيدًا بالماء والصابون حتى صارتا نظيفتين ولامعتين.",
+    "textEn": "Maryam came back from playing and washed her hands well with soap and water until they were clean and shiny.",
+    "sceneKey": "s10",
+    "imageUrl": ""
+   },
+   "game": {
+    "before": "الطهور",
+    "answer": "شطر",
+    "after": "الإيمان",
+    "options": [
+     "باب",
+     "شطر",
+     "بيت"
+    ]
+   },
+   "missionAr": "اغسل يديك بالماء والصابون قبل كل وجبة",
+   "missionEn": "Wash your hands with soap and water before every meal",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n1",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 1,
+   "titleAr": "النية",
+   "titleEn": "Intention",
+   "text": "عَنْ أَمِيرِ الْمُؤْمِنِينَ أَبِي حَفْصٍ عُمَرَ بْنِ الْخَطَّابِ رَضِيَ اللهُ عَنْهُ قَالَ: سَمِعْتُ رَسُولَ اللَّهِ صلى الله عليه وسلم يَقُولُ: \" إنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى، فَمَنْ كَانَتْ هِجْرَتُهُ إلَى اللَّهِ وَرَسُولِهِ فَهِجْرَتُهُ إلَى اللَّهِ وَرَسُولِهِ، وَمَنْ كَانَتْ هِجْرَتُهُ لِدُنْيَا يُصِيبُهَا أَوْ امْرَأَةٍ يَنْكِحُهَا فَهِجْرَتُهُ إلَى مَا هَاجَرَ إلَيْهِ\"",
+   "translationEn": "It is narrated on the authority of Amirul Mu'minin, Abu Hafs 'Umar bin al-Khattab (ra) who said: I heard the Messenger of Allah (ﷺ) say: \"Actions are (judged) by motives (niyyah), so each man will have what he intended. Thus, he whose migration (hijrah) was to Allah and His Messenger, his migration is to Allah and His Messenger; but he whose migration was for some worldly thing he might gain, or for a wife he might marry, his migration is to that for which he migrated.\"",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "رواه البخاري ومسلم",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "الله ينظر إلى ما في قلبك. اجعل نيتك في كل عمل أن يرضى الله عنك.",
+   "explainEn": "Allah looks at what is in your heart. In everything you do, intend to please Allah.",
+   "story": null,
+   "game": {
+    "before": "إنما الأعمال",
+    "answer": "بالنيات",
+    "after": "",
+    "options": [
+     "بالأقوال",
+     "بالنيات",
+     "بالأموال"
+    ]
+   },
+   "missionAr": "قبل أن تساعد أحدًا اليوم، قل في نفسك: «أفعل هذا ليرضى الله عني»",
+   "missionEn": "Before helping someone today, say in your heart: \"I do this to please Allah\"",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n2",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 2,
+   "titleAr": "حديث جبريل",
+   "titleEn": "Jibril's Visit",
+   "text": "عَنْ عُمَرَ رَضِيَ اللهُ عَنْهُ أَيْضًا قَالَ: \" بَيْنَمَا نَحْنُ جُلُوسٌ عِنْدَ رَسُولِ اللَّهِ صلى الله عليه وسلم ذَاتَ يَوْمٍ، إذْ طَلَعَ عَلَيْنَا رَجُلٌ شَدِيدُ بَيَاضِ الثِّيَابِ، شَدِيدُ سَوَادِ الشَّعْرِ، لَا يُرَى عَلَيْهِ أَثَرُ السَّفَرِ، وَلَا يَعْرِفُهُ مِنَّا أَحَدٌ. حَتَّى جَلَسَ إلَى النَّبِيِّ صلى الله عليه وسلم. فَأَسْنَدَ رُكْبَتَيْهِ إلَى رُكْبَتَيْهِ، وَوَضَعَ كَفَّيْهِ عَلَى فَخِذَيْهِ،\nفَقَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم الْإِسْلَامُ أَنْ تَشْهَدَ أَنْ لَا إلَهَ إلَّا اللَّهُ وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ، وَتُقِيمَ الصَّلَاةَ، وَتُؤْتِيَ الزَّكَاةَ، وَتَصُومَ رَمَضَانَ، وَتَحُجَّ الْبَيْتَ إنْ اسْتَطَعْت إلَيْهِ سَبِيلًا.\nقَالَ: صَدَقْت. فَعَجِبْنَا لَهُ يَسْأَلُهُ وَيُصَدِّقُهُ!\nقَالَ: فَأَخْبِرْنِي عَنْ الْإِيمَانِ.\nقَالَ: أَنْ تُؤْمِنَ بِاَللَّهِ وَمَلَائِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ وَالْيَوْمِ الْآخِرِ، وَتُؤْمِنَ بِالْقَدَرِ خَيْرِهِ وَشَرِّهِ.\nقَالَ: صَدَقْت. قَالَ: فَأَخْبِرْنِي عَنْ الْإِحْسَانِ.\nقَالَ: أَنْ تَعْبُدَ اللَّهَ كَأَنَّك تَرَاهُ، فَإِنْ لَمْ تَكُنْ تَرَاهُ فَإِنَّهُ يَرَاك.\nقَالَ: فَأَخْبِرْنِي عَنْ السَّاعَةِ. قَالَ: مَا الْمَسْئُولُ عَنْهَا بِأَعْلَمَ مِنْ السَّائِلِ.\nقَالَ: فَأَخْبِرْنِي عَنْ أَمَارَاتِهَا؟ قَالَ: أَنْ تَلِدَ الْأَمَةُ رَبَّتَهَا، وَأَنْ تَرَى الْحُفَاةَ الْعُرَاةَ الْعَالَةَ رِعَاءَ الشَّاءِ يَتَطَاوَلُونَ فِي الْبُنْيَانِ. ثُمَّ انْطَلَقَ، فَلَبِثْتُ مَلِيًّا،\nثُمَّ قَالَ: يَا عُمَرُ أَتَدْرِي مَنْ السَّائِلُ؟.\nقُلْتُ: اللَّهُ وَرَسُولُهُ أَعْلَمُ.\nقَالَ: فَإِنَّهُ جِبْرِيلُ أَتَاكُمْ يُعَلِّمُكُمْ دِينَكُمْ \"",
+   "translationEn": "Also on the authority of `Umar (ra) who said: While we were one day sitting with the Messenger of Allah (ﷺ) there appeared before us a man dressed in extremely white clothes and with very black hair. No traces of journeying were visible on him, and none of us knew him. He sat down close by the Prophet (ﷺ) rested his knees against the knees of the Prophet (ﷺ) and placed his palms over his thighs, and said: \"O Muhammad! Inform me about Islam.\" The Messenger of Allah (ﷺ) replied: \"Islam is that you should testify that there is no deity worthy of worship except Allah and that Muhammad is His Messenger (ﷺ), that you should perform salah (ritual prayer), pay the zakah, fast during Ramadan, and perform Hajj (pilgrimage) to the House (the Ka`bah at Makkah), if you can find a way to it (or find the means for making the journey to it).\" He said: \"You have spoken the truth.\" We were astonished at his thus questioning him (ﷺ) and then telling him that he was right, but he went on to say, \"Inform me about Iman (faith).\" He (the Prophet) answered, \"It is that you believe in Allah and His angels and His Books and His Messengers and in the Last Day, and in fate (qadar), both in its good and in its evil aspects.\" He said, \"You have spoken the truth.\" Then he (the man) said, \"Inform me about Ihsan.\" He (the Prophet) answered, \"It is that you should serve Allah as though you could see Him, for though you cannot see Him yet He sees you.\" He said, \"Inform me about the Hour.\" He (the Prophet) said, \"About that the one questioned knows no more than the questioner.\" So he said, \"Well, inform me about its signs.\" He said, \"They are that the slave-girl will give birth to her mistress and that you will see the barefooted ones, the naked, the destitute, the herdsmen of the sheep (competing with each other) in raising lofty buildings.\" Thereupon the man went off. I waited a while, and then he (the Prophet) said, \"O `Umar, do you know who that questioner was?\" I replied, \"Allah and His Messenger know better.\" He said, \"That was Jibril. He came to teach you your religion.\"",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "رواه مسلم",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "جاء جبريل عليه السلام في صورة رجل ليعلّم الصحابة دينهم: الإسلام والإيمان والإحسان. والإحسان أن تعبد الله كأنك تراه.",
+   "explainEn": "Angel Jibril came as a man to teach the companions their religion: Islam, Iman and Ihsan, which is worshipping Allah as if you see Him.",
+   "story": null,
+   "game": {
+    "before": "أن تعبد الله كأنك",
+    "answer": "تراه",
+    "after": "فإن لم تكن تراه فإنه يراك",
+    "options": [
+     "تسمعه",
+     "تراه",
+     "تعرفه"
+    ]
+   },
+   "missionAr": "",
+   "missionEn": "",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n3",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 3,
+   "titleAr": "أركان الإسلام",
+   "titleEn": "Pillars of Islam",
+   "text": "عَنْ أَبِي عَبْدِ الرَّحْمَنِ عَبْدِ اللَّهِ بْنِ عُمَرَ بْنِ الْخَطَّابِ رَضِيَ اللَّهُ عَنْهُمَا قَالَ: سَمِعْت رَسُولَ اللَّهِ صلى الله عليه وسلم يَقُولُ: \" بُنِيَ الْإِسْلَامُ عَلَى خَمْسٍ: شَهَادَةِ أَنْ لَا إلَهَ إلَّا اللَّهُ وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ، وَإِقَامِ الصَّلَاةِ، وَإِيتَاءِ الزَّكَاةِ، وَحَجِّ الْبَيْتِ، وَصَوْمِ رَمَضَانَ\"",
+   "translationEn": "On the authority of Abdullah, the son of Umar ibn al-Khattab (ra), who said: I heard the Messenger of Allah (ﷺ) say, \"Islam has been built on five : testifying that there is no deity worthy of worship except Allah and that Muhammad is the Messenger of Allah, establishing the salah (prayer), paying the zakat (obligatory charity), making the hajj (pilgrimage) to the House, and fasting in Ramadhan.\"",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "رواه البخاري ومسلم",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "للإسلام خمسة أركان مثل أعمدة البيت: الشهادتان، والصلاة، والزكاة، والحج، والصوم.",
+   "explainEn": "Islam stands on five pillars like the columns of a house: the Shahada, prayer, zakat, Hajj and fasting.",
+   "story": null,
+   "game": {
+    "before": "بُني الإسلام على",
+    "answer": "خمس",
+    "after": "",
+    "options": [
+     "ثلاث",
+     "خمس",
+     "عشر"
+    ]
+   },
+   "missionAr": "صلِّ الصلوات الخمس في وقتها اليوم",
+   "missionEn": "Pray the five prayers on time today",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n4",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 4,
+   "titleAr": "خلق الإنسان",
+   "titleEn": "How We Are Created",
+   "text": "عَنْ أَبِي عَبْدِ الرَّحْمَنِ عَبْدِ اللَّهِ بْنِ مَسْعُودٍ رَضِيَ اللهُ عَنْهُ قَالَ: حَدَّثَنَا رَسُولُ اللَّهِ صلى الله عليه وسلم -وَهُوَ الصَّادِقُ الْمَصْدُوقُ-: \"إنَّ أَحَدَكُمْ يُجْمَعُ خَلْقُهُ فِي بَطْنِ أُمِّهِ أَرْبَعِينَ يَوْمًا نُطْفَةً، ثُمَّ يَكُونُ عَلَقَةً مِثْلَ ذَلِكَ، ثُمَّ يَكُونُ مُضْغَةً مِثْلَ ذَلِكَ، ثُمَّ يُرْسَلُ إلَيْهِ الْمَلَكُ فَيَنْفُخُ فِيهِ الرُّوحَ، وَيُؤْمَرُ بِأَرْبَعِ كَلِمَاتٍ: بِكَتْبِ رِزْقِهِ، وَأَجَلِهِ، وَعَمَلِهِ، وَشَقِيٍّ أَمْ سَعِيدٍ؛ فَوَاَللَّهِ الَّذِي لَا إلَهَ غَيْرُهُ إنَّ أَحَدَكُمْ لَيَعْمَلُ بِعَمَلِ أَهْلِ الْجَنَّةِ حَتَّى مَا يَكُونُ بَيْنَهُ وَبَيْنَهَا إلَّا ذِرَاعٌ فَيَسْبِقُ عَلَيْهِ الْكِتَابُ فَيَعْمَلُ بِعَمَلِ أَهْلِ النَّارِ فَيَدْخُلُهَا. وَإِنَّ أَحَدَكُمْ لَيَعْمَلُ بِعَمَلِ أَهْلِ النَّارِ حَتَّى مَا يَكُونُ بَيْنَهُ وَبَيْنَهَا إلَّا ذِرَاعٌ فَيَسْبِقُ عَلَيْهِ الْكِتَابُ فَيَعْمَلُ بِعَمَلِ أَهْلِ الْجَنَّةِ فَيَدْخُلُهَا\"",
+   "translationEn": "On the authority of Abdullah ibn Masood (ra), who said: The Messenger of Allah (ﷺ), and he is the truthful, the believed, narrated to us, “Verily the creation of each one of you is brought together in his mother’s womb for forty days in the form of a nutfah (a drop), then he becomes an alaqah (clot of blood) for a like period, then a mudghah (morsel of flesh) for a like period, then there is sent to him the angel who blows his soul into him and who is commanded with four matters: to write down his rizq (sustenance), his life span, his actions, and whether he will be happy or unhappy (i.e., whether or not he will enter Paradise). By the One, other than Whom there is no deity, verily one of you performs the actions of the people of Paradise until there is but an arms length between him and it, and that which has been written overtakes him, and so he acts with the actions of the people of the Hellfire and thus enters it; and verily one of you performs the actions of the people of the Hellfire, until there is but an arms length between him and it, and that which has been written overtakes him and so he acts with the actions of the people of Paradise and thus he enters it.”",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "رواه البخاري ومسلم",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "خلقنا الله في بطون أمهاتنا خطوة بخطوة، وكتب لكل واحد رزقه وعمره، فلنعمل الخير دائمًا حتى النهاية.",
+   "explainEn": "Allah created each of us step by step in our mothers' wombs and wrote our provision and life span, so let us keep doing good until the end.",
+   "story": null,
+   "game": {
+    "before": "إن أحدكم يُجمع خلقه في بطن",
+    "answer": "أمه",
+    "after": "",
+    "options": [
+     "البحر",
+     "أمه",
+     "الأرض"
+    ]
+   },
+   "missionAr": "",
+   "missionEn": "",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n5",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 5,
+   "titleAr": "لا نخترع في الدين",
+   "titleEn": "Nothing New in Religion",
+   "text": "عَنْ أُمِّ الْمُؤْمِنِينَ أُمِّ عَبْدِ اللَّهِ عَائِشَةَ رَضِيَ اللَّهُ عَنْهَا، قَالَتْ: قَالَ: رَسُولُ اللَّهِ صلى الله عليه وسلم \"مَنْ أَحْدَثَ فِي أَمْرِنَا هَذَا مَا لَيْسَ مِنْهُ فَهُوَ رَدٌّ\nوَفِي رِوَايَةٍ لِمُسْلِمٍ: مَنْ عَمِلَ عَمَلًا لَيْسَ عَلَيْهِ أَمْرُنَا فَهُوَ رَدٌّ\"",
+   "translationEn": "On the authority of the mother of the faithful, Aisha (ra), who said: The Messenger of Allah (ﷺ) said, “He who innovates something in this matter of ours (i.e., Islam) that is not of it will have it rejected (by Allah).” In another version in Muslim it reads: “He who does an act which we have not commanded, will have it rejected (by Allah).”",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "رواه البخاري ومسلم",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "نعبد الله كما علّمنا النبي ﷺ، ولا نزيد في الدين أشياء من عندنا.",
+   "explainEn": "We worship Allah the way the Prophet ﷺ taught us, without adding things of our own to the religion.",
+   "story": null,
+   "game": {
+    "before": "من أحدث في أمرنا هذا ما ليس منه فهو",
+    "answer": "ردّ",
+    "after": "",
+    "options": [
+     "جديد",
+     "حسن",
+     "ردّ"
+    ]
+   },
+   "missionAr": "",
+   "missionEn": "",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n6",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 6,
+   "titleAr": "الحلال والحرام",
+   "titleEn": "Halal and Haram",
+   "text": "عَنْ أَبِي عَبْدِ اللَّهِ النُّعْمَانِ بْنِ بَشِيرٍ رَضِيَ اللَّهُ عَنْهُمَا، قَالَ: سَمِعْت رَسُولَ اللَّهِ صلى الله عليه وسلم يَقُولُ: \"إنَّ الْحَلَالَ بَيِّنٌ، وَإِنَّ الْحَرَامَ بَيِّنٌ، وَبَيْنَهُمَا أُمُورٌ مُشْتَبِهَاتٌ لَا يَعْلَمُهُنَّ كَثِيرٌ مِنْ النَّاسِ، فَمَنْ اتَّقَى الشُّبُهَاتِ فَقْد اسْتَبْرَأَ لِدِينِهِ وَعِرْضِهِ، وَمَنْ وَقَعَ فِي الشُّبُهَاتِ وَقَعَ فِي الْحَرَامِ، كَالرَّاعِي يَرْعَى حَوْلَ الْحِمَى يُوشِكُ أَنْ يَرْتَعَ فِيهِ، أَلَا وَإِنَّ لِكُلِّ مَلِكٍ حِمًى، أَلَا وَإِنَّ حِمَى اللَّهِ مَحَارِمُهُ، أَلَا وَإِنَّ فِي الْجَسَدِ مُضْغَةً إذَا صَلَحَتْ صَلَحَ الْجَسَدُ كُلُّهُ، وَإذَا فَسَدَتْ فَسَدَ الْجَسَدُ كُلُّهُ، أَلَا وَهِيَ الْقَلْبُ\"",
+   "translationEn": "On the authority of an-Nu’man ibn Basheer (ra), who said: I heard the Messenger of Allah (ﷺ) say, “That which is lawful is clear and that which is unlawful is clear, and between the two of them are doubtful matters about which many people do not know. Thus he who avoids doubtful matters clears himself in regard to his religion and his honor, but he who falls into doubtful matters is diseased. Truly, it is the heart.”",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "رواه البخاري ومسلم",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "الحلال واضح والحرام واضح، وإذا شككنا في شيء نتركه. وأهم شيء أن يكون قلبنا طيبًا.",
+   "explainEn": "Halal is clear and haram is clear; when we are unsure about something we leave it. Most important is keeping our heart good.",
+   "story": null,
+   "game": {
+    "before": "إذا صلحت صلح الجسد كله، وإذا فسدت فسد الجسد كله، ألا وهي",
+    "answer": "القلب",
+    "after": "",
+    "options": [
+     "اليد",
+     "القلب",
+     "العين"
+    ]
+   },
+   "missionAr": "",
+   "missionEn": "",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n7",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 7,
+   "titleAr": "النصيحة",
+   "titleEn": "Sincerity",
+   "text": "عَنْ أَبِي رُقَيَّةَ تَمِيمِ بْنِ أَوْسٍ الدَّارِيِّ رَضِيَ اللهُ عَنْهُ أَنَّ النَّبِيَّ صلى الله عليه وسلم قَالَ: \"الدِّينُ النَّصِيحَةُ.\" قُلْنَا: لِمَنْ؟ قَالَ: \"لِلَّهِ، وَلِكِتَابِهِ، وَلِرَسُولِهِ، وَلِأَئِمَّةِ الْمُسْلِمِينَ وَعَامَّتِهِمْ.\"",
+   "translationEn": "On the authority of Tameem ibn Aus ad-Daree (ra): The Prophet (ﷺ) said, “The deen (religion) is naseehah (advice, sincerity).” We said, “To whom?” He (ﷺ) said, “To Allah, His Book, His Messenger, and to the leaders of the Muslims and their common folk.”",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "رواه مسلم",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "الدين أن نكون صادقين ومخلصين مع الله وكتابه ورسوله ومع كل الناس، ونحب لهم الخير.",
+   "explainEn": "Religion is being sincere with Allah, His Book, His Messenger and all people, and wanting good for them.",
+   "story": null,
+   "game": {
+    "before": "الدين",
+    "answer": "النصيحة",
+    "after": "",
+    "options": [
+     "الكلام",
+     "النصيحة",
+     "اللعب"
+    ]
+   },
+   "missionAr": "انصح صديقك بلطف إذا رأيته يخطئ",
+   "missionEn": "Gently advise a friend if you see them making a mistake",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n8",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 8,
+   "titleAr": "حرمة المسلم",
+   "titleEn": "A Muslim Is Protected",
+   "text": "عَنْ ابْنِ عُمَرَ رَضِيَ اللَّهُ عَنْهُمَا، أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم قَالَ: \"أُمِرْتُ أَنْ أُقَاتِلَ النَّاسَ حَتَّى يَشْهَدُوا أَنْ لَا إلَهَ إلَّا اللَّهُ وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ، وَيُقِيمُوا الصَّلَاةَ، وَيُؤْتُوا الزَّكَاةَ؛ فَإِذَا فَعَلُوا ذَلِكَ عَصَمُوا مِنِّي دِمَاءَهُمْ وَأَمْوَالَهُمْ إلَّا بِحَقِّ الْإِسْلَامِ، وَحِسَابُهُمْ عَلَى اللَّهِ تَعَالَى\"",
+   "translationEn": "On the authority of Abdullah ibn Umar (ra): The Messenger of Allah (ﷺ) said, \"I have been ordered to fight against the people until they testify that there is none worthy of worship except Allah and that Muhammad is the Messenger of Allah, and until they establish the salah and pay the zakat. And if they do that then they will have gained protection from me for their lives and property, unless in Islam, and their reckoning will be with Allah.\"",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "رواه البخاري ومسلم",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "من شهد أن لا إله إلا الله وأقام الصلاة وآتى الزكاة صار مسلمًا، فنفسه وماله محفوظان، وحسابه على الله.",
+   "explainEn": "Whoever testifies that there is no god but Allah, prays and gives zakat is a Muslim; his life and wealth are protected, and his reckoning is with Allah.",
+   "story": null,
+   "game": {
+    "before": "ويقيموا",
+    "answer": "الصلاة",
+    "after": "ويؤتوا الزكاة",
+    "options": [
+     "البيت",
+     "الصلاة",
+     "السوق"
+    ]
+   },
+   "missionAr": "",
+   "missionEn": "",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n9",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 9,
+   "titleAr": "افعل ما تستطيع",
+   "titleEn": "Do What You Can",
+   "text": "عَنْ أَبِي هُرَيْرَةَ عَبْدِ الرَّحْمَنِ بْنِ صَخْرٍ رَضِيَ اللهُ عَنْهُ قَالَ: سَمِعْت رَسُولَ اللَّهِ صلى الله عليه وسلم يَقُولُ: \"مَا نَهَيْتُكُمْ عَنْهُ فَاجْتَنِبُوهُ، وَمَا أَمَرْتُكُمْ بِهِ فَأْتُوا مِنْهُ مَا اسْتَطَعْتُمْ، فَإِنَّمَا أَهْلَكَ الَّذِينَ مِنْ قَبْلِكُمْ كَثْرَةُ مَسَائِلِهِمْ وَاخْتِلَافُهُمْ عَلَى أَنْبِيَائِهِمْ \"",
+   "translationEn": "On the authority of Abu Hurayrah (ra): I heard the Messenger of Allah (ﷺ) say, “What I have forbidden for you, avoid. What I have ordered you who were before you.”",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "رواه البخاري ومسلم",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "نبتعد عن كل ما نهانا الله عنه، ونفعل ما أمرنا به على قدر استطاعتنا، فالله رحيم.",
+   "explainEn": "We stay away from all that we are forbidden, and do what we are commanded as much as we can. Allah is merciful.",
+   "story": null,
+   "game": {
+    "before": "وما أمرتكم به فأتوا منه ما",
+    "answer": "استطعتم",
+    "after": "",
+    "options": [
+     "أردتم",
+     "استطعتم",
+     "لعبتم"
+    ]
+   },
+   "missionAr": "افعل اليوم ما يطلبه منك والداك بقدر ما تستطيع",
+   "missionEn": "Do what your parents ask of you today, as best you can",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n10",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 10,
+   "titleAr": "الله طيب",
+   "titleEn": "Allah Is Good",
+   "text": "عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللهُ عَنْهُ قَالَ: قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم \"إنَّ اللَّهَ طَيِّبٌ لَا يَقْبَلُ إلَّا طَيِّبًا، وَإِنَّ اللَّهَ أَمَرَ الْمُؤْمِنِينَ بِمَا أَمَرَ بِهِ الْمُرْسَلِينَ فَقَالَ تَعَالَى: \"يَا أَيُّهَا الرُّسُلُ كُلُوا مِنْ الطَّيِّبَاتِ وَاعْمَلُوا صَالِحًا\"، وَقَالَ تَعَالَى: \"يَا أَيُّهَا الَّذِينَ آمَنُوا كُلُوا مِنْ طَيِّبَاتِ مَا رَزَقْنَاكُمْ\" ثُمَّ ذَكَرَ الرَّجُلَ يُطِيلُ السَّفَرَ أَشْعَثَ أَغْبَرَ يَمُدُّ يَدَيْهِ إلَى السَّمَاءِ: يَا رَبِّ! يَا رَبِّ! وَمَطْعَمُهُ حَرَامٌ، وَمَشْرَبُهُ حَرَامٌ، وَمَلْبَسُهُ حَرَامٌ، وَغُذِّيَ بِالْحَرَامِ، فَأَنَّى يُسْتَجَابُ لَهُ؟\"",
+   "translationEn": "On the authority of Abu Hurayrah (ra): The Messenger of Allah (ﷺ) said, “Allah the Almighty is Good and accepts only that which is good. And verily Allah has commanded the believers to do that which He has commanded the Messengers. So the Almighty has said: “O (you) Messengers! Eat of the tayyibat ” Then he (ﷺ) mentioned be answered?",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "رواه مسلم",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "الله يحب الطيب الحلال، فنأكل ونلبس من الحلال حتى يستجيب الله دعاءنا.",
+   "explainEn": "Allah loves what is good and pure, so we eat and dress from what is halal so that Allah answers our duas.",
+   "story": null,
+   "game": {
+    "before": "إن الله طيب لا يقبل إلا",
+    "answer": "طيبًا",
+    "after": "",
+    "options": [
+     "كثيرًا",
+     "غاليًا",
+     "طيبًا"
+    ]
+   },
+   "missionAr": "قل «الحمد لله» بعد كل وجبة اليوم",
+   "missionEn": "Say \"Alhamdulillah\" after every meal today",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n11",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 11,
+   "titleAr": "اترك ما يقلقك",
+   "titleEn": "Leave What Is Doubtful",
+   "text": "عَنْ أَبِي مُحَمَّدٍ الْحَسَنِ بْنِ عَلِيِّ بْنِ أَبِي طَالِبٍ سِبْطِ رَسُولِ اللَّهِ صلى الله عليه وسلم وَرَيْحَانَتِهِ رَضِيَ اللَّهُ عَنْهُمَا، قَالَ: حَفِظْت مِنْ رَسُولِ اللَّهِ صلى الله عليه وسلم \"دَعْ مَا يُرِيبُك إلَى مَا لَا يُرِيبُك\"",
+   "translationEn": "On the authority of Abu Muhammad al-Hasan ibn Ali ibn Abee Talib (may Allah be pleased with him), the grandson of the Messenger of Allah (peace and blessings of Allah be upon him), and the one much loved by him, who said: I memorised from the Messenger of Allah (peace and blessings of Allah be upon him): “Leave that which makes you doubt for that which does not make you doubt.” At-Tirmidhi said that it was a good and sound (hasan saheeh) hadeeth.",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "رواه الترمذي والنسائي، وقال الترمذي: حديث حسن صحيح",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "إذا شككت هل الشيء صواب أم خطأ، اتركه واختر الشيء الذي أنت متأكد أنه صواب.",
+   "explainEn": "If you are unsure whether something is right or wrong, leave it and choose what you are sure is right.",
+   "story": null,
+   "game": {
+    "before": "دع ما يريبك إلى ما لا",
+    "answer": "يريبك",
+    "after": "",
+    "options": [
+     "يفرحك",
+     "يريبك",
+     "يتعبك"
+    ]
+   },
+   "missionAr": "إذا شككت أن شيئًا خطأ فاتركه",
+   "missionEn": "If you are unsure whether something is wrong, leave it",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n12",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 12,
+   "titleAr": "اترك ما لا يعنيك",
+   "titleEn": "Mind What Concerns You",
+   "text": "عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللهُ عَنْهُ قَالَ: قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم \"مِنْ حُسْنِ إسْلَامِ الْمَرْءِ تَرْكُهُ مَا لَا يَعْنِيهِ\"",
+   "translationEn": "On the authority of Abu Hurayrah (may Allah be pleased with him) who said: The Messenger of Allah (peace and blessings of Allah be upon him) said, “Part of the perfection of one’s Islam is his leaving that which does not concern him.” A hasan (good) hadeeth which was related by at-Tirmidhi and others in this fashion.",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "حديث حسن، رواه الترمذي وغيره هكذا",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "المسلم الجميل لا يتدخل في أشياء لا تخصه، ويهتم بما ينفعه.",
+   "explainEn": "A good Muslim does not interfere in things that do not concern him, and focuses on what benefits him.",
+   "story": null,
+   "game": {
+    "before": "من حسن إسلام المرء تركه ما لا",
+    "answer": "يعنيه",
+    "after": "",
+    "options": [
+     "يحبه",
+     "يعرفه",
+     "يعنيه"
+    ]
+   },
+   "missionAr": "لا تتدخل اليوم في شيء لا يخصك",
+   "missionEn": "Today, stay out of things that are not your business",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n13",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 13,
+   "titleAr": "حب الخير للناس",
+   "titleEn": "Love Good for Others",
+   "text": "عَنْ أَبِي حَمْزَةَ أَنَسِ بْنِ مَالِكٍ رَضِيَ اللهُ عَنْهُ خَادِمِ رَسُولِ اللَّهِ صلى الله عليه وسلم عَنْ النَّبِيِّ صلى الله عليه وسلم قَالَ: \"لَا يُؤْمِنُ أَحَدُكُمْ حَتَّى يُحِبَّ لِأَخِيهِ مَا يُحِبُّ لِنَفْسِهِ\"",
+   "translationEn": "On the authority of Abu Hamzah Anas bin Malik (may Allah be pleased with him) — the servant of the Messenger of Allah (peace and blessings of Allah be upon him) — that the Prophet (peace and blessings of Allah be upon him) said: None of you believes until he loves for his brother that which he loves for himself.",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "رواه البخاري ومسلم",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "إذا فرحت بشيء جميل، تمنَّ أن يكون لأخيك مثله، وشاركه فرحتك.",
+   "explainEn": "When something nice makes you happy, wish the same for your brother and share your joy.",
+   "story": null,
+   "game": {
+    "before": "لا يؤمن أحدكم حتى يحب لأخيه ما يحب",
+    "answer": "لنفسه",
+    "after": "",
+    "options": [
+     "لأبيه",
+     "لنفسه",
+     "لبيته"
+    ]
+   },
+   "missionAr": "شارك لعبتك أو طعامك مع أخيك أو صديقك",
+   "missionEn": "Share your toy or your food with your sibling or friend",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n14",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 14,
+   "titleAr": "حياة المسلم غالية",
+   "titleEn": "Life Is Precious",
+   "text": "عَنْ ابْنِ مَسْعُودٍ رَضِيَ اللهُ عَنْهُ قَالَ: قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم \"لَا يَحِلُّ دَمُ امْرِئٍ مُسْلِمٍ إلَّا بِإِحْدَى ثَلَاثٍ: الثَّيِّبُ الزَّانِي، وَالنَّفْسُ بِالنَّفْسِ، وَالتَّارِكُ لِدِينِهِ الْمُفَارِقُ لِلْجَمَاعَةِ\"",
+   "translationEn": "On the authority of Ibn Masood (may Allah be pleased with him) who said: The Messenger of Allah (peace and blessings of Allah be upon him) said, “It is not permissible to spill the blood of a Muslim except in three : the married person who commits adultery, a life for a life, and the one who forsakes his religion and separates from the community.”",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "رواه البخاري ومسلم",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "حياة المسلم غالية جدًا عند الله، ولا يجوز لأحد أن يعتدي عليها.",
+   "explainEn": "A Muslim's life is very precious to Allah, and no one may attack it.",
+   "story": null,
+   "game": {
+    "before": "لا يحل دم امرئ مسلم إلا بإحدى",
+    "answer": "ثلاث",
+    "after": "",
+    "options": [
+     "خمس",
+     "ثلاث",
+     "عشر"
+    ]
+   },
+   "missionAr": "",
+   "missionEn": "",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n15",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 15,
+   "titleAr": "الجار والضيف",
+   "titleEn": "Neighbors and Guests",
+   "text": "عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللهُ عَنْهُ أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم قَالَ: \"مَنْ كَانَ يُؤْمِنُ بِاَللَّهِ وَالْيَوْمِ الْآخِرِ فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ، وَمَنْ كَانَ يُؤْمِنُ بِاَللَّهِ وَالْيَوْمِ الْآخِرِ فَلْيُكْرِمْ جَارَهُ، وَمَنْ كَانَ يُؤْمِنُ بِاَللَّهِ وَالْيَوْمِ الْآخِرِ فَلْيُكْرِمْ ضَيْفَهُ\"",
+   "translationEn": "On the authority of Abu Hurayrah (may Allah be pleased with him), that the Messenger of Allah (peace and blessings of Allah be upon him) said: Let him who believes in Allah and the Last Day speak good, or keep silent; and let him who believes in Allah and the Last Day be generous to his neighbour; and let him who believes in Allah and the Last Day be generous to his guest.",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "رواه البخاري ومسلم",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "نقول كلامًا طيبًا أو نسكت، ونحسن إلى جيراننا، ونكرم ضيوفنا.",
+   "explainEn": "We say good words or stay quiet, we are kind to our neighbors, and we honor our guests.",
+   "story": null,
+   "game": {
+    "before": "ومن كان يؤمن بالله واليوم الآخر فليكرم",
+    "answer": "جاره",
+    "after": "",
+    "options": [
+     "نفسه",
+     "جاره",
+     "لعبته"
+    ]
+   },
+   "missionAr": "قدّم لجارك أو ضيفك شيئًا جميلًا، ولو سلامًا وابتسامة",
+   "missionEn": "Give your neighbor or guest something nice, even a greeting and a smile",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n16",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 16,
+   "titleAr": "لا تغضب",
+   "titleEn": "Do Not Get Angry",
+   "text": "عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللهُ عَنْهُ أَنَّ رَجُلًا قَالَ لِلنَّبِيِّ صلى الله عليه وسلم أَوْصِنِي. قَالَ: لَا تَغْضَبْ، فَرَدَّدَ مِرَارًا، قَالَ: لَا تَغْضَبْ\"",
+   "translationEn": "On the authority of Abu Hurayrah (may Allah be pleased with him): A man said to the Prophet (peace and blessings of Allah be upon him), “Counsel me,” so he (peace and blessings of Allah be upon him) said, “Do not become angry.” The man repeated he (peace and blessings of Allah be upon him) said, “Do not become angry.”",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "رواه البخاري",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "عندما تغضب خذ نفسًا عميقًا واهدأ، فالهدوء خير كثير.",
+   "explainEn": "When you feel angry, take a deep breath and calm down. Staying calm brings much good.",
+   "story": null,
+   "game": {
+    "before": "قال: لا",
+    "answer": "تغضب",
+    "after": "",
+    "options": [
+     "تتأخر",
+     "تركض",
+     "تغضب"
+    ]
+   },
+   "missionAr": "إذا غضبت اليوم، خذ ثلاثة أنفاس عميقة قبل أن تتكلم",
+   "missionEn": "If you get angry today, take three deep breaths before you speak",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n17",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 17,
+   "titleAr": "الإحسان في كل شيء",
+   "titleEn": "Excellence in Everything",
+   "text": "عَنْ أَبِي يَعْلَى شَدَّادِ بْنِ أَوْسٍ رَضِيَ اللهُ عَنْهُ عَنْ رَسُولِ اللَّهِ صلى الله عليه وسلم قَالَ: \"إنَّ اللَّهَ كَتَبَ الْإِحْسَانَ عَلَى كُلِّ شَيْءٍ، فَإِذَا قَتَلْتُمْ فَأَحْسِنُوا الْقِتْلَةَ، وَإِذَا ذَبَحْتُمْ فَأَحْسِنُوا الذِّبْحَةَ، وَلْيُحِدَّ أَحَدُكُمْ شَفْرَتَهُ، وَلْيُرِحْ ذَبِيحَتَهُ\"",
+   "translationEn": "On the authority of Abu Ya’la Shaddad bin Aws (may Allah be pleased with him), that the Messenger of Allah (peace and blessings of Allah be upon him) said: Verily Allah has prescribed ihsan (proficiency, perfection) in all things. So if you kill then kill well; and if you slaughter, then slaughter well. Let each one of you sharpen his blade and let him spare suffering to the animal he slaughters.”",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "رواه مسلم",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "الله يحب أن نتقن كل شيء ونرفق بكل شيء، حتى الحيوانات.",
+   "explainEn": "Allah wants us to do everything well and be gentle with everything, even animals.",
+   "story": null,
+   "game": {
+    "before": "إن الله كتب",
+    "answer": "الإحسان",
+    "after": "على كل شيء",
+    "options": [
+     "السرعة",
+     "الإحسان",
+     "الكلام"
+    ]
+   },
+   "missionAr": "أتقن واجبك اليوم، وكن رفيقًا بالحيوانات",
+   "missionEn": "Do your homework really well today, and be gentle with animals",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n18",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 18,
+   "titleAr": "اتق الله حيثما كنت",
+   "titleEn": "Mindful of Allah Everywhere",
+   "text": "عَنْ أَبِي ذَرٍّ جُنْدَبِ بْنِ جُنَادَةَ، وَأَبِي عَبْدِ الرَّحْمَنِ مُعَاذِ بْنِ جَبَلٍ رَضِيَ اللَّهُ عَنْهُمَا، عَنْ رَسُولِ اللَّهِ صلى الله عليه وسلم قَالَ: \"اتَّقِ اللَّهَ حَيْثُمَا كُنْت، وَأَتْبِعْ السَّيِّئَةَ الْحَسَنَةَ تَمْحُهَا، وَخَالِقْ النَّاسَ بِخُلُقٍ حَسَنٍ\"",
+   "translationEn": "On the authority of Abu Dharr Jundub ibn Junadah, and Abu Abdur-Rahman Muadh bin Jabal (may Allah be pleased with him), that the Messenger of Allah (peace and blessings of Allah be upon him) said: Have taqwa (fear) of Allah wherever you may be, and follow up a bad deed with a good deed which will wipe it out, and behave well towards the people. It was related by at-Tirmidhi, who said it was a hasan (good) hadeeth, and in some copies it is stated to be a hasan saheeh hadeeth.",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "رواه الترمذي وقال: حديث حسن، وفي بعض النسخ: حسن صحيح",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "الله يرانا في كل مكان. وإذا أخطأنا نسرع بعمل حسنة تمحو الخطأ، ونعامل الناس بأخلاق حسنة.",
+   "explainEn": "Allah sees us everywhere. When we make a mistake we quickly do a good deed to erase it, and we treat people with good manners.",
+   "story": null,
+   "game": {
+    "before": "اتق الله حيثما كنت، وأتبع السيئة",
+    "answer": "الحسنة",
+    "after": "تمحها",
+    "options": [
+     "الكلمة",
+     "السيئة",
+     "الحسنة"
+    ]
+   },
+   "missionAr": "إذا أخطأت اليوم فاعتذر، ثم افعل حسنة",
+   "missionEn": "If you make a mistake today, apologize and then do a good deed",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n19",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 19,
+   "titleAr": "احفظ الله يحفظك",
+   "titleEn": "Guard Allah’s Commands",
+   "text": "عَنْ عَبْدِ اللَّهِ بْنِ عَبَّاسٍ رَضِيَ اللَّهُ عَنْهُمَا قَالَ: \"كُنْت خَلْفَ رَسُولِ اللَّهِ صلى الله عليه وسلم يَوْمًا، فَقَالَ: يَا غُلَامِ! إنِّي أُعَلِّمُك كَلِمَاتٍ: احْفَظْ اللَّهَ يَحْفَظْك، احْفَظْ اللَّهَ تَجِدْهُ تُجَاهَك، إذَا سَأَلْت فَاسْأَلْ اللَّهَ، وَإِذَا اسْتَعَنْت فَاسْتَعِنْ بِاَللَّهِ، وَاعْلَمْ أَنَّ الْأُمَّةَ لَوْ اجْتَمَعَتْ عَلَى أَنْ يَنْفَعُوك بِشَيْءٍ لَمْ يَنْفَعُوك إلَّا بِشَيْءٍ قَدْ كَتَبَهُ اللَّهُ لَك، وَإِنْ اجْتَمَعُوا عَلَى أَنْ يَضُرُّوك بِشَيْءٍ لَمْ يَضُرُّوك إلَّا بِشَيْءٍ قَدْ كَتَبَهُ اللَّهُ عَلَيْك؛ رُفِعَتْ الْأَقْلَامُ، وَجَفَّتْ الصُّحُفُ\". رَوَاهُ التِّرْمِذِيُّ وَقَالَ: حَدِيثٌ حَسَنٌ صَحِيحٌ.\nوَفِي رِوَايَةِ غَيْرِ التِّرْمِذِيِّ: \"احْفَظْ اللَّهَ تَجِدْهُ أمامك، تَعَرَّفْ إلَى اللَّهِ فِي الرَّخَاءِ يَعْرِفُك فِي الشِّدَّةِ، وَاعْلَمْ أَنَّ مَا أَخْطَأَك لَمْ يَكُنْ لِيُصِيبَك، وَمَا أَصَابَك لَمْ يَكُنْ لِيُخْطِئَك، وَاعْلَمْ أَنَّ النَّصْرَ مَعَ الصَّبْرِ، وَأَنْ الْفَرَجَ مَعَ الْكَرْبِ، وَأَنَّ مَعَ الْعُسْرِ يُسْرًا\"",
+   "translationEn": "On the authority of Abu Abbas Abdullah bin Abbas (may Allah be pleased with him) who said: One day I was behind the Prophet (peace and blessings of Allah be upon him) . And know that if the nation were to gather together to benefit you with anything, they would not benefit you except with what Allah had already prescribed for you. And if they were to gather together to harm you with anything, they would not harm you except with what Allah had already prescribed against you. The pens have been lifted and the pages have dried.” It was related by at-Tirmidhi, who said it was a good and sound hadeeth. Another narration, other than that of Tirmidhi, reads: Be mindful of Allah, and you will find Him in front of you. Recognize and acknowledge Allah in times of ease and prosperity, and He will remember you in times of adversity. And know that what has passed you by was not going to befall you, and what has befallen you was not going to pass you by. And know that victory comes with patience, relief with affliction, and hardship with ease.",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "رواه الترمذي وقال: حديث حسن صحيح",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "إذا أطعت الله حفظك ورعاك. وإذا احتجت شيئًا فاطلبه من الله، فهو وحده الذي ينفع ويضر.",
+   "explainEn": "If you obey Allah, He will protect you. When you need something, ask Allah, for only He can help or harm.",
+   "story": null,
+   "game": {
+    "before": "احفظ الله",
+    "answer": "يحفظك",
+    "after": "",
+    "options": [
+     "يعطيك",
+     "يحفظك",
+     "يسمعك"
+    ]
+   },
+   "missionAr": "ادعُ الله اليوم واطلب منه ما تحتاج",
+   "missionEn": "Make dua today and ask Allah for what you need",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n20",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 20,
+   "titleAr": "الحياء",
+   "titleEn": "Modesty",
+   "text": "عَنْ أَبِي مَسْعُودٍ عُقْبَةَ بْنِ عَمْرٍو الْأَنْصَارِيِّ الْبَدْرِيِّ رَضِيَ اللهُ عَنْهُ قَالَ: قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم \"إنَّ مِمَّا أَدْرَكَ النَّاسُ مِنْ كَلَامِ النُّبُوَّةِ الْأُولَى: إذَا لَمْ تَسْتَحِ فَاصْنَعْ مَا شِئْت\"",
+   "translationEn": "On the authority of Abu Masood Uqbah bin ’Amr al-Ansaree al-Badree (may Allah be pleased with him) who said: The Messenger of Allah (peace and blessings of Allah be upon him) said, “Verily, from what was learnt by the people from the speech of the earliest prophecy is: If you feel no shame, then do as you wish.”",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "رواه البخاري",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "الحياء خُلق جميل يمنعنا من فعل الأشياء القبيحة.",
+   "explainEn": "Modesty (haya) is a beautiful quality that stops us from doing bad things.",
+   "story": null,
+   "game": {
+    "before": "إذا لم تستحِ فاصنع ما",
+    "answer": "شئت",
+    "after": "",
+    "options": [
+     "قلت",
+     "رأيت",
+     "شئت"
+    ]
+   },
+   "missionAr": "لا تفعل شيئًا تستحي أن يراه الناس",
+   "missionEn": "Don't do anything you would be shy for people to see",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n21",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 21,
+   "titleAr": "آمنت بالله ثم استقم",
+   "titleEn": "Believe and Stay Firm",
+   "text": "عَنْ أَبِي عَمْرٍو وَقِيلَ: أَبِي عَمْرَةَ سُفْيَانَ بْنِ عَبْدِ اللَّهِ رَضِيَ اللهُ عَنْهُ قَالَ: \"قُلْت: يَا رَسُولَ اللَّهِ! قُلْ لِي فِي الْإِسْلَامِ قَوْلًا لَا أَسْأَلُ عَنْهُ أَحَدًا غَيْرَك؛ قَالَ: قُلْ: آمَنْت بِاَللَّهِ ثُمَّ اسْتَقِمْ\"",
+   "translationEn": "On the authority of Abu `Amr — and he is also called Abu `Amrah — Sufyan bin Abdullah ath- Thaqafee (may Allah be pleased with him) who said: I said, \"O Messenger of Allah, tell me something about al-Islam which I can ask of no one but you.\" He (peace and blessings of Allah be upon him) said, \"Say I believe in Allah — and then be steadfast.\"",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "رواه مسلم",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "نؤمن بالله ثم نستمر على الطريق الصحيح ولا نتركه.",
+   "explainEn": "We believe in Allah and then keep firmly on the right path.",
+   "story": null,
+   "game": {
+    "before": "قل: آمنت بالله ثم",
+    "answer": "استقم",
+    "after": "",
+    "options": [
+     "اذهب",
+     "استقم",
+     "نم"
+    ]
+   },
+   "missionAr": "اختر عملًا صالحًا صغيرًا وداوم عليه كل يوم",
+   "missionEn": "Choose one small good deed and keep doing it every day",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n22",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 22,
+   "titleAr": "طريق الجنة",
+   "titleEn": "The Way to Paradise",
+   "text": "عَنْ أَبِي عَبْدِ اللَّهِ جَابِرِ بْنِ عَبْدِ اللَّهِ الْأَنْصَارِيِّ رَضِيَ اللَّهُ عَنْهُمَا: \"أَنَّ رَجُلًا سَأَلَ رَسُولَ اللَّهِ صلى الله عليه وسلم فَقَالَ: أَرَأَيْت إذَا صَلَّيْت الْمَكْتُوبَاتِ، وَصُمْت رَمَضَانَ، وَأَحْلَلْت الْحَلَالَ، وَحَرَّمْت الْحَرَامَ، وَلَمْ أَزِدْ عَلَى ذَلِكَ شَيْئًا؛ أَأَدْخُلُ الْجَنَّةَ؟ قَالَ: نَعَمْ\"",
+   "translationEn": "On the authority of Abu Abdullah Jabir bin Abdullah al-Ansaree (may Allah be pleased with him) that: A man questioned the Messenger of Allah (peace and blessings of Allah be upon him) and said, “Do you think that if I perform the obligatory prayers, fast in Ramadhan, treat as lawful that which is halal, and treat as forbidden that which is haram, and do not increase upon that , then I shall enter Paradise?” He (peace and blessings of Allah be upon him) replied, “Yes.”",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "رواه مسلم",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "من صلّى الصلوات وصام رمضان وفعل الحلال وترك الحرام دخل الجنة بإذن الله.",
+   "explainEn": "Whoever prays the obligatory prayers, fasts Ramadan, does what is halal and avoids what is haram will enter Paradise, by Allah's will.",
+   "story": null,
+   "game": {
+    "before": "أأدخل الجنة؟ قال:",
+    "answer": "نعم",
+    "after": "",
+    "options": [
+     "لا",
+     "نعم",
+     "ربما"
+    ]
+   },
+   "missionAr": "",
+   "missionEn": "",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n23",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 23,
+   "titleAr": "الصلاة نور",
+   "titleEn": "Prayer Is Light",
+   "text": "عَنْ أَبِي مَالِكٍ الْحَارِثِ بْنِ عَاصِمٍ الْأَشْعَرِيِّ رَضِيَ اللهُ عَنْهُ قَالَ: قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم \"الطَّهُورُ شَطْرُ الْإِيمَانِ، وَالْحَمْدُ لِلَّهِ تَمْلَأُ الْمِيزَانَ، وَسُبْحَانَ اللَّهِ وَالْحَمْدُ لِلَّهِ تَمْلَآنِ -أَوْ: تَمْلَأُ- مَا بَيْنَ السَّمَاءِ وَالْأَرْضِ، وَالصَّلَاةُ نُورٌ، وَالصَّدَقَةُ بُرْهَانٌ، وَالصَّبْرُ ضِيَاءٌ، وَالْقُرْآنُ حُجَّةٌ لَك أَوْ عَلَيْك، كُلُّ النَّاسِ يَغْدُو، فَبَائِعٌ نَفْسَهُ فَمُعْتِقُهَا أَوْ مُوبِقُهَا\"",
+   "translationEn": "On the authority of Abu Malik al-Harith bin Asim al-Asharee (may Allah be pleased with him) who said: The Messenger of Allah (peace and blessings of Allah be upon him) said, “Purity is half of iman (faith). ‘Al-hamdu lillah (praise be to Allah)’ fills the scales, and ‘subhan-Allah (how far is Allah from every imperfection) and ‘Al-hamdulillah (praise be to Allah)’ fill that which is between heaven and earth. And the salah (prayer) is a light, and charity is a proof, and patience is illumination, and the Qur’an is a proof either for you or against you. Every person starts his day as a vendor of his soul, either freeing it or causing its ruin.”",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "رواه مسلم",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "النظافة نصف الإيمان، و«الحمد لله» و«سبحان الله» لهما أجر عظيم، والصلاة نور يضيء حياتنا.",
+   "explainEn": "Cleanliness is half of faith, praising Allah fills the scales, and prayer is a light in our lives.",
+   "story": null,
+   "game": {
+    "before": "والصلاة",
+    "answer": "نور",
+    "after": "والصدقة برهان",
+    "options": [
+     "ماء",
+     "نور",
+     "بيت"
+    ]
+   },
+   "missionAr": "قل «سبحان الله» و«الحمد لله» عشر مرات",
+   "missionEn": "Say \"SubhanAllah\" and \"Alhamdulillah\" ten times each",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n24",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 24,
+   "titleAr": "يا عبادي",
+   "titleEn": "O My Servants",
+   "text": "عَنْ أَبِي ذَرٍّ الْغِفَارِيِّ رَضِيَ اللهُ عَنْهُ عَنْ النَّبِيِّ صلى الله عليه وسلم فِيمَا يَرْوِيهِ عَنْ رَبِّهِ تَبَارَكَ وَتَعَالَى، أَنَّهُ قَالَ: \"يَا عِبَادِي: إنِّي حَرَّمْت الظُّلْمَ عَلَى نَفْسِي، وَجَعَلْته بَيْنَكُمْ مُحَرَّمًا؛ فَلَا تَظَالَمُوا. يَا عِبَادِي! كُلُّكُمْ ضَالٌّ إلَّا مَنْ هَدَيْته، فَاسْتَهْدُونِي أَهْدِكُمْ. يَا عِبَادِي! كُلُّكُمْ جَائِعٌ إلَّا مَنْ أَطْعَمْته، فَاسْتَطْعِمُونِي أُطْعِمْكُمْ. يَا عِبَادِي! كُلُّكُمْ عَارٍ إلَّا مَنْ كَسَوْته، فَاسْتَكْسُونِي أَكْسُكُمْ. يَا عِبَادِي! إنَّكُمْ تُخْطِئُونَ بِاللَّيْلِ وَالنَّهَارِ، وَأَنَا أَغْفِرُ الذُّنُوبَ جَمِيعًا؛ فَاسْتَغْفِرُونِي أَغْفِرْ لَكُمْ. يَا عِبَادِي! إنَّكُمْ لَنْ تَبْلُغُوا ضُرِّي فَتَضُرُّونِي، وَلَنْ تَبْلُغُوا نَفْعِي فَتَنْفَعُونِي. يَا عِبَادِي! لَوْ أَنَّ أَوَّلَكُمْ وَآخِرَكُمْ وَإِنْسَكُمْ وَجِنَّكُمْ كَانُوا عَلَى أَتْقَى قَلْبِ رَجُلٍ وَاحِدٍ مِنْكُمْ، مَا زَادَ ذَلِكَ فِي مُلْكِي شَيْئًا. يَا عِبَادِي! لَوْ أَنَّ أَوَّلَكُمْ وَآخِرَكُمْ وَإِنْسَكُمْ وَجِنَّكُمْ كَانُوا عَلَى أَفْجَرِ قَلْبِ رَجُلٍ وَاحِدٍ مِنْكُمْ، مَا نَقَصَ ذَلِكَ مِنْ مُلْكِي شَيْئًا. يَا عِبَادِي! لَوْ أَنَّ أَوَّلَكُمْ وَآخِرَكُمْ وَإِنْسَكُمْ وَجِنَّكُمْ قَامُوا فِي صَعِيدٍ وَاحِدٍ، فَسَأَلُونِي، فَأَعْطَيْت كُلَّ وَاحِدٍ مَسْأَلَته، مَا نَقَصَ ذَلِكَ مِمَّا عِنْدِي إلَّا كَمَا يَنْقُصُ الْمِخْيَطُ إذَا أُدْخِلَ الْبَحْرَ. يَا عِبَادِي! إنَّمَا هِيَ أَعْمَالُكُمْ أُحْصِيهَا لَكُمْ، ثُمَّ أُوَفِّيكُمْ إيَّاهَا؛ فَمَنْ وَجَدَ خَيْرًا فَلْيَحْمَدْ اللَّهَ، وَمَنْ وَجَدَ غَيْرَ ذَلِكَ فَلَا يَلُومَن إلَّا نَفْسَهُ\"",
+   "translationEn": "On the authority of Abu Dharr al-Ghifaree (may Allah be pleased with him) from the Prophet (peace and blessings of Allah be upon him) from his Lord, that He said: O My servants! I have forbidden dhulm (oppression) for Myself, and I have made it forbidden amongst you, so do not oppress one another. O My servants, all of you are astray except those whom I have guided, so seek guidance from Me and I shall guide you. O My servants, all of you are hungry except those whom I have fed, so seek food from Me and I shall feed you. O My servants, all of you are naked except those whom I have clothed, so seek clothing from Me and I shall clothe you. O My servants, you commit sins by day and by night, and I forgive all sins, so seek forgiveness from Me and I shall forgive you. O My servants, you will not attain harming Me so as to harm Me, and you will not attain benefiting Me so as to benefit Me. O My servants, if the first of you and the last of you, and the humans of you and the jinn of you, were all as pious as the most pious heart of any individual amongst you, then this would not increase My Kingdom an iota. O My servants, if the first of you and the last of you, and the humans of you and the jinn of you, were all as wicked as the most wicked heart of any individual amongst you, then this would not decrease My Kingdom an iota. O My servants, if the first of you and the last of you, and the humans of you and the jinn of you, were all to stand together in one place and ask of Me, and I were to give everyone what he requested, then that would not decrease what I Possess, except what is decreased of the ocean when a needle is dipped into it. O My servants, it is but your deeds that I account for you, and then recompense you for. So he who finds good, let him praise Allah, and he who finds other than that, let him blame no one but himself.",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "رواه مسلم",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "حديث قدسي يخبرنا فيه الله أنه حرّم الظلم، وأنه يهدينا ويطعمنا ويغفر لنا إذا طلبنا منه.",
+   "explainEn": "In this hadith qudsi Allah tells us He has forbidden injustice, and that He guides, feeds and forgives us when we ask Him.",
+   "story": null,
+   "game": {
+    "before": "يا عبادي إني حرمت",
+    "answer": "الظلم",
+    "after": "على نفسي",
+    "options": [
+     "الكلام",
+     "الظلم",
+     "الطعام"
+    ]
+   },
+   "missionAr": "",
+   "missionEn": "",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n25",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 25,
+   "titleAr": "كل خير صدقة",
+   "titleEn": "Every Good Is Charity",
+   "text": "عَنْ أَبِي ذَرٍّ رَضِيَ اللهُ عَنْهُ أَيْضًا، \"أَنَّ نَاسًا مِنْ أَصْحَابِ رَسُولِ اللَّهِ صلى الله عليه وسلم قَالُوا لِلنَّبِيِّ صلى الله عليه وسلم يَا رَسُولَ اللَّهِ ذَهَبَ أَهْلُ الدُّثُورِ بِالْأُجُورِ؛ يُصَلُّونَ كَمَا نُصَلِّي، وَيَصُومُونَ كَمَا نَصُومُ، وَيَتَصَدَّقُونَ بِفُضُولِ أَمْوَالِهِمْ. قَالَ: أَوَلَيْسَ قَدْ جَعَلَ اللَّهُ لَكُمْ مَا تَصَّدَّقُونَ؟ إنَّ بِكُلِّ تَسْبِيحَةٍ صَدَقَةً، وَكُلِّ تَكْبِيرَةٍ صَدَقَةً، وَكُلِّ تَحْمِيدَةٍ صَدَقَةً، وَكُلِّ تَهْلِيلَةٍ صَدَقَةً، وَأَمْرٌ بِمَعْرُوفٍ صَدَقَةٌ، وَنَهْيٌ عَنْ مُنْكَرٍ صَدَقَةٌ، وَفِي بُضْعِ أَحَدِكُمْ صَدَقَةٌ. قَالُوا: يَا رَسُولَ اللَّهِ أَيَأْتِي أَحَدُنَا شَهْوَتَهُ وَيَكُونُ لَهُ فِيهَا أَجْرٌ؟ قَالَ: أَرَأَيْتُمْ لَوْ وَضَعَهَا فِي حَرَامٍ أَكَانَ عَلَيْهِ وِزْرٌ؟ فَكَذَلِكَ إذَا وَضَعَهَا فِي الْحَلَالِ، كَانَ لَهُ أَجْرٌ\"",
+   "translationEn": "Also on the authority of Abu Dharr (may Allah be pleased with him): Some people from amongst the Companions of the Messenger of Allah (peace and blessings of Allah be upon him) said to the Prophet (peace and blessings of Allah be upon him), \"O Messenger of Allah, the affluent have made off with the rewards; they pray as we pray, they fast as we fast, and they give of each one of you there is a charity.\" They said, \"O Messenger of Allah, when one of us fulfils his carnal desire will he have some reward for that?\" He (peace and blessings of Allah be upon him) said, \"Do you not see that if he were to act upon it in an unlawful manner then he would be deserving of punishment? Likewise, if he were to act upon it in a lawful manner then he will be deserving of a reward.\"",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "رواه مسلم",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "حتى من ليس عنده مال يقدر أن يتصدق: كل «سبحان الله» و«الحمد لله» و«الله أكبر» صدقة.",
+   "explainEn": "Even someone without money can give charity: every \"SubhanAllah\", \"Alhamdulillah\" and \"Allahu Akbar\" is charity.",
+   "story": null,
+   "game": {
+    "before": "إن بكل تسبيحة",
+    "answer": "صدقة",
+    "after": "",
+    "options": [
+     "لعبة",
+     "هدية",
+     "صدقة"
+    ]
+   },
+   "missionAr": "قل «سبحان الله، الحمد لله، الله أكبر» عشر مرات",
+   "missionEn": "Say \"SubhanAllah, Alhamdulillah, Allahu Akbar\" ten times",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n26",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 26,
+   "titleAr": "صدقة كل يوم",
+   "titleEn": "Daily Charity",
+   "text": "عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللهُ عَنْهُ قَالَ: قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم \"كُلُّ سُلَامَى مِنْ النَّاسِ عَلَيْهِ صَدَقَةٌ، كُلَّ يَوْمٍ تَطْلُعُ فِيهِ الشَّمْسُ تَعْدِلُ بَيْنَ اثْنَيْنِ صَدَقَةٌ، وَتُعِينُ الرَّجُلَ فِي دَابَّتِهِ فَتَحْمِلُهُ عَلَيْهَا أَوْ تَرْفَعُ لَهُ عَلَيْهَا مَتَاعَهُ صَدَقَةٌ، وَالْكَلِمَةُ الطَّيِّبَةُ صَدَقَةٌ، وَبِكُلِّ خُطْوَةٍ تَمْشِيهَا إلَى الصَّلَاةِ صَدَقَةٌ، وَتُمِيطُ الْأَذَى عَنْ الطَّرِيقِ صَدَقَةٌ\"",
+   "translationEn": "On the authority of Abu Hurayrah (may Allah be pleased with him) who said: The Messenger of Allah (peace and blessings of Allah be upon him) said, “Every joint of a person must perform a charity each day that the sun rises: to judge justly between two people is a charity. To help a man with his mount, lifting him onto it or hoisting up his belongings onto it, is a charity. And the good word is a charity. And every step that you take towards the prayer is a charity, and removing a harmful object from the road is a charity.”",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "رواه البخاري ومسلم",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "كل يوم نقدر أن نتصدق: نصلح بين اثنين، نساعد غيرنا، نقول كلمة طيبة، ونبعد الأذى عن الطريق.",
+   "explainEn": "Every day we can give charity: make peace between two people, help others, say a kind word, and remove harm from the road.",
+   "story": null,
+   "game": {
+    "before": "وتميط الأذى عن",
+    "answer": "الطريق",
+    "after": "صدقة",
+    "options": [
+     "البيت",
+     "الطريق",
+     "السماء"
+    ]
+   },
+   "missionAr": "أزل شيئًا مؤذيًا من الطريق أو من الأرض، ورتّب غرفتك",
+   "missionEn": "Remove something harmful from the path or floor, and tidy your room",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n27",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 27,
+   "titleAr": "البر حسن الخلق",
+   "titleEn": "Goodness Is Good Character",
+   "text": "عَنْ النَّوَّاسِ بْنِ سَمْعَانَ رَضِيَ اللهُ عَنْهُ عَنْ النَّبِيِّ صلى الله عليه وسلم قَالَ: \"الْبِرُّ حُسْنُ الْخُلُقِ، وَالْإِثْمُ مَا حَاكَ فِي صَدْرِك، وَكَرِهْت أَنْ يَطَّلِعَ عَلَيْهِ النَّاسُ\" رَوَاهُ مُسْلِمٌ. وَعَنْ وَابِصَةَ بْنِ مَعْبَدٍ رَضِيَ اللهُ عَنْهُ قَالَ: أَتَيْت رَسُولَ اللَّهِ صلى الله عليه وسلم فَقَالَ: \"جِئْتَ تَسْأَلُ عَنْ الْبِرِّ؟ قُلْت: نَعَمْ. فقَالَ: استفت قلبك، الْبِرُّ مَا اطْمَأَنَّتْ إلَيْهِ النَّفْسُ، وَاطْمَأَنَّ إلَيْهِ الْقَلْبُ، وَالْإِثْمُ مَا حَاكَ فِي النَّفْسِ وَتَرَدَّدَ فِي الصَّدْرِ، وَإِنْ أَفْتَاك النَّاسُ وَأَفْتَوْك\"",
+   "translationEn": "On the authority of an-Nawas bin Sam’an (may Allah be pleased with him), that the Prophet (peace and blessings of Allah be upon him) said: Righteousness is in good character, and wrongdoing is that which wavers in your soul, and which you dislike people finding out about. And on the authority of Wabisah bin Ma’bad (may Allah be pleased with him) who said: I came to the Messenger of Allah (peace and blessings of Allah be upon him) and he (peace and blessings of Allah be upon him) said, “You have come to ask about righteousness.” I said, “Yes.” He (peace and blessings of Allah be upon him) said, “Consult your heart. Righteousness is that about which the soul feels at ease and the heart feels tranquil. And wrongdoing is that which wavers in the soul and causes uneasiness in the breast, even though people have repeatedly given their legal opinion .” A good hadeeth transmitted from the musnads of the two imams, Ahmed bin Hambal and Al- Darimi, with a good chain of authorities.",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "حديث النواس رواه مسلم، وحديث وابصة حديث حسن رويناه في مسندي الإمامين أحمد بن حنبل والدارمي بإسناد حسن",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "البر هو الأخلاق الحسنة، والإثم هو ما يقلق قلبك ولا تحب أن يراه الناس.",
+   "explainEn": "Goodness is good character; wrongdoing is what troubles your heart and you would hate for people to see.",
+   "story": null,
+   "game": {
+    "before": "البر",
+    "answer": "حسن الخلق",
+    "after": "",
+    "options": [
+     "كثرة المال",
+     "حسن الخلق",
+     "قوة الجسم"
+    ]
+   },
+   "missionAr": "كن صاحب خلق حسن مع كل من تقابله اليوم",
+   "missionEn": "Show good manners to everyone you meet today",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n28",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 28,
+   "titleAr": "التمسك بالسنة",
+   "titleEn": "Hold On to the Sunnah",
+   "text": "عَنْ أَبِي نَجِيحٍ الْعِرْبَاضِ بْنِ سَارِيَةَ رَضِيَ اللهُ عَنْهُ قَالَ: \"وَعَظَنَا رَسُولُ اللَّهِ صلى الله عليه وسلم مَوْعِظَةً وَجِلَتْ مِنْهَا الْقُلُوبُ، وَذَرَفَتْ مِنْهَا الْعُيُونُ، فَقُلْنَا: يَا رَسُولَ اللَّهِ! كَأَنَّهَا مَوْعِظَةُ مُوَدِّعٍ فَأَوْصِنَا، قَالَ: أُوصِيكُمْ بِتَقْوَى اللَّهِ، وَالسَّمْعِ وَالطَّاعَةِ وَإِنْ تَأَمَّرَ عَلَيْكُمْ عَبْدٌ، فَإِنَّهُ مَنْ يَعِشْ مِنْكُمْ فَسَيَرَى اخْتِلَافًا كَثِيرًا، فَعَلَيْكُمْ بِسُنَّتِي وَسُنَّةِ الْخُلَفَاءِ الرَّاشِدِينَ الْمَهْدِيينَ، عَضُّوا عَلَيْهَا بِالنَّوَاجِذِ، وَإِيَّاكُمْ وَمُحْدَثَاتِ الْأُمُورِ؛ فَإِنَّ كُلَّ بِدْعَةٍ ضَلَالَةٌ\"",
+   "translationEn": "On the authority of Abu Najeeh al-’Irbaad ibn Saariyah (may Allah be pleased with him) who said: The Messenger of Allah (peace and blessings of Allah be upon him) gave us a sermon by which our hearts were filled with fear and tears came to our eyes. So we said, “O Messenger of Allah! It is as though this is a farewell sermon, so counsel us.” He (peace and blessings of Allah be upon him) said, “I counsel you to have taqwa (fear) of Allah, and to listen and obey , for verily every bidah (innovation) is misguidance.” It was related by at-Tirmidhi, who said that it was a good and sound hadeeth.",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "رواه أبو داود والترمذي وقال: حديث حسن صحيح",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "أوصانا النبي ﷺ بتقوى الله واتباع سنته وسنة الخلفاء الراشدين، وألّا نخترع في الدين.",
+   "explainEn": "The Prophet ﷺ advised us to fear Allah, follow his Sunnah and that of the rightly guided caliphs, and not invent new things in religion.",
+   "story": null,
+   "game": {
+    "before": "فعليكم بسنتي وسنة الخلفاء",
+    "answer": "الراشدين",
+    "after": "المهديين",
+    "options": [
+     "الأولين",
+     "الراشدين",
+     "الكثيرين"
+    ]
+   },
+   "missionAr": "",
+   "missionEn": "",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n29",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 29,
+   "titleAr": "أبواب الخير",
+   "titleEn": "Doors of Goodness",
+   "text": "عَنْ مُعَاذِ بْنِ جَبَلٍ رَضِيَ اللهُ عَنْهُ قَالَ: قُلْت يَا رَسُولَ اللَّهِ! أَخْبِرْنِي بِعَمَلٍ يُدْخِلُنِي الْجَنَّةَ وَيُبَاعِدْنِي مِنْ النَّارِ، قَالَ: \"لَقَدْ سَأَلْت عَنْ عَظِيمٍ، وَإِنَّهُ لَيَسِيرٌ عَلَى مَنْ يَسَّرَهُ اللَّهُ عَلَيْهِ: تَعْبُدُ اللَّهَ لَا تُشْرِكْ بِهِ شَيْئًا، وَتُقِيمُ الصَّلَاةَ، وَتُؤْتِي الزَّكَاةَ، وَتَصُومُ رَمَضَانَ، وَتَحُجُّ الْبَيْتَ، ثُمَّ قَالَ: أَلَا أَدُلُّك عَلَى أَبْوَابِ الْخَيْرِ؟ الصَّوْمُ جُنَّةٌ، وَالصَّدَقَةُ تُطْفِئُ الْخَطِيئَةَ كَمَا يُطْفِئُ الْمَاءُ النَّارَ، وَصَلَاةُ الرَّجُلِ فِي جَوْفِ اللَّيْلِ، ثُمَّ تَلَا: \" تَتَجَافَى جُنُوبُهُمْ عَنِ الْمَضَاجِعِ \" حَتَّى بَلَغَ \"يَعْمَلُونَ\"، ثُمَّ قَالَ: أَلَا أُخْبِرُك بِرَأْسِ الْأَمْرِ وَعَمُودِهِ وَذُرْوَةِ سَنَامِهِ؟ قُلْت: بَلَى يَا رَسُولَ اللَّهِ. قَالَ: رَأْسُ الْأَمْرِ الْإِسْلَامُ، وَعَمُودُهُ الصَّلَاةُ، وَذُرْوَةُ سَنَامِهِ الْجِهَادُ، ثُمَّ قَالَ: أَلَا أُخْبِرُك بِمَلَاكِ ذَلِكَ كُلِّهِ؟ فقُلْت: بَلَى يَا رَسُولَ اللَّهِ ! فَأَخَذَ بِلِسَانِهِ وَقَالَ: كُفَّ عَلَيْك هَذَا. قُلْت: يَا نَبِيَّ اللَّهِ وَإِنَّا لَمُؤَاخَذُونَ بِمَا نَتَكَلَّمُ بِهِ؟ فَقَالَ: ثَكِلَتْك أُمُّك وَهَلْ يَكُبُّ النَّاسَ عَلَى وُجُوهِهِمْ -أَوْ قَالَ عَلَى مَنَاخِرِهِمْ- إلَّا حَصَائِدُ أَلْسِنَتِهِمْ؟!\"",
+   "translationEn": "On the authority of Muadh bin Jabal (may Allah be pleased with him) who said: I said, “O Messenger of Allah, tell me of an act which will take me into Paradise and will keep me away from the Hellfire.” He (peace and blessings of Allah be upon him) said, “You have asked me about a great matter, yet it is easy for him for whom Allah makes it easy: worship Allah, without associating any partners with Him; establish the prayer; pay the zakat; fast in Ramadhan; and make the pilgrimage to the House.” Then he (peace and blessings of Allah be upon him) said, “Shall I not guide you towards the means of goodness? Fasting is a shield; charity wipes away sin as water extinguishes fire; and the praying of a man in the depths of the night.” Then he (peace and blessings of Allah be upon him) recited: “ Then he (peace and blessings of Allah be upon him) said, “Shall I not inform you of the head of the matter, its pillar and its peak?” I said, “Yes, O Messenger of Allah.” He (peace and blessings of Allah be upon him) said, “The head of the matter is Islam, its pillar is the prayer and its peak is jihad.” Then he (peace and blessings of Allah be upon him) said, “Shall I not tell you of the foundation of all of that?” I said, “Yes, O Messenger of Allah.” So he took hold of his tongue and said, “Restrain this.” I said, “O Prophet of Allah, will we be taken to account for what we say with it?” He (peace and blessings of Allah be upon him) said, “May your mother be bereaved of you, O Muadh! Is there anything that throws people into the Hellfire upon their faces — or: on their noses — except the harvests of their tongues?” It was related by at-Tirmidhi, who said it was a good and sound hadeeth.",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "رواه الترمذي وقال: حديث حسن صحيح",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "الصلاة عمود الدين، والصدقة تطفئ الخطايا كما يطفئ الماء النار، ونحفظ ألسنتنا من الكلام السيئ.",
+   "explainEn": "Prayer is the pillar of religion, charity puts out sins as water puts out fire, and we guard our tongues from bad words.",
+   "story": null,
+   "game": {
+    "before": "رأس الأمر الإسلام، وعموده",
+    "answer": "الصلاة",
+    "after": "",
+    "options": [
+     "الصوم",
+     "الصلاة",
+     "الكلام"
+    ]
+   },
+   "missionAr": "احفظ لسانك اليوم من أي كلمة سيئة",
+   "missionEn": "Guard your tongue from any bad word today",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n30",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 30,
+   "titleAr": "حدود الله",
+   "titleEn": "Allah's Limits",
+   "text": "عَنْ أَبِي ثَعْلَبَةَ الْخُشَنِيِّ جُرْثُومِ بن نَاشِر رَضِيَ اللهُ عَنْهُ عَنْ رَسُولِ اللَّهِ صلى الله عليه وسلم قَال: \"إنَّ اللَّهَ تَعَالَى فَرَضَ فَرَائِضَ فَلَا تُضَيِّعُوهَا، وَحَدَّ حُدُودًا فَلَا تَعْتَدُوهَا، وَحَرَّمَ أَشْيَاءَ فَلَا تَنْتَهِكُوهَا، وَسَكَتَ عَنْ أَشْيَاءَ رَحْمَةً لَكُمْ غَيْرَ نِسْيَانٍ فَلَا تَبْحَثُوا عَنْهَا\"",
+   "translationEn": "On the authority of Abu Tha’labah al-Kushanee — Jurthoom bin Nashir (may Allah be pleased with him) — that the Messenger of Allah (peace and blessings of Allah be upon him) said: Verily Allah ta’ala has laid down religious obligations (fara’id), so do not neglect them; and He has set limits, so do not overstep them; and He has forbidden some things, so do not violate them; and He has remained silent about some things, out of compassion for you, not forgetfulness — so do not seek after them. A hasan hadeeth narrated by ad-Daraqutnee and others.",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "حديث حسن، رواه الدارقطني وغيره",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "الله فرض علينا أشياء فلا نتركها، وحرّم أشياء فلا نقترب منها، وسكت عن أشياء رحمةً بنا.",
+   "explainEn": "Allah made some things obligatory so we must not neglect them, forbade some so we stay away, and left others unmentioned out of mercy.",
+   "story": null,
+   "game": {
+    "before": "إن الله تعالى فرض فرائض فلا",
+    "answer": "تضيعوها",
+    "after": "",
+    "options": [
+     "تحملوها",
+     "تضيعوها",
+     "تكتبوها"
+    ]
+   },
+   "missionAr": "",
+   "missionEn": "",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n31",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 31,
+   "titleAr": "الزهد",
+   "titleEn": "Contentment",
+   "text": "عَنْ أَبِي الْعَبَّاسِ سَهْلِ بْنِ سَعْدٍ السَّاعِدِيّ رَضِيَ اللهُ عَنْهُ قَالَ: جَاءَ رَجُلٌ إلَى النَّبِيِّ صلى الله عليه وسلم فَقَالَ: يَا رَسُولَ اللهِ! دُلَّنِي عَلَى عَمَلٍ إذَا عَمِلْتُهُ أَحَبَّنِي اللهُ وَأَحَبَّنِي النَّاسُ؛ فَقَالَ: \"ازْهَدْ فِي الدُّنْيَا يُحِبَّك اللهُ، وَازْهَدْ فِيمَا عِنْدَ النَّاسِ يُحِبَّك النَّاسُ\"",
+   "translationEn": "On the authority of Abu al-’Abbas Sahl bin Sa’ad as-Sa’idee (may Allah be pleased with him) who said: A man came to the Prophet (peace and blessings of Allah be upon him) and said, “O Messenger of Allah, direct me to an act which, if I do it, Allah to love me and the people to love me.” So he (peace and blessings of Allah be upon him) said, “Renounce the world and Allah will love you, and renounce what the people possess and the people will love you.” A hasan hadeeth related by Ibn Majah and others with good chains of authorities.",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "حديث حسن، رواه ابن ماجه وغيره بأسانيد حسنة",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "إذا لم نتعلق بالدنيا أحبّنا الله، وإذا لم ننظر لما في أيدي الناس أحبّنا الناس.",
+   "explainEn": "If we are not attached to worldly things Allah loves us, and if we don't crave what others have, people love us.",
+   "story": null,
+   "game": {
+    "before": "ازهد في الدنيا",
+    "answer": "يحبك الله",
+    "after": "",
+    "options": [
+     "تكسب كثيرًا",
+     "يحبك الله",
+     "تصبح مشهورًا"
+    ]
+   },
+   "missionAr": "كن راضيًا بما عندك، ولا تطلب ألعاب غيرك",
+   "missionEn": "Be happy with what you have and don't ask for others' toys",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n32",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 32,
+   "titleAr": "لا ضرر ولا ضرار",
+   "titleEn": "No Harm",
+   "text": "عَنْ أَبِي سَعِيدٍ سَعْدِ بْنِ مَالِكِ بْنِ سِنَانٍ الْخُدْرِيّ رَضِيَ اللهُ عَنْهُ أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم قَالَ: \" لَا ضَرَرَ وَلَا ضِرَارَ\"",
+   "translationEn": "On the authority of Abu Sa’eed al-Khudree (may Allah be pleased with him), that the Messenger of Allah (peace and blessings of Allah be upon him) said: There should be neither harming (darar) nor reciprocating harm (dirar). A hasan hadeeth related by Ibn Majah, ad-Daraqutnee and others as a musnad hadeeth. It was also related by Malik in al-Muwatta in mursal form from Amr bin Yahya, from his father from the Prophet (peace and blessings of Allah be upon him), but leaving Abu Sa’eed from the chain. And it has other chains of narrations that strengthen one another.",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "حديث حسن، رواه ابن ماجه والدارقطني وغيرهما مسندًا، ورواه مالك في الموطأ مرسلًا، وله طرق يقوي بعضها بعضًا",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "لا نؤذي أنفسنا ولا نؤذي غيرنا، ولا نرد الأذى بأذى.",
+   "explainEn": "We don't harm ourselves or others, and we don't return harm with harm.",
+   "story": null,
+   "game": {
+    "before": "لا ضرر ولا",
+    "answer": "ضرار",
+    "after": "",
+    "options": [
+     "كلام",
+     "ضرار",
+     "طعام"
+    ]
+   },
+   "missionAr": "لا تؤذِ أحدًا اليوم، حتى لو أخطأ في حقك",
+   "missionEn": "Do not hurt anyone today, even if they wronged you",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n33",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 33,
+   "titleAr": "البينة على المدعي",
+   "titleEn": "Proof and Fairness",
+   "text": "عَنْ ابْنِ عَبَّاسٍ رَضِيَ اللَّهُ عَنْهُمَا أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم قَالَ: \"لَوْ يُعْطَى النَّاسُ بِدَعْوَاهُمْ لَادَّعَى رِجَالٌ أَمْوَالَ قَوْمٍ وَدِمَاءَهُمْ، لَكِنَّ الْبَيِّنَةَ عَلَى الْمُدَّعِي، وَالْيَمِينَ عَلَى مَنْ أَنْكَرَ\"",
+   "translationEn": "On the authority of Ibn Abbas (may Allah be pleased with him), that the Messenger of Allah (peace and blessings of Allah be upon him) said: Were people to be given everything that they claimed, men would people. But, the onus of proof is upon the claimant, and the taking of an oath is upon him who denies. A hasan hadeeth narrated by al-Baihaqee and others in this form, and part of it is in the two Saheehs.",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "حديث حسن، رواه البيهقي وغيره هكذا، وبعضه في الصحيحين",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "من ادّعى شيئًا يجب أن يأتي بدليل، ومن أنكر يحلف، حتى يأخذ كل واحد حقه بالعدل.",
+   "explainEn": "Whoever makes a claim must bring proof, and whoever denies it takes an oath, so everyone gets their right fairly.",
+   "story": null,
+   "game": {
+    "before": "لكن البينة على المدعي، واليمين على من",
+    "answer": "أنكر",
+    "after": "",
+    "options": [
+     "سكت",
+     "أنكر",
+     "ضحك"
+    ]
+   },
+   "missionAr": "",
+   "missionEn": "",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n34",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 34,
+   "titleAr": "تغيير المنكر",
+   "titleEn": "Changing What Is Wrong",
+   "text": "عَنْ أَبِي سَعِيدٍ الْخُدْرِيّ رَضِيَ اللهُ عَنْهُ قَالَ سَمِعْت رَسُولَ اللَّهِ صلى الله عليه وسلم يَقُولُ: \"مَنْ رَأَى مِنْكُمْ مُنْكَرًا فَلْيُغَيِّرْهُ بِيَدِهِ، فَإِنْ لَمْ يَسْتَطِعْ فَبِلِسَانِهِ، فَإِنْ لَمْ يَسْتَطِعْ فَبِقَلْبِهِ، وَذَلِكَ أَضْعَفُ الْإِيمَانِ\"",
+   "translationEn": "On the authority of Abu Sa`eed al-Khudree (may Allah be pleased with him) who said: I heard the Messenger of Allah (ﷺ) say, “Whosoever of you sees an evil, let him change it with his hand; and if he is not able to do so, then with his tongue; and if he is not able to do so, then with his heart — and that is the weakest of faith.”",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "رواه مسلم",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "إذا رأينا شيئًا خطأ نغيّره بأيدينا، فإن لم نستطع فبالكلام، فإن لم نستطع نكرهه بقلوبنا.",
+   "explainEn": "If we see something wrong we change it with our hands; if we can't, then with our words; if we can't, we dislike it in our hearts.",
+   "story": null,
+   "game": {
+    "before": "من رأى منكم منكرًا فليغيره",
+    "answer": "بيده",
+    "after": "",
+    "options": [
+     "بقدمه",
+     "بيده",
+     "بماله"
+    ]
+   },
+   "missionAr": "إذا رأيت شيئًا خطأ اليوم فغيّره بلطف أو أخبر الكبار",
+   "missionEn": "If you see something wrong today, fix it gently or tell an adult",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n35",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 35,
+   "titleAr": "إخوة الإسلام",
+   "titleEn": "Brotherhood",
+   "text": "عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللهُ عَنْهُ قَالَ: قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم \" لَا تَحَاسَدُوا، وَلَا تَنَاجَشُوا، وَلَا تَبَاغَضُوا، وَلَا تَدَابَرُوا، وَلَا يَبِعْ بَعْضُكُمْ عَلَى بَيْعِ بَعْضٍ، وَكُونُوا عِبَادَ اللَّهِ إخْوَانًا، الْمُسْلِمُ أَخُو الْمُسْلِمِ، لَا يَظْلِمُهُ، وَلَا يَخْذُلُهُ، وَلَا يَكْذِبُهُ، وَلَا يَحْقِرُهُ، التَّقْوَى هَاهُنَا، وَيُشِيرُ إلَى صَدْرِهِ ثَلَاثَ مَرَّاتٍ، بِحَسْبِ امْرِئٍ مِنْ الشَّرِّ أَنْ يَحْقِرَ أَخَاهُ الْمُسْلِمَ، كُلُّ الْمُسْلِمِ عَلَى الْمُسْلِمِ حَرَامٌ: دَمُهُ وَمَالُهُ وَعِرْضُهُ\"",
+   "translationEn": "On the authority of Abu Hurayrah (may Allah be pleased with him) who said: The Messenger of Allah (peace and blessings of Allah be upon him) said, “Do not envy one another, and do not inflate prices for one another, and do not hate one another, and do not turn away from one another, and do not undercut one another in trade, but . It is evil enough for a man to hold his brother Muslim in contempt. The whole of a Muslim is inviolable for another Muslim: his blood, his property, and his honour.”",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "رواه مسلم",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "لا نحسد ولا نكره ولا نخاصم بعضنا، بل نكون إخوة يحب بعضنا بعضًا.",
+   "explainEn": "We don't envy, hate or turn away from each other; we are brothers and sisters who love one another.",
+   "story": null,
+   "game": {
+    "before": "وكونوا عباد الله",
+    "answer": "إخوانًا",
+    "after": "",
+    "options": [
+     "أغنياء",
+     "إخوانًا",
+     "بعيدين"
+    ]
+   },
+   "missionAr": "سلّم على أخيك أو صديقك وقل له: «أحبك في الله»",
+   "missionEn": "Greet your sibling or friend and tell them: \"I love you for the sake of Allah\"",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n36",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 36,
+   "titleAr": "مساعدة الآخرين",
+   "titleEn": "Helping Others",
+   "text": "عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللهُ عَنْهُ عَنْ النَّبِيِّ صلى الله عليه وسلم قَالَ: \"مَنْ نَفَّسَ عَنْ مُؤْمِنٍ كُرْبَةً مِنْ كُرَبِ الدُّنْيَا نَفَّسَ اللَّهُ عَنْهُ كُرْبَةً مِنْ كُرَبِ يَوْمِ الْقِيَامَةِ، وَمَنْ يَسَّرَ عَلَى مُعْسِرٍ، يَسَّرَ اللَّهُ عَلَيْهِ فِي الدُّنْيَا وَالْآخِرَةِ، وَمَنْ سَتَرَ مُسْلِما سَتَرَهُ اللهُ فِي الدُّنْيَا وَالْآخِرَةِ، وَاَللَّهُ فِي عَوْنِ الْعَبْدِ مَا كَانَ الْعَبْدُ فِي عَوْنِ أَخِيهِ، وَمَنْ سَلَكَ طَرِيقًا يَلْتَمِسُ فِيهِ عِلْمًا سَهَّلَ اللَّهُ لَهُ بِهِ طَرِيقًا إلَى الْجَنَّةِ، وَمَا اجْتَمَعَ قَوْمٌ فِي بَيْتٍ مِنْ بُيُوتِ اللَّهِ يَتْلُونَ كِتَابَ اللَّهِ، وَيَتَدَارَسُونَهُ فِيمَا بَيْنَهُمْ؛ إلَّا نَزَلَتْ عَلَيْهِمْ السَّكِينَةُ، وَغَشِيَتْهُمْ الرَّحْمَةُ، وَ حَفَّتهُمُ المَلاَئِكَة، وَذَكَرَهُمْ اللَّهُ فِيمَنْ عِنْدَهُ، وَمَنْ أَبَطْأَ بِهِ عَمَلُهُ لَمْ يُسْرِعْ بِهِ نَسَبُهُ\"",
+   "translationEn": "On the authority of Abu Hurayrah (may Allah be pleased with him), that the Prophet (peace and blessings of Allah be upon him) said: Whoever removes a worldly grief from a believer, Allah will remove from him one of the griefs of the Day of Resurrection. And whoever alleviates the need of a needy person, Allah will alleviate his needs in this world and the Hereafter. Whoever shields a Muslim, Allah will shield him in this world and the Hereafter. And Allah will aid His slave so long as he aids his brother. And whoever follows a path to seek knowledge therein, Allah will make easy for him a path to Paradise. No people gather together in one of the Houses of Allah, reciting the Book of Allah and studying it among themselves, except that sakeenah (tranquility) descends upon them, and mercy envelops them, and the angels surround them, and Allah mentions them amongst those who are with Him. And whoever is slowed down by his actions, will not be hastened forward by his lineage. Related by in these words.",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "رواه مسلم بهذا اللفظ",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "إذا ساعدت غيرك ساعدك الله، ومن يطلب العلم يسهّل الله له طريقًا إلى الجنة.",
+   "explainEn": "When you help others, Allah helps you, and whoever seeks knowledge, Allah makes his path to Paradise easy.",
+   "story": null,
+   "game": {
+    "before": "والله في عون العبد ما كان العبد في عون",
+    "answer": "أخيه",
+    "after": "",
+    "options": [
+     "نفسه",
+     "أخيه",
+     "بيته"
+    ]
+   },
+   "missionAr": "ساعد شخصًا في شيء صعب عليه اليوم",
+   "missionEn": "Help someone with something that is hard for them today",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n37",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 37,
+   "titleAr": "الحسنات والسيئات",
+   "titleEn": "Good and Bad Deeds",
+   "text": "عَنْ ابْنِ عَبَّاسٍ رَضِيَ اللَّهُ عَنْهُمَا عَنْ رَسُولِ اللَّهِ صلى الله عليه وسلم فِيمَا يَرْوِيهِ عَنْ رَبِّهِ تَبَارَكَ وَتَعَالَى، قَالَ: \"إنَّ اللَّهَ كَتَبَ الْحَسَنَاتِ وَالسَّيِّئَاتِ، ثُمَّ بَيَّنَ ذَلِكَ، فَمَنْ هَمَّ بِحَسَنَةٍ فَلَمْ يَعْمَلْهَا كَتَبَهَا اللَّهُ عِنْدَهُ حَسَنَةً كَامِلَةً، وَإِنْ هَمَّ بِهَا فَعَمِلَهَا كَتَبَهَا اللَّهُ عِنْدَهُ عَشْرَ حَسَنَاتٍ إلَى سَبْعِمِائَةِ ضِعْفٍ إلَى أَضْعَافٍ كَثِيرَةٍ، وَإِنْ هَمَّ بِسَيِّئَةٍ فَلَمْ يَعْمَلْهَا كَتَبَهَا اللَّهُ عِنْدَهُ حَسَنَةً كَامِلَةً، وَإِنْ هَمَّ بِهَا فَعَمِلَهَا كَتَبَهَا اللَّهُ سَيِّئَةً وَاحِدَةً\"",
+   "translationEn": "On the authority of Ibn Abbas (may Allah be pleased with him), from the Messenger of Allah (peace and blessings of Allah be upon him), from what he has related from his Lord: Verily Allah ta’ala has written down the good deeds and the evil deeds, and then explained it and then performed it, then Allah writes it down as one evil deed.” .",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "رواه البخاري ومسلم في صحيحيهما بهذه الحروف",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "من نوى خيرًا كُتبت له حسنة، وإن فعله كُتبت له عشر حسنات أو أكثر، والسيئة تُكتب واحدة فقط.",
+   "explainEn": "Intending good earns a reward; doing it earns ten or more, while a bad deed is written as just one.",
+   "story": null,
+   "game": {
+    "before": "فمن هم بحسنة فلم يعملها كتبها الله عنده حسنة",
+    "answer": "كاملة",
+    "after": "",
+    "options": [
+     "صغيرة",
+     "كاملة",
+     "ناقصة"
+    ]
+   },
+   "missionAr": "",
+   "missionEn": "",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n38",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 38,
+   "titleAr": "محبة الله",
+   "titleEn": "Allah's Love",
+   "text": "عَنْ أَبِي هُرَيْرَة رَضِيَ اللهُ عَنْهُ قَالَ: قَالَ رَسُول اللَّهِ صلى الله عليه وسلم إنَّ اللَّهَ تَعَالَى قَالَ: \"مَنْ عَادَى لِي وَلِيًّا فَقْد آذَنْتهُ بِالْحَرْبِ، وَمَا تَقَرَّبَ إلَيَّ عَبْدِي بِشَيْءٍ أَحَبَّ إلَيَّ مِمَّا افْتَرَضْتُهُ عَلَيْهِ، وَلَا يَزَالُ عَبْدِي يَتَقَرَّبُ إلَيَّ بِالنَّوَافِلِ حَتَّى أُحِبَّهُ، فَإِذَا أَحْبَبْتُهُ كُنْت سَمْعَهُ الَّذِي يَسْمَعُ بِهِ، وَبَصَرَهُ الَّذِي يُبْصِرُ بِهِ، وَيَدَهُ الَّتِي يَبْطِشُ بِهَا، وَرِجْلَهُ الَّتِي يَمْشِي بِهَا، وَلَئِنْ سَأَلَنِي لَأُعْطِيَنَّهُ، وَلَئِنْ اسْتَعَاذَنِي لَأُعِيذَنَّهُ\"",
+   "translationEn": "On the authority of Abu Hurayrah (may Allah be pleased with him) who said: The Messenger of Allah (peace and blessings of Allah be upon him) said, “Verily Allah ta’ala has said: ‘Whosoever shows enmity to a wali (friend) of Mine, then I have declared war against him. And My servant does not draw near to Me with anything more loved to Me than the religious duties I have obligated upon him. And My servant continues to draw near to me with nafil (supererogatory) deeds until I Love him. When I Love him, I am his hearing with which he hears, and his sight with which he sees, and his hand with which he strikes, and his foot with which he walks. Were he to ask of Me, I would surely give it to him; and were he to seek refuge with Me, I would surely grant him refuge.’ ”",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "رواه البخاري",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "كلما أكثرنا من الطاعات الزائدة مثل صلاة السنة والذكر، أحبّنا الله واستجاب دعاءنا.",
+   "explainEn": "The more extra good deeds we do, like sunnah prayers and dhikr, the more Allah loves us and answers our duas.",
+   "story": null,
+   "game": {
+    "before": "ولا يزال عبدي يتقرب إليّ",
+    "answer": "بالنوافل",
+    "after": "حتى أحبه",
+    "options": [
+     "بالأموال",
+     "بالنوافل",
+     "بالألعاب"
+    ]
+   },
+   "missionAr": "صلِّ ركعتين سُنّة اليوم",
+   "missionEn": "Pray two sunnah rak‘ahs today",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n39",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 39,
+   "titleAr": "رحمة الله بنا",
+   "titleEn": "Allah's Mercy",
+   "text": "عَنْ ابْنِ عَبَّاسٍ رَضِيَ اللَّهُ عَنْهُمَا أَنَّ رَسُولَ اللَّهِ صلى الله عليه وسلم قَالَ: \"إنَّ اللَّهَ تَجَاوَزَ لِي عَنْ أُمَّتِي الْخَطَأَ وَالنِّسْيَانَ وَمَا اسْتُكْرِهُوا عَلَيْهِ\"",
+   "translationEn": "On the authority of Ibn Abbas (may Allah be pleased with him), that the Messenger of Allah (peace and blessings of Allah be upon him) said: Verily Allah has pardoned for me my ummah: their mistakes, their forgetfulness, and that which they have been forced to do under duress. A hasan hadeeth related by Ibn Majah, and al-Bayhaqee and others.",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "حديث حسن، رواه ابن ماجه والبيهقي وغيرهما",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "الله رحيم، لا يحاسبنا على الخطأ بدون قصد، ولا على النسيان، ولا على ما أُجبرنا عليه.",
+   "explainEn": "Allah is merciful: He does not hold us accountable for honest mistakes, forgetting, or what we were forced to do.",
+   "story": null,
+   "game": {
+    "before": "إن الله تجاوز لي عن أمتي الخطأ و",
+    "answer": "النسيان",
+    "after": "",
+    "options": [
+     "الكسل",
+     "النسيان",
+     "العناد"
+    ]
+   },
+   "missionAr": "",
+   "missionEn": "",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n40",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 40,
+   "titleAr": "كأنك غريب",
+   "titleEn": "Like a Traveler",
+   "text": "عَنْ ابْن عُمَرَ رَضِيَ اللَّهُ عَنْهُمَا قَالَ: أَخَذَ رَسُولُ اللَّهِ صلى الله عليه وسلم بِمَنْكِبِي، وَقَالَ: \"كُنْ فِي الدُّنْيَا كَأَنَّك غَرِيبٌ أَوْ عَابِرُ سَبِيلٍ\". وَكَانَ ابْنُ عُمَرَ رَضِيَ اللَّهُ عَنْهُمَا يَقُولُ: إذَا أَمْسَيْتَ فَلَا تَنْتَظِرْ الصَّبَاحَ، وَإِذَا أَصْبَحْتَ فَلَا تَنْتَظِرْ الْمَسَاءَ، وَخُذْ مِنْ صِحَّتِك لِمَرَضِك، وَمِنْ حَيَاتِك لِمَوْتِك",
+   "translationEn": "On the authority of Abdullah ibn Umar (may Allah be pleased with him), who said: The Messenger of Allah (peace and blessings of Allah be upon him) took me by the shoulder and said, “Be in this world as though you were a stranger or a wayfarer.” And Ibn Umar (may Allah be pleased with him) used to say, “In the evening do not expect your life before your death.”",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "رواه البخاري",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "الدنيا مثل محطة في رحلة، فنستغل وقتنا وصحتنا في الخير قبل أن تنتهي الرحلة.",
+   "explainEn": "This world is like a stop on a journey, so we use our time and health for good before the journey ends.",
+   "story": null,
+   "game": {
+    "before": "كن في الدنيا كأنك",
+    "answer": "غريب",
+    "after": "أو عابر سبيل",
+    "options": [
+     "ملك",
+     "غريب",
+     "نائم"
+    ]
+   },
+   "missionAr": "استغل وقتك اليوم في شيء نافع بدل الشاشة",
+   "missionEn": "Spend your time today on something useful instead of a screen",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n41",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 41,
+   "titleAr": "اتباع النبي ﷺ",
+   "titleEn": "Following the Prophet ﷺ",
+   "text": "عَنْ أَبِي مُحَمَّدٍ عَبْدِ اللَّهِ بْنِ عَمْرِو بْنِ الْعَاصِ رَضِيَ اللَّهُ عَنْهُمَا، قَالَ: قَالَ رَسُولُ اللَّهِ صلى الله عليه وسلم \"لَا يُؤْمِنُ أَحَدُكُمْ حَتَّى يَكُونَ هَوَاهُ تَبَعًا لِمَا جِئْتُ بِهِ\"",
+   "translationEn": "On the authority of Abu Muhammad Abdullah bin ’Amr bin al-’Aas (may Allah be pleased with him) who said: The Messenger of Allah (peace and blessings of Allah be upon him) said, “None of you believes until his desires are subservient to that which I have brought.” We have related it in Kitab al-Hujjah with a saheeh chain of narrators.",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "حديث حسن صحيح، رويناه في كتاب الحجة بإسناد صحيح",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "المؤمن يحب ما جاء به النبي ﷺ ويجعل رغباته تابعة له.",
+   "explainEn": "A believer loves what the Prophet ﷺ brought and makes his wishes follow it.",
+   "story": null,
+   "game": {
+    "before": "لا يؤمن أحدكم حتى يكون هواه",
+    "answer": "تبعًا",
+    "after": "لما جئت به",
+    "options": [
+     "بعيدًا",
+     "تبعًا",
+     "مختلفًا"
+    ]
+   },
+   "missionAr": "",
+   "missionEn": "",
+   "audioUrl": "",
+   "published": true
+  },
+  {
+   "id": "n42",
+   "tabId": "nawawi",
+   "levelId": null,
+   "order": 42,
+   "titleAr": "مغفرة الله واسعة",
+   "titleEn": "Allah's Vast Forgiveness",
+   "text": "عَنْ أَنَسِ بْنِ مَالِكٍ رَضِيَ اللهُ عَنْهُ قَالَ: سَمِعْت رَسُولَ اللَّهِ صلى الله عليه وسلم يَقُولُ: قَالَ اللَّهُ تَعَالَى: \"يَا ابْنَ آدَمَ! إِنَّكَ مَا دَعَوْتنِي وَرَجَوْتنِي غَفَرْتُ لَك عَلَى مَا كَانَ مِنْك وَلَا أُبَالِي، يَا ابْنَ آدَمَ! لَوْ بَلَغَتْ ذُنُوبُك عَنَانَ السَّمَاءِ ثُمَّ اسْتَغْفَرْتنِي غَفَرْتُ لَك، يَا ابْنَ آدَمَ! إنَّك لَوْ أتَيْتنِي بِقُرَابِ الْأَرْضِ خَطَايَا ثُمَّ لَقِيتنِي لَا تُشْرِكُ بِي شَيْئًا لَأَتَيْتُك بِقُرَابِهَا مَغْفِرَةً\"",
+   "translationEn": "On the authority of Anas (may Allah be pleased with him) who said: I heard the Messenger of Allah (peace and blessings of Allah be upon him) say, “Allah the Almighty has said: ‘O Son of Adam, as long as you invoke Me and ask of Me, I shall forgive you for what you have done, and I shall not mind. O Son of Adam, were your sins to reach the clouds of the sky and you then asked forgiveness from Me, I would forgive you. O Son of Adam, were you to come to Me with sins nearly as great as the Earth, and were you then to face Me, ascribing no partner to Me, I would bring you forgiveness nearly as great as it .’ ” It was related by at-Tirmidhi, who said that it was a hasan hadeeth.",
+   "narratorAr": "",
+   "narratorGenAr": "",
+   "narratorEn": "",
+   "narratorFactAr": "",
+   "narratorFactEn": "",
+   "sourceAr": "رواه الترمذي وقال: حديث حسن صحيح",
+   "sourceEn": "",
+   "sourceFactAr": "",
+   "sourceFactEn": "",
+   "isnadInText": true,
+   "explainAr": "مهما أخطأنا، إذا دعونا الله واستغفرناه بصدق غفر لنا، فمغفرته واسعة جدًا.",
+   "explainEn": "No matter how many mistakes we make, if we call on Allah and sincerely ask forgiveness, He forgives us. His forgiveness is vast.",
+   "story": null,
+   "game": {
+    "before": "يا ابن آدم! إنك ما",
+    "answer": "دعوتني",
+    "after": "ورجوتني غفرت لك",
+    "options": [
+     "لعبت",
+     "دعوتني",
+     "نمت"
+    ]
+   },
+   "missionAr": "قل «أستغفر الله» عشر مرات اليوم",
+   "missionEn": "Say \"Astaghfirullah\" ten times today",
+   "audioUrl": "",
+   "published": true
+  }
+ ],
+ "qaSections": [
+  {
+   "id": "basics_1",
+   "tabId": "basics",
+   "titleAr": "الأصول الثلاثة",
+   "titleEn": "The Three Foundations",
+   "color": "#0E7C74",
+   "order": 1,
+   "videoScene": "s0",
+   "audioUrl": "",
+   "items": [
+    {
+     "q": "من ربك؟",
+     "a": "ربي الله، الذي خلقني وخلق كل شيء، ويرزقني ويرعاني.",
+     "order": 1
+    },
+    {
+     "q": "ما دينك؟",
+     "a": "ديني الإسلام، وهو أن نعبد الله وحده ونطيعه.",
+     "order": 2
+    },
+    {
+     "q": "من نبيك؟",
+     "a": "نبيي محمد ﷺ، خاتم الأنبياء والمرسلين.",
+     "order": 3
+    },
+    {
+     "q": "لماذا خلقنا الله؟",
+     "a": "خلقنا الله لنعبده وحده لا شريك له.\nقال تعالى: ﴿وَمَا خَلَقْتُ الْجِنَّ وَالْإِنسَ إِلَّا لِيَعْبُدُونِ﴾",
+     "order": 4
+    },
+    {
+     "q": "ما معنى «لا إله إلا الله»؟",
+     "a": "لا معبود بحق إلا الله وحده.",
+     "order": 5
+    }
+   ]
+  },
+  {
+   "id": "basics_2",
+   "tabId": "basics",
+   "titleAr": "أركان الإسلام",
+   "titleEn": "Pillars of Islam",
+   "color": "#C27A10",
+   "order": 2,
+   "videoScene": "s1",
+   "audioUrl": "",
+   "items": [
+    {
+     "q": "كم عدد أركان الإسلام؟",
+     "a": "خمسة:\n١. الشهادتان\n٢. إقامة الصلاة\n٣. إيتاء الزكاة\n٤. صوم رمضان\n٥. حج البيت لمن استطاع",
+     "order": 1
+    },
+    {
+     "q": "ما الشهادتان؟",
+     "a": "أشهد أن لا إله إلا الله، وأشهد أن محمدًا رسول الله.",
+     "order": 2
+    },
+    {
+     "q": "ما الزكاة؟",
+     "a": "جزء من المال يعطيه المسلم الغني للفقراء والمحتاجين كل عام، إذا بلغ ماله قدرًا معينًا.",
+     "order": 3
+    },
+    {
+     "q": "متى نصوم؟",
+     "a": "نصوم شهر رمضان، من طلوع الفجر إلى غروب الشمس.",
+     "order": 4
+    },
+    {
+     "q": "أين نحج؟",
+     "a": "نحج إلى بيت الله الحرام، الكعبة، في مكة المكرمة.",
+     "order": 5
+    }
+   ]
+  },
+  {
+   "id": "basics_3",
+   "tabId": "basics",
+   "titleAr": "أركان الإيمان",
+   "titleEn": "Pillars of Faith",
+   "color": "#33478A",
+   "order": 3,
+   "videoScene": "s2",
+   "audioUrl": "",
+   "items": [
+    {
+     "q": "كم عدد أركان الإيمان؟",
+     "a": "ستة: أن تؤمن بالله، وملائكته، وكتبه، ورسله، واليوم الآخر، والقدر خيره وشره.",
+     "order": 1
+    },
+    {
+     "q": "من هم الملائكة؟",
+     "a": "خلق خلقهم الله من نور، يطيعون الله دائمًا ولا يعصونه.",
+     "order": 2
+    },
+    {
+     "q": "اذكر بعض الملائكة",
+     "a": "جبريل: ينزل بالوحي.\nميكائيل: موكّل بالمطر.\nإسرافيل: ينفخ في الصور.",
+     "order": 3
+    },
+    {
+     "q": "ما الكتب التي أنزلها الله؟",
+     "a": "القرآن، والتوراة، والإنجيل، والزبور، وصحف إبراهيم وموسى عليهما السلام.",
+     "order": 4
+    },
+    {
+     "q": "ما آخر الكتب السماوية؟",
+     "a": "القرآن الكريم، أنزله الله على نبينا محمد ﷺ.",
+     "order": 5
+    },
+    {
+     "q": "ما الإحسان؟",
+     "a": "أن تعبد الله كأنك تراه، فإن لم تكن تراه فإنه يراك.",
+     "order": 6
+    }
+   ]
+  },
+  {
+   "id": "basics_4",
+   "tabId": "basics",
+   "titleAr": "الطهارة والوضوء",
+   "titleEn": "Purity and Wudu",
+   "color": "#1E7FB8",
+   "order": 4,
+   "videoScene": "s3",
+   "audioUrl": "",
+   "items": [
+    {
+     "q": "كيف أتوضأ؟",
+     "a": "١. أنوي الوضوء وأقول: بسم الله\n٢. أغسل كفيّ ثلاثًا\n٣. أتمضمض وأستنشق\n٤. أغسل وجهي\n٥. أغسل يديّ إلى المرفقين\n٦. أمسح رأسي وأذنيّ\n٧. أغسل رجليّ إلى الكعبين",
+     "order": 1
+    },
+    {
+     "q": "ما الذي ينقض الوضوء؟",
+     "a": "مثل: البول، والغائط، وخروج الريح، والنوم العميق.",
+     "order": 2
+    },
+    {
+     "q": "ماذا أقول بعد الوضوء؟",
+     "a": "أشهد أن لا إله إلا الله وحده لا شريك له، وأشهد أن محمدًا عبده ورسوله.",
+     "order": 3
+    }
+   ]
+  },
+  {
+   "id": "basics_5",
+   "tabId": "basics",
+   "titleAr": "الصلاة",
+   "titleEn": "Prayer",
+   "color": "#C4472A",
+   "order": 5,
+   "videoScene": "s4",
+   "audioUrl": "",
+   "items": [
+    {
+     "q": "كم صلاة في اليوم والليلة؟",
+     "a": "خمس صلوات: الفجر، والظهر، والعصر، والمغرب، والعشاء.",
+     "order": 1
+    },
+    {
+     "q": "كم عدد ركعات كل صلاة؟",
+     "a": "الفجر: ركعتان\nالظهر: أربع\nالعصر: أربع\nالمغرب: ثلاث\nالعشاء: أربع",
+     "order": 2
+    },
+    {
+     "q": "إلى أين نتجه في الصلاة؟",
+     "a": "إلى القبلة، وهي الكعبة المشرفة في مكة المكرمة.",
+     "order": 3
+    },
+    {
+     "q": "ماذا أقول في الركوع والسجود؟",
+     "a": "في الركوع: سبحان ربي العظيم.\nفي السجود: سبحان ربي الأعلى.",
+     "order": 4
+    },
+    {
+     "q": "ما الذي أحتاجه قبل الصلاة؟",
+     "a": "أن أكون متوضئًا، ولابسًا ملابس طاهرة ساترة، ومتجهًا إلى القبلة، وأن يكون وقت الصلاة قد دخل.",
+     "order": 5
+    }
+   ]
+  },
+  {
+   "id": "basics_6",
+   "tabId": "basics",
+   "titleAr": "نبينا محمد ﷺ",
+   "titleEn": "Our Prophet Muhammad ﷺ",
+   "color": "#7558D6",
+   "order": 6,
+   "videoScene": "s5",
+   "audioUrl": "",
+   "items": [
+    {
+     "q": "ما اسم النبي ﷺ كاملًا؟",
+     "a": "محمد بن عبد الله بن عبد المطلب بن هاشم.",
+     "order": 1
+    },
+    {
+     "q": "أين وُلد النبي ﷺ؟",
+     "a": "وُلد في مكة المكرمة، في عام الفيل.",
+     "order": 2
+    },
+    {
+     "q": "من أم النبي ﷺ؟",
+     "a": "آمنة بنت وهب.",
+     "order": 3
+    },
+    {
+     "q": "متى نزل عليه الوحي؟",
+     "a": "وعمره أربعون سنة، وهو في غار حراء.",
+     "order": 4
+    },
+    {
+     "q": "إلى أين هاجر النبي ﷺ؟",
+     "a": "هاجر من مكة إلى المدينة المنورة.",
+     "order": 5
+    },
+    {
+     "q": "من أول من آمن به؟",
+     "a": "من النساء: خديجة رضي الله عنها.\nمن الرجال: أبو بكر الصديق رضي الله عنه.\nمن الصبيان: علي بن أبي طالب رضي الله عنه.",
+     "order": 6
+    }
+   ]
+  },
+  {
+   "id": "basics_7",
+   "tabId": "basics",
+   "titleAr": "آداب المسلم وأذكاره",
+   "titleEn": "Manners and Daily Remembrance",
+   "color": "#1F8A70",
+   "order": 7,
+   "videoScene": "s6",
+   "audioUrl": "",
+   "items": [
+    {
+     "q": "ماذا أقول حين ألقى أحدًا؟",
+     "a": "السلام عليكم ورحمة الله وبركاته.\nوالرد: وعليكم السلام ورحمة الله وبركاته.",
+     "order": 1
+    },
+    {
+     "q": "ماذا أقول قبل الأكل وبعده؟",
+     "a": "قبل الأكل: بسم الله.\nبعد الأكل: الحمد لله.",
+     "order": 2
+    },
+    {
+     "q": "ماذا أقول إذا عطست؟",
+     "a": "أقول: الحمد لله.\nومن يسمعني يقول: يرحمك الله.\nفأرد: يهديكم الله ويصلح بالكم.",
+     "order": 3
+    },
+    {
+     "q": "ماذا أقول قبل النوم؟",
+     "a": "باسمك اللهم أموت وأحيا.",
+     "order": 4
+    },
+    {
+     "q": "ماذا أقول عند الخروج من البيت؟",
+     "a": "بسم الله، توكلت على الله، ولا حول ولا قوة إلا بالله.",
+     "order": 5
+    }
+   ]
+  }
+ ]
+}

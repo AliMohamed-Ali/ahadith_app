@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="200" viewBox="0 0 320 200">
+                  <rect width="320" height="200" fill="#FFE8C7"></rect>
+                  <rect x="200" y="18" width="104" height="42" rx="21" fill="#FFFFFF"></rect><path d="M214 58L198 70L228 58Z" fill="#FFFFFF"></path>
+                  <text x="252" y="46" text-anchor="middle" font-size="20" font-weight="800" fill="#0E7C74" font-family="Baloo Bhaijaan 2, sans-serif">بسم الله</text>
+                  <circle cx="160" cy="72" r="17" fill="#F2C29B"></circle><path d="M143 70a17 17 0 0 1 34 0q-17-9-34 0z" fill="#3B2A1A"></path>
+                  <circle cx="154" cy="72" r="2.2" fill="#1D2B5E"></circle><circle cx="166" cy="72" r="2.2" fill="#1D2B5E"></circle><path d="M154 79q6 6 12 0" stroke="#1D2B5E" stroke-width="2.5" fill="none" stroke-linecap="round"></path>
+                  <rect x="145" y="90" width="30" height="50" rx="12" fill="#0E7C74"></rect>
+                  <path d="M148 100L138 126M172 100L182 124" stroke="#0E7C74" stroke-width="8" stroke-linecap="round"></path><circle cx="138" cy="128" r="5" fill="#F2C29B"></circle>
+                  <rect x="40" y="138" width="240" height="14" rx="4" fill="#B9783F"></rect><rect x="52" y="152" width="216" height="48" fill="#D49A5E"></rect>
+                  <ellipse cx="160" cy="134" rx="34" ry="8" fill="#FFFFFF" stroke="#D8CBB3" stroke-width="2"></ellipse>
+                  <circle cx="150" cy="130" r="6" fill="#E8573A"></circle><circle cx="166" cy="129" r="5" fill="#9ED9B4"></circle><circle cx="177" cy="132" r="4" fill="#F5B82E"></circle>
+                  <rect x="222" y="112" width="16" height="26" rx="3" fill="#BDEBE3" stroke="#FFFFFF" stroke-width="2"></rect>
+                </svg>
