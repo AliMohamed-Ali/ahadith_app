@@ -14,7 +14,9 @@ class MediaScreen extends StatefulWidget {
 class _MediaScreenState extends State<MediaScreen> {
   late Future<List<MediaItem>> _files = MediaService.list();
 
-  void _reload() => setState(() => _files = MediaService.list());
+  void _reload() => setState(() {
+        _files = MediaService.list();
+      });
 
   IconData _icon(String name) {
     final n = name.toLowerCase();

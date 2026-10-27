@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../ui.dart';
@@ -29,6 +30,10 @@ class MediaService {
       'aac' => 'audio/aac',
       'wav' => 'audio/wav',
       'ogg' => 'audio/ogg',
+      'opus' => 'audio/opus',
+      'amr' => 'audio/amr',
+      '3gp' => 'audio/3gpp',
+      'flac' => 'audio/flac',
       'png' => 'image/png',
       'jpg' || 'jpeg' => 'image/jpeg',
       'webp' => 'image/webp',
@@ -41,12 +46,37 @@ class MediaService {
     };
   }
 
+  static const _audioExt = ['mp3', 'm4a', 'aac', 'wav', 'ogg', 'opus', 'amr', '3gp', 'flac'];
+  static const _anyExt = [..._audioExt, 'png', 'jpg', 'jpeg', 'webp', 'gif', 'mp4', 'mov', 'webm'];
+  static bool _picking = false;
+
   /// يفتح اختيار ملف، يرفعه، ويعرض التقدم. يرجع الرابط أو null.
   static Future<String?> pickAndUpload(BuildContext context, {MediaKind kind = MediaKind.any, String folder = 'media'}) async {
-    final res = await FilePicker.platform.pickFiles(
-      withData: true,
-      type: switch (kind) { MediaKind.audio => FileType.audio, MediaKind.image => FileType.image, MediaKind.video => FileType.video, MediaKind.any => FileType.media },
-    );
+    // ضغطة تانية والاختيار لسه مفتوح بتلغي الأولى بخطأ multiple_request.
+    if (_picking) return null;
+    _picking = true;
+    FilePickerResult? res;
+    try {
+      // على iOS الصوت والملفات العامة بـ custom علشان يفتح تطبيق الملفات بدل مكتبة الموسيقى.
+      // على أندرويد custom بيحوّل الامتدادات لـ MIME وبيقفل ملفات صوت كتير (زي تسجيلات الموبايل)، فبنستخدم فلتر النظام.
+      final ios = !kIsWeb && defaultTargetPlatform == TargetPlatform.iOS;
+      res = await FilePicker.platform.pickFiles(
+        withData: true,
+        type: switch (kind) {
+          MediaKind.image => FileType.image,
+          MediaKind.video => FileType.video,
+          MediaKind.audio => ios ? FileType.custom : FileType.audio,
+          MediaKind.any => ios ? FileType.custom : FileType.any,
+        },
+        allowedExtensions: ios ? switch (kind) { MediaKind.audio => _audioExt, MediaKind.any => _anyExt, _ => null } : null,
+      );
+    } catch (e) {
+      debugPrint('file picker failed: $e');
+      if (context.mounted) toast(context, 'مقدرناش نفتح اختيار الملفات، جرّب تاني', error: true);
+      return null;
+    } finally {
+      _picking = false;
+    }
     final f = res?.files.single;
     if (f == null || f.bytes == null) return null;
     final type = _contentType(f.name);
@@ -132,7 +162,7 @@ class MediaField extends StatelessWidget {
         },
         icon: const Icon(Icons.upload_rounded),
       ),
-      if (url.isNotEmpty) IconButton(tooltip: 'شيل', onPressed: () => onChanged(''), icon: const Icon(Icons.close_rounded)),
+      if (url.isNotEmpty) IconButton(tooltip: 'امسح', onPressed: () => onChanged(''), icon: const Icon(Icons.close_rounded)),
     ]);
   }
 }
