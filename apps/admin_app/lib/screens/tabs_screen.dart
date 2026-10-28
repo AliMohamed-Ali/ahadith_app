@@ -3,6 +3,7 @@ import 'package:hadith_core/hadith_core.dart';
 import 'package:provider/provider.dart';
 
 import '../ui.dart';
+import 'bukhari_screen.dart';
 import 'hadith_list_screen.dart';
 import 'levels_screen.dart';
 import 'qa_editor_screen.dart';
@@ -20,7 +21,7 @@ class _TabsScreenState extends State<TabsScreen> {
   List<AppTab> _local = [];
 
   void _open(AppTab t) {
-    final Widget w = t.isQa ? QaEditorScreen(tab: t) : (t.hasLevels ? LevelsScreen(tab: t) : HadithListScreen(tab: t));
+    final Widget w = t.isQa ? QaEditorScreen(tab: t) : (t.isAges ? const BukhariAdminScreen() : (t.hasLevels ? LevelsScreen(tab: t) : HadithListScreen(tab: t)));
     Navigator.of(context).push(MaterialPageRoute(builder: (_) => w));
   }
 
@@ -53,7 +54,7 @@ class _TabsScreenState extends State<TabsScreen> {
             itemBuilder: (context, i) {
               final t = _local[i];
               final c = hexColor(t.color);
-              final kind = t.isQa ? 'أسئلة وأجوبة' : (t.hasLevels ? 'أحاديث بمستويات' : 'أحاديث مفتوحة');
+              final kind = t.isQa ? 'أسئلة وأجوبة' : (t.isAges ? 'بالسن والدروس (البخاري)' : (t.hasLevels ? 'أحاديث بمستويات' : 'أحاديث مفتوحة'));
               final place = t.place == 'tab' ? 'تبويب تحت' : 'كارت في الرئيسية';
               return Card(
                 key: ValueKey(t.id),
@@ -64,9 +65,14 @@ class _TabsScreenState extends State<TabsScreen> {
                 child: ListTile(
                   leading: CircleAvatar(backgroundColor: c, child: Icon(t.isQa ? Icons.lightbulb_rounded : Icons.menu_book_rounded, color: onColor(c))),
                   title: Text(t.nameAr, style: TextStyle(fontWeight: FontWeight.w800, color: t.visible ? null : Colors.black38)),
-                  subtitle: Text('$kind · $place${t.visible ? '' : ' · مخفي'}'),
+                  subtitle: Text('$kind · $place${t.visible ? '' : ' · مخفي عن الأطفال'}'),
                   onTap: () => _open(t),
                   trailing: Row(mainAxisSize: MainAxisSize.min, children: [
+                    // يظهر/يختفي في أبلكيشن الأطفال على طول
+                    Tooltip(
+                      message: t.visible ? 'ظاهر للأطفال' : 'مخفي عن الأطفال',
+                      child: Switch(value: t.visible, onChanged: (v) => run(context, () => repo.saveTab(t.copyWith(visible: v)), done: v ? 'بقى ظاهر للأطفال ✓' : 'اتخفى عن الأطفال')),
+                    ),
                     IconButton(tooltip: 'تعديل', onPressed: () => showTabEditor(context, t), icon: const Icon(Icons.edit_rounded)),
                     ReorderableDragStartListener(index: i, child: const Icon(Icons.drag_handle_rounded)),
                   ]),
@@ -114,7 +120,8 @@ Future<void> showTabEditor(BuildContext context, AppTab? tab, {int nextOrder = 1
               options: const {'hadith': 'أحاديث', 'qa': 'أسئلة وأجوبة'},
               onChanged: (v) => setS(() => type = v),
             ),
-            if (type == 'hadith') ...[
+            // البخاري طريقة عرضه ثابتة (سنين ← دروس)
+            if (type == 'hadith' && mode != 'ages') ...[
               const SizedBox(height: 12),
               Choice<String>(
                 label: 'طريقة العرض',

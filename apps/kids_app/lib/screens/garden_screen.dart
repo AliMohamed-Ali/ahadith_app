@@ -20,7 +20,17 @@ class GardenScreen extends StatefulWidget {
 }
 
 class _GardenScreenState extends State<GardenScreen> with SingleTickerProviderStateMixin {
-  late final Stream<List<Hadith>> _all = context.read<ContentRepository>().allHadiths();
+  // بنحمّل بس الأحاديث اللي الطفل لعبها (مش كل الأحاديث، البخاري لوحده آلاف).
+  Future<List<Hadith>>? _future;
+  String _key = '';
+  Future<List<Hadith>> _byIds(Iterable<String> ids) {
+    final k = (ids.toList()..sort()).join(',');
+    if (_future == null || k != _key) {
+      _key = k;
+      _future = context.read<ContentRepository>().hadithsByIds(ids);
+    }
+    return _future!;
+  }
   late final AnimationController _fly = AnimationController(vsync: this, duration: const Duration(seconds: 8))..repeat();
   static const _petals = [Color(0xFFF27BA6), Color(0xFFFF8A3D), Color(0xFF9B7BEA), Color(0xFF4FA8F0), Color(0xFFE8573A)];
 
@@ -41,8 +51,8 @@ class _GardenScreenState extends State<GardenScreen> with SingleTickerProviderSt
       decoration: const BoxDecoration(gradient: LinearGradient(colors: [Color(0xFFCDEBFF), Color(0xFFDFF3E4)], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
       child: SafeArea(
         bottom: false,
-        child: StreamBuilder<List<Hadith>>(
-          stream: _all,
+        child: FutureBuilder<List<Hadith>>(
+          future: _byIds(ids),
           builder: (context, snap) {
             final titles = {for (final h in snap.data ?? const <Hadith>[]) h.id: h.title(ar)};
             return CustomScrollView(slivers: [

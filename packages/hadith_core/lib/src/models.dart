@@ -26,7 +26,7 @@ class AppTab {
   final String nameEn;
   /// 'hadith' أو 'qa'
   final String type;
-  /// 'levels' أو 'open'
+  /// 'levels' أو 'open' أو 'ages' (صحيح البخاري: سنين ← دروس)
   final String mode;
   /// 'home' (كارت في الرئيسية) أو 'tab' (تبويب في الشريط السفلي)
   final String place;
@@ -38,6 +38,10 @@ class AppTab {
   bool get isHadith => type == 'hadith';
   bool get isQa => type == 'qa';
   bool get hasLevels => isHadith && mode == 'levels';
+  /// تبويب مقسّم بسن الطفل ثم دروس (صحيح البخاري).
+  bool get isAges => isHadith && mode == 'ages';
+  /// أحاديثه متقسمة في مستويات أو دروس (بتترتب وتكتمل).
+  bool get usesLevels => hasLevels || isAges;
   String name(bool ar) => ar || nameEn.isEmpty ? nameAr : nameEn;
 
   factory AppTab.fromJson(String id, Json j) => AppTab(
@@ -83,7 +87,7 @@ class AppTab {
 
 /// مستوى داخل تبويب أحاديث بمستويات. عددها غير محدود.
 class Level {
-  Level({required this.id, required this.tabId, required this.nameAr, this.nameEn = '', this.ageAr = '', this.ageEn = '', this.color = '#FFD465', this.order = 0});
+  Level({required this.id, required this.tabId, required this.nameAr, this.nameEn = '', this.ageAr = '', this.ageEn = '', this.color = '#FFD465', this.order = 0, this.ageYear = 0, this.hadithIds = const []});
 
   final String id;
   final String tabId;
@@ -93,6 +97,10 @@ class Level {
   final String ageEn;
   final String color;
   final int order;
+  /// لدروس البخاري: السن (4 لـ 12)، و0 للمستويات العادية.
+  final int ageYear;
+  /// لدروس البخاري: أحاديث الدرس (عشان التقدم يتحسب من غير ما نحمّلها).
+  final List<String> hadithIds;
 
   String name(bool ar) => ar || nameEn.isEmpty ? nameAr : nameEn;
   String age(bool ar) => ar || ageEn.isEmpty ? ageAr : ageEn;
@@ -106,11 +114,23 @@ class Level {
         ageEn: _s(j['ageEn']),
         color: _s(j['color']).isEmpty ? '#FFD465' : _s(j['color']),
         order: _i(j['order']),
+        ageYear: _i(j['ageYear']),
+        hadithIds: ((j['hadithIds'] as List?) ?? const []).map(_s).toList(),
       );
 
   factory Level.fromDoc(DocumentSnapshot<Json> d) => Level.fromJson(d.id, d.data() ?? {});
 
-  Json toJson() => {'tabId': tabId, 'nameAr': nameAr, 'nameEn': nameEn, 'ageAr': ageAr, 'ageEn': ageEn, 'color': color, 'order': order};
+  Json toJson() => {
+        'tabId': tabId,
+        'nameAr': nameAr,
+        'nameEn': nameEn,
+        'ageAr': ageAr,
+        'ageEn': ageEn,
+        'color': color,
+        'order': order,
+        if (ageYear > 0) 'ageYear': ageYear,
+        if (hadithIds.isNotEmpty) 'hadithIds': hadithIds,
+      };
 
   Level copyWith({String? nameAr, String? nameEn, String? ageAr, String? ageEn, String? color, int? order}) => Level(
         id: id,
@@ -121,6 +141,8 @@ class Level {
         ageEn: ageEn ?? this.ageEn,
         color: color ?? this.color,
         order: order ?? this.order,
+        ageYear: ageYear,
+        hadithIds: hadithIds,
       );
 }
 
@@ -189,6 +211,10 @@ class Hadith {
     this.missionEn = '',
     this.audioUrl = '',
     this.published = false,
+    this.ageYear = 0,
+    this.bukhariNo = 0,
+    this.status = '',
+    this.isnadAr = '',
   }) : game = game ?? GameData();
 
   final String id;
@@ -218,6 +244,14 @@ class Hadith {
   final String missionEn;
   final String audioUrl;
   final bool published;
+  /// لأحاديث البخاري: السن (4 لـ 12)، ورقم الحديث، والسند.
+  final int ageYear;
+  final int bukhariNo;
+  /// 'auto' (اتقسم تلقائي)، 'review' (محتاج مراجعة قبل ما يظهر لطفل)، 'ok' (اتراجع)، 'hidden' (مش مناسب).
+  final String status;
+  final String isnadAr;
+
+  bool get needsReview => status == 'review';
 
   String title(bool ar) => ar || titleEn.isEmpty ? titleAr : titleEn;
   String explain(bool ar) => ar || explainEn.isEmpty ? explainAr : explainEn;
@@ -260,6 +294,10 @@ class Hadith {
         missionEn: _s(j['missionEn']),
         audioUrl: _s(j['audioUrl']),
         published: _b(j['published']),
+        ageYear: _i(j['ageYear']),
+        bukhariNo: _i(j['bukhariNo']),
+        status: _s(j['status']),
+        isnadAr: _s(j['isnadAr']),
       );
 
   factory Hadith.fromDoc(DocumentSnapshot<Json> d) => Hadith.fromJson(d.id, d.data() ?? {});
@@ -290,6 +328,10 @@ class Hadith {
         'missionEn': missionEn,
         'audioUrl': audioUrl,
         'published': published,
+        if (ageYear > 0) 'ageYear': ageYear,
+        if (bukhariNo > 0) 'bukhariNo': bukhariNo,
+        if (status.isNotEmpty) 'status': status,
+        if (isnadAr.isNotEmpty) 'isnadAr': isnadAr,
         'updatedAt': FieldValue.serverTimestamp(),
       };
 }

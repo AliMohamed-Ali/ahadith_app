@@ -221,7 +221,7 @@ class _OpenTabCard extends StatelessWidget {
       shadow: Color.lerp(c, Colors.black, .35)!,
       icon: Icons.menu_book_rounded,
       title: tab.name(S.ar(context)),
-      sub: S.of(context, 'openTabSub'),
+      sub: S.of(context, tab.isAges ? 'bkSub' : 'openTabSub'),
       onTap: () => openTab(context, tab),
     );
   }

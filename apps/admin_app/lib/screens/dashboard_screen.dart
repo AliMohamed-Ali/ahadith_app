@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../services/seed_service.dart';
 import '../ui.dart';
+import 'bukhari_screen.dart';
 import 'media_screen.dart';
 import 'notify_screen.dart';
 import 'rewards_screen.dart';
@@ -20,7 +21,8 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   late final repo = context.read<ContentRepository>();
   late final Stream<List<AppTab>> _tabs = repo.tabs();
-  late final Stream<List<Hadith>> _hadiths = repo.allHadiths(onlyPublished: false);
+  // عدّ بس من غير ما نحمّل الأحاديث (البخاري لوحده آلاف)
+  late final Future<List<int>> _counts = Future.wait([repo.countHadiths(), repo.countHadiths(published: true)]);
 
   void _go(Widget w) => Navigator.of(context).push(MaterialPageRoute(builder: (_) => w));
 
@@ -54,23 +56,23 @@ class _DashboardScreenState extends State<DashboardScreen> {
         actions: [IconButton(tooltip: 'خروج', onPressed: () => FirebaseAuth.instance.signOut(), icon: const Icon(Icons.logout_rounded))],
       ),
       body: ListView(padding: const EdgeInsets.all(16), children: [
-        StreamBuilder<List<Hadith>>(
-          stream: _hadiths,
+        FutureBuilder<List<int>>(
+          future: _counts,
           builder: (context, hs) => StreamBuilder<List<AppTab>>(
             stream: _tabs,
             builder: (context, ts) {
-              final h = hs.data ?? const <Hadith>[];
-              final pub = h.where((x) => x.published).length;
+              final c = hs.data;
               return Row(children: [
                 _Stat(label: 'تبويبات', value: '${ts.data?.length ?? '…'}', color: AppColors.navy),
-                _Stat(label: 'أحاديث منشورة', value: '$pub', color: AppColors.teal),
-                _Stat(label: 'مسودات', value: '${h.length - pub}', color: AppColors.goldDark),
+                _Stat(label: 'أحاديث منشورة', value: c == null ? '…' : '${c[1]}', color: AppColors.teal),
+                _Stat(label: 'مسودات', value: c == null ? '…' : '${c[0] - c[1]}', color: AppColors.goldDark),
               ]);
             },
           ),
         ),
         const SizedBox(height: 16),
         _Tile(icon: Icons.tab_rounded, color: AppColors.teal, title: 'المحتوى والتبويبات', sub: 'التبويبات، المستويات، الأحاديث، الأسئلة', onTap: () => _go(const TabsScreen())),
+        _Tile(icon: Icons.menu_book_rounded, color: const Color(0xFF7558D6), title: 'صحيح البخاري', sub: 'استيراد، ومراجعة الأحاديث لكل سن، والنشر', onTap: () => _go(const BukhariAdminScreen())),
         _Tile(icon: Icons.workspace_premium_rounded, color: AppColors.royal, title: 'النجوم والجوائز', sub: 'النجوم العادية والملكية ومتجر فانوس', onTap: () => _go(const RewardsScreen())),
         _Tile(icon: Icons.perm_media_rounded, color: AppColors.coral, title: 'الوسائط', sub: 'رفع صوت وصور وفيديو', onTap: () => _go(const MediaScreen())),
         _Tile(icon: Icons.notifications_active_rounded, color: AppColors.goldDark, title: 'الإشعارات', sub: 'ابعتي إشعار لكل الأطفال', onTap: () => _go(const NotifyScreen())),

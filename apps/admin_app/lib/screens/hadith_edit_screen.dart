@@ -106,6 +106,11 @@ class _HadithEditScreenState extends State<HadithEditScreen> {
       missionEn: s('missionEn'),
       audioUrl: _audio,
       published: published,
+      // بيانات البخاري بتفضل زي ما هي (مكانه بيتغير من شاشة مراجعة البخاري)
+      ageYear: widget.hadith?.ageYear ?? 0,
+      bukhariNo: widget.hadith?.bukhariNo ?? 0,
+      status: widget.hadith?.status ?? '',
+      isnadAr: widget.hadith?.isnadAr ?? '',
     );
   }
 
@@ -225,6 +230,11 @@ class _HadithEditScreenState extends State<HadithEditScreen> {
 
   /// مكان الحديث: أي تبويب وأي مستوى (يسمح بنقله).
   Widget _placeSection() {
+    if ((widget.hadith?.ageYear ?? 0) > 0) {
+      return FormSection(title: 'مكان الحديث', icon: Icons.place_rounded, children: [
+        Text('صحيح البخاري · سن ${widget.hadith!.ageYear} سنين. لنقله لسن تانية استخدمي «نقل لسن» من شاشة مراجعة البخاري.'),
+      ]);
+    }
     return StreamBuilder<List<AppTab>>(
       stream: _tabs,
       builder: (context, ts) => StreamBuilder<List<Level>>(

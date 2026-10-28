@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../l10n.dart';
 import '../state/progress_store.dart';
 import '../widgets/common.dart';
+import 'bukhari_screen.dart';
 import 'qa_screen.dart';
 import 'river_screen.dart';
 
@@ -31,6 +32,7 @@ class TabBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (tab.isQa) return QaScreen(tab: tab, showHeader: !inRoute);
+    if (tab.isAges) return BukhariScreen(tab: tab, showHeader: !inRoute);
     if (!tab.hasLevels) return RiverScreen(tab: tab, embedded: true, showHeader: !inRoute);
     return LevelsList(tab: tab, showHeader: !inRoute);
   }

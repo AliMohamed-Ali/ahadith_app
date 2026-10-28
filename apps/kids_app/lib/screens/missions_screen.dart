@@ -16,7 +16,17 @@ class MissionsScreen extends StatefulWidget {
 }
 
 class _MissionsScreenState extends State<MissionsScreen> {
-  late final Stream<List<Hadith>> _all = context.read<ContentRepository>().allHadiths();
+  // بنحمّل بس الأحاديث اللي الطفل لعبها (مش كل الأحاديث، البخاري لوحده آلاف).
+  Future<List<Hadith>>? _future;
+  String _key = '';
+  Future<List<Hadith>> _byIds(Iterable<String> ids) {
+    final k = (ids.toList()..sort()).join(',');
+    if (_future == null || k != _key) {
+      _key = k;
+      _future = context.read<ContentRepository>().hadithsByIds(ids);
+    }
+    return _future!;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +34,8 @@ class _MissionsScreenState extends State<MissionsScreen> {
     final p = context.watch<ProgressStore>();
     return Scaffold(
       appBar: AppBar(title: Text(S.of(context, 'missions')), backgroundColor: AppColors.coral),
-      body: StreamBuilder<List<Hadith>>(
-        stream: _all,
+      body: FutureBuilder<List<Hadith>>(
+        future: _byIds(p.missions.keys),
         builder: (context, snap) {
           final byId = {for (final h in snap.data ?? const <Hadith>[]) h.id: h};
           final entries = p.missions.entries.where((e) => byId.containsKey(e.key)).toList()

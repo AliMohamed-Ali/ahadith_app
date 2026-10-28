@@ -5,17 +5,20 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hadith_core/hadith_core.dart';
 import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
 import 'l10n.dart';
-import 'screens/shell.dart';
+import 'screens/splash_screen.dart';
 import 'state/progress_store.dart';
 import 'theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // الخطوط متخزنة في assets/google_fonts، فمش محتاجين نحمّلها من النت.
+  GoogleFonts.config.allowRuntimeFetching = false;
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   // تسجيل مجهول: لا يطلب أي بيانات من الطفل، ويُستخدم فقط للوحة الشرف.
   try {
@@ -48,6 +51,14 @@ Future<void> main() async {
   );
 }
 
+/// حجم الخط بيتظبط على مقاس الشاشة (موبايل صغير، كبير، تابلت) ومع إعداد حجم الخط في الموبايل،
+/// بس في حدود عشان التصميم ما يبوظش لو الإعداد كبير قوي.
+TextScaler appTextScaler(MediaQueryData mq) {
+  final byScreen = (mq.size.shortestSide / 390).clamp(.88, 1.2);
+  final bySystem = mq.textScaler.scale(10) / 10;
+  return TextScaler.linear((byScreen * bySystem.clamp(.9, 1.2)).clamp(.85, 1.35));
+}
+
 class KidsApp extends StatelessWidget {
   const KidsApp({super.key});
 
@@ -65,8 +76,11 @@ class KidsApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      builder: (context, child) => RoyalStarListener(child: child ?? const SizedBox()),
-      home: const Shell(),
+      builder: (context, child) => MediaQuery(
+        data: MediaQuery.of(context).copyWith(textScaler: appTextScaler(MediaQuery.of(context))),
+        child: RoyalStarListener(child: child ?? const SizedBox()),
+      ),
+      home: const SplashScreen(),
     );
   }
 }

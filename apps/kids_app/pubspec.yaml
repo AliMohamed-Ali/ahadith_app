@@ -37,12 +37,18 @@ flutter:
   uses-material-design: true
   assets:
     - assets/scenes/
+    # الخطوط جوه الأبلكيشن عشان تظهر صح من أول مرة حتى من غير نت.
+    - assets/google_fonts/
 
 flutter_launcher_icons:
   android: true
   ios: true
+  # الأيقونة الكاملة: آيفون وأندرويد القديم.
   image_path: assets/icon/app_icon.png
   remove_alpha_ios: true
-  # Android 8+: الصورة كاملة خلفية، والـ launcher بيقصّها دايرة أو مربع حسب الموبايل.
-  adaptive_icon_background: assets/icon/app_icon.png
-  adaptive_icon_foreground: assets/icon/transparent.png
+  # أندرويد 8+: خلفية + فانوس لوحده جوه المنطقة الآمنة، فما يتقصّش مهما الموبايل قص الأيقونة (دايرة/مربع/نقطة).
+  adaptive_icon_background: assets/icon/icon_background.png
+  adaptive_icon_foreground: assets/icon/icon_foreground.png
+  adaptive_icon_foreground_inset: 0
+  # أندرويد 13+: نسخة لون واحد لما المستخدم يفعّل "الأيقونات بلون الثيم".
+  adaptive_icon_monochrome: assets/icon/icon_monochrome.png

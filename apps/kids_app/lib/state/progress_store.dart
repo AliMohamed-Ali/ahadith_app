@@ -63,6 +63,8 @@ class ProgressStore extends ChangeNotifier {
   Set<String> wearing = {};
   bool locOk = false;
   bool showMe = true;
+  /// صحيح البخاري: السن اللي الطفل بيبدأ منها (من اختبار تحديد المستوى)، و null لو لسه ما اتحددتش.
+  int? bukhariStart;
 
   bool get ar => lang == 'ar';
 
@@ -86,6 +88,7 @@ class ProgressStore extends ChangeNotifier {
         s.wearing = Set<String>.from((j['wearing'] ?? []) as List);
         s.locOk = (j['locOk'] ?? false) as bool;
         s.showMe = (j['showMe'] ?? true) as bool;
+        s.bukhariStart = j['bukhariStart'] as int?;
       } catch (e) {
         debugPrint('progress load failed: $e');
       }
@@ -110,6 +113,7 @@ class ProgressStore extends ChangeNotifier {
         'wearing': wearing.toList(),
         'locOk': locOk,
         'showMe': showMe,
+        'bukhariStart': bukhariStart,
       }),
     );
   }
@@ -195,6 +199,11 @@ class ProgressStore extends ChangeNotifier {
     _changed();
   }
 
+  void setBukhariStart(int age) {
+    bukhariStart = age;
+    _changed();
+  }
+
   void setShowMe(bool v) {
     showMe = v;
     _changed();
@@ -233,6 +242,7 @@ class ProgressStore extends ChangeNotifier {
     wearing = {};
     locOk = false;
     showMe = true;
+    bukhariStart = null;
     await _prefs.remove(_key);
     notifyListeners();
   }

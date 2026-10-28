@@ -81,8 +81,8 @@ class _HadithListScreenState extends State<HadithListScreen> {
                             onTap: () => _open(h),
                             trailing: Row(mainAxisSize: MainAxisSize.min, children: [
                               Tooltip(
-                                message: h.published ? 'منشور' : 'مسودة',
-                                child: Switch(value: h.published, onChanged: (v) => run(context, () => repo.setPublished(h.id, v), done: v ? 'اتنشر ✓' : 'بقى مسودة')),
+                                message: h.published ? 'ظاهر للأطفال' : 'مخفي عن الأطفال',
+                                child: Switch(value: h.published, onChanged: (v) => run(context, () => repo.setPublished(h.id, v), done: v ? 'بقى ظاهر للأطفال ✓' : 'اتخفى عن الأطفال')),
                               ),
                               if (canReorder) ReorderableDragStartListener(index: i, child: const Icon(Icons.drag_handle_rounded)),
                             ]),

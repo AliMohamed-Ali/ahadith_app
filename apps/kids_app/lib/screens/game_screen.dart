@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hadith_core/hadith_core.dart';
 import 'package:provider/provider.dart';
@@ -10,11 +11,22 @@ import '../theme.dart';
 import '../widgets/art.dart';
 import '../widgets/common.dart';
 import '../widgets/fanoos.dart';
+import 'adventure_game.dart';
+import 'climb_game.dart';
+import 'puzzle_game.dart';
 import 'river_screen.dart';
+import 'train_run_game.dart';
 
-enum GameKind { fish, bubbles, train }
+// ألعاب المغامرة (نفس أسامي AdventureWorld) متوزعة بين الألعاب التانية عشان تتنوع.
+enum GameKind { fish, climb, puzzle, mountains, bubbles, trainRun, farm, train, desert, balloons, sea, order, forest, stars, snow, butterflies, night, river, orchard, jungle }
 
-/// ألعاب "الكلمة الناقصة": صيد السمك، الفقاعات، القطار. تتبدل حسب ترتيب الحديث.
+extension on GameKind {
+  AdventureWorld? get world => AdventureWorld.values.asNameMap()[name];
+}
+
+/// ألعاب الحديث: صيد السمك، الفقاعات، القطار، البالونات، رتّب الحديث، النجوم، الفراشات،
+/// و10 مغامرات الطفل بيجري فيها ويجمع كلمات الحديث.
+/// تتبدل حسب ترتيب الحديث.
 class GameScreen extends StatefulWidget {
   const GameScreen({super.key, required this.flow});
   final FlowCtx flow;
@@ -23,7 +35,7 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
-  late final GameKind kind = GameKind.values[widget.flow.index % GameKind.values.length];
+  late GameKind kind = _chooseKind();
   late final List<String> options = [...widget.flow.hadith.game.options]..shuffle(math.Random());
   late final AnimationController _clock = AnimationController(vsync: this, duration: const Duration(seconds: 60))..repeat();
   late final AnimationController _leave = AnimationController(vsync: this, duration: const Duration(milliseconds: 1100));
@@ -32,6 +44,26 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
 
   Hadith get h => widget.flow.hadith;
   double get _sec => _clock.value * 60;
+
+  GameKind _chooseKind() {
+    final k = GameKind.values[widget.flow.index % GameKind.values.length];
+    // لعبة الترتيب محتاجة جملة مش طويلة قوي ولا قصيرة قوي.
+    if (k == GameKind.order && !_OrderGame.fits(h.game)) return GameKind.balloons;
+    if (k == GameKind.puzzle && !PuzzleGame.fits(h.game)) return GameKind.bubbles;
+    return k;
+  }
+
+  /// للتجربة بس (Debug): ينقل للعبة اللي بعدها على نفس الحديث.
+  void _debugNextKind() {
+    var next = GameKind.values[(kind.index + 1) % GameKind.values.length];
+    if (next == GameKind.order && !_OrderGame.fits(h.game) || next == GameKind.puzzle && !PuzzleGame.fits(h.game)) next = GameKind.values[(next.index + 1) % GameKind.values.length];
+    setState(() {
+      kind = next;
+      _wrong.clear();
+      _solved = false;
+      _leave.reset();
+    });
+  }
 
   @override
   void dispose() {
@@ -58,7 +90,7 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
     if (!mounted) return;
     final p = context.read<ProgressStore>();
     final f = widget.flow;
-    p.winGame(h, openTab: f.openTab, levelId: f.level?.id, levelHadithIds: f.tab.hasLevels ? f.levelHadithIds : null);
+    p.winGame(h, openTab: f.openTab, levelId: f.level?.id, levelHadithIds: f.tab.usesLevels ? f.levelHadithIds : null);
     showWinSheet(context, f);
   }
 
@@ -66,12 +98,45 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     final ar = S.ar(context);
     final g = h.game;
-    final titleKey = switch (kind) { GameKind.fish => 'gameFish', GameKind.bubbles => 'gameBubbles', GameKind.train => 'gameTrain' };
+    final titleKey = switch (kind) {
+      GameKind.fish => 'gameFish',
+      GameKind.bubbles => 'gameBubbles',
+      GameKind.train => 'gameTrain',
+      GameKind.balloons => 'gameBalloons',
+      GameKind.order => 'gameOrder',
+      GameKind.stars => 'gameStars',
+      GameKind.butterflies => 'gameButterflies',
+      GameKind.climb => 'gameClimb',
+      GameKind.trainRun => 'gameTrainRun',
+      GameKind.puzzle => 'gamePuzzle',
+      _ => kind.world!.titleKey,
+    };
+    final bg = switch (kind) {
+      GameKind.train => const Color(0xFFFFF6E0),
+      GameKind.balloons => const Color(0xFFCDEBFF),
+      GameKind.order => const Color(0xFFFFEEF4),
+      GameKind.stars => const Color(0xFF1E2A5A),
+      GameKind.butterflies => const Color(0xFFE6F7D9),
+      GameKind.puzzle => const Color(0xFFFDF1DC),
+      _ => const Color(0xFFD8F1FB),
+    };
     return Scaffold(
-      backgroundColor: kind == GameKind.train ? const Color(0xFFFFF6E0) : const Color(0xFFD8F1FB),
-      appBar: AppBar(title: Text(S.of(context, titleKey))),
+      backgroundColor: bg,
+      appBar: AppBar(title: Text(S.of(context, titleKey)), actions: [
+        if (kDebugMode) IconButton(tooltip: 'Next game (debug)', icon: const Icon(Icons.skip_next_rounded), onPressed: _debugNextKind),
+      ]),
       body: !g.isValid
           ? _MemorizeMode(hadith: h, onDone: _win)
+          : kind == GameKind.climb
+          ? ClimbGame(key: ValueKey(kind), game: g, onDone: _win)
+          : kind == GameKind.puzzle
+          ? PuzzleGame(key: ValueKey(kind), game: g, onDone: _win)
+          : kind == GameKind.trainRun
+          ? TrainRunGame(key: ValueKey(kind), game: g, onDone: _win)
+          : kind.world != null
+          ? AdventureGame(key: ValueKey(kind), game: g, world: kind.world!, onDone: _win)
+          : kind == GameKind.order
+          ? _OrderGame(key: ValueKey(kind), game: g, onDone: _win)
           : Column(children: [
               // الجملة مع الفراغ
               Container(
@@ -108,6 +173,10 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
                       GameKind.fish => _fish(box.biggest),
                       GameKind.bubbles => _bubbles(box.biggest),
                       GameKind.train => _train(box.biggest, ar),
+                      GameKind.balloons => _balloons(box.biggest),
+                      GameKind.stars => _stars(box.biggest),
+                      GameKind.butterflies => _butterflies(box.biggest),
+                      _ => const SizedBox.shrink(),
                     },
                   ),
                 ),
@@ -220,6 +289,92 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
             ),
           ),
       ]),
+    ]);
+  }
+
+  // ---------- البالونات ----------
+  Widget _balloons(Size s) {
+    final n = options.length;
+    final col = s.width / n;
+    return Stack(children: [
+      Positioned.fill(child: CustomPaint(painter: _SkyPainter(_sec))),
+      for (var i = 0; i < n; i++)
+        Builder(builder: (_) {
+          final o = options[i];
+          final span = s.height + _BalloonView.height;
+          final y = s.height - ((_sec * (30 + i * 6) + i * 130) % span);
+          final x = col * i + col / 2 - _BalloonView.width / 2 + math.sin(_sec * 1.2 + i * 2) * 16;
+          final popped = _solved && o == h.game.answer;
+          return Positioned(
+            left: x,
+            top: y,
+            child: _Tappable(
+              disabled: _wrong.contains(o),
+              onTap: () => _pick(o),
+              child: Transform.scale(
+                scale: popped ? 1 + _leave.value * 0.8 : 1,
+                child: Opacity(opacity: popped ? (1 - _leave.value).clamp(0.0, 1.0) : 1, child: _BalloonView(word: o, color: _palette[i % _palette.length])),
+              ),
+            ),
+          );
+        }),
+    ]);
+  }
+
+  // ---------- النجوم ----------
+  Widget _stars(Size s) {
+    final n = options.length;
+    final col = s.width / n;
+    const size = 124.0;
+    return Stack(children: [
+      Positioned.fill(child: CustomPaint(painter: _NightPainter(_sec))),
+      for (var i = 0; i < n; i++)
+        Builder(builder: (_) {
+          final o = options[i];
+          // النجوم بتنزل من فوق لتحت
+          final y = (_sec * (26 + i * 6) + i * 140) % (s.height + size) - size;
+          final x = col * i + col / 2 - size / 2 + math.sin(_sec * .9 + i * 2) * 10;
+          final caught = _solved && o == h.game.answer;
+          return Positioned(
+            left: x,
+            top: caught ? y - _leave.value * (y + size + 40) : y,
+            child: _Tappable(
+              disabled: _wrong.contains(o),
+              onTap: () => _pick(o),
+              child: Transform.scale(
+                scale: caught ? 1 + _leave.value * 0.5 : 1,
+                child: _StarView(word: o, size: size, angle: math.sin(_sec * 1.4 + i) * .25, glow: caught),
+              ),
+            ),
+          );
+        }),
+    ]);
+  }
+
+  // ---------- الفراشات ----------
+  Widget _butterflies(Size s) {
+    final n = options.length;
+    final lane = (s.height - 50) / n;
+    const w = _ButterflyView.width;
+    return Stack(children: [
+      Positioned.fill(child: CustomPaint(painter: _GardenPainter(_sec))),
+      for (var i = 0; i < n; i++)
+        Builder(builder: (_) {
+          final o = options[i];
+          final phase = _sec * (.45 + i * .1) + i * 1.7;
+          final x = (s.width - w) / 2 * (1 + math.sin(phase));
+          final y = 10 + i * lane + math.sin(_sec * 2.2 + i) * 12;
+          final flown = _solved && o == h.game.answer;
+          return Positioned(
+            left: x,
+            top: flown ? y - _leave.value * (y + 120) : y,
+            child: _Tappable(
+              disabled: _wrong.contains(o),
+              onTap: () => _pick(o),
+              child: _ButterflyView(word: o, color: _palette[i % _palette.length], flap: math.sin(_sec * (flown ? 22 : 9) + i).abs()),
+            ),
+          );
+        }),
     ]);
   }
 }
@@ -351,6 +506,366 @@ class _Wagon extends StatelessWidget {
           border: Border.all(color: dashed ? AppColors.teal : Colors.black12, width: dashed ? 3 : 1),
         ),
         child: Text(word, style: hadithStyle(size: 20, color: onColor(color))),
+      );
+}
+
+class _BalloonView extends StatelessWidget {
+  const _BalloonView({required this.word, required this.color});
+  final String word;
+  final Color color;
+  static const width = 110.0;
+  static const height = 170.0;
+  @override
+  Widget build(BuildContext context) => SizedBox(
+        width: width,
+        height: height,
+        child: Stack(children: [
+          Positioned.fill(child: CustomPaint(painter: _BalloonPainter(color))),
+          Positioned(
+            left: 14,
+            right: 14,
+            top: 18,
+            height: 88,
+            child: Center(child: FittedBox(fit: BoxFit.scaleDown, child: Text(word, style: hadithStyle(size: 20, color: Colors.white)))),
+          ),
+        ]),
+      );
+}
+
+class _BalloonPainter extends CustomPainter {
+  _BalloonPainter(this.color);
+  final Color color;
+  @override
+  void paint(Canvas canvas, Size s) {
+    final body = Rect.fromLTWH(4, 0, s.width - 8, 124);
+    canvas.drawOval(body, Paint()..shader = RadialGradient(center: const Alignment(-.35, -.4), colors: [Color.lerp(color, Colors.white, .35)!, color]).createShader(body));
+    // اللمعة
+    canvas.drawOval(const Rect.fromLTWH(22, 16, 16, 28), Paint()..color = Colors.white.withOpacity(.55));
+    // العقدة والخيط
+    final cx = s.width / 2;
+    canvas.drawPath(Path()..moveTo(cx, 120)..lineTo(cx - 7, 132)..lineTo(cx + 7, 132)..close(), Paint()..color = color);
+    canvas.drawPath(
+      Path()
+        ..moveTo(cx, 132)
+        ..quadraticBezierTo(cx - 10, 148, cx, 156)
+        ..quadraticBezierTo(cx + 10, 164, cx, s.height),
+      Paint()
+        ..color = AppColors.muted
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 1.6,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant _BalloonPainter old) => old.color != color;
+}
+
+class _SkyPainter extends CustomPainter {
+  _SkyPainter(this.t);
+  final double t;
+  @override
+  void paint(Canvas canvas, Size s) {
+    // الشمس
+    canvas.drawCircle(Offset(s.width - 40, 40), 46, Paint()..color = AppColors.gold.withOpacity(.25));
+    canvas.drawCircle(Offset(s.width - 40, 40), 30, Paint()..color = AppColors.gold);
+    // سحاب ماشي
+    final cloud = Paint()..color = Colors.white.withOpacity(.9);
+    for (var i = 0; i < 4; i++) {
+      final x = (t * (10 + i * 4) + i * 170) % (s.width + 160) - 80;
+      final y = 30 + i * s.height / 4.5;
+      final r = 18.0 + (i % 2) * 6;
+      canvas.drawCircle(Offset(x, y), r, cloud);
+      canvas.drawCircle(Offset(x + r, y - r * .5), r * 1.15, cloud);
+      canvas.drawCircle(Offset(x + r * 2.1, y), r, cloud);
+      canvas.drawRRect(RRect.fromRectAndRadius(Rect.fromLTWH(x, y - 2, r * 2.1, r), Radius.circular(r / 2)), cloud);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant _SkyPainter old) => old.t != t;
+}
+
+class _StarView extends StatelessWidget {
+  const _StarView({required this.word, required this.size, required this.angle, this.glow = false});
+  final String word;
+  final double size;
+  final double angle;
+  final bool glow;
+  @override
+  Widget build(BuildContext context) => SizedBox(
+        width: size,
+        height: size,
+        child: Stack(alignment: Alignment.center, children: [
+          Transform.rotate(angle: angle, child: CustomPaint(size: Size.square(size), painter: _StarPainter(glow))),
+          SizedBox(
+            width: size * .5,
+            child: FittedBox(fit: BoxFit.scaleDown, child: Text(word, style: hadithStyle(size: 18))),
+          ),
+        ]),
+      );
+}
+
+class _StarPainter extends CustomPainter {
+  _StarPainter(this.glow);
+  final bool glow;
+  @override
+  void paint(Canvas canvas, Size s) {
+    final c = s.center(Offset.zero);
+    final outer = s.width / 2 - 4;
+    final inner = outer * .55;
+    final path = Path();
+    for (var k = 0; k < 10; k++) {
+      final r = k.isEven ? outer : inner;
+      final a = -math.pi / 2 + k * math.pi / 5;
+      final p = c + Offset(math.cos(a) * r, math.sin(a) * r);
+      k == 0 ? path.moveTo(p.dx, p.dy) : path.lineTo(p.dx, p.dy);
+    }
+    path.close();
+    canvas.drawPath(path, Paint()
+      ..color = AppColors.gold.withOpacity(glow ? .9 : .45)
+      ..maskFilter = MaskFilter.blur(BlurStyle.normal, glow ? 16 : 8));
+    canvas.drawPath(path, Paint()..shader = const RadialGradient(colors: [AppColors.cream, AppColors.gold]).createShader(Rect.fromCircle(center: c, radius: outer)));
+    canvas.drawPath(path, Paint()
+      ..color = AppColors.goldDark
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2.5
+      ..strokeJoin = StrokeJoin.round);
+  }
+
+  @override
+  bool shouldRepaint(covariant _StarPainter old) => old.glow != glow;
+}
+
+class _NightPainter extends CustomPainter {
+  _NightPainter(this.t);
+  final double t;
+  @override
+  void paint(Canvas canvas, Size s) {
+    final rnd = math.Random(7);
+    for (var i = 0; i < 45; i++) {
+      final o = Offset(rnd.nextDouble() * s.width, rnd.nextDouble() * s.height);
+      final twinkle = .25 + .75 * math.sin(t * (1.5 + rnd.nextDouble() * 2) + i).abs();
+      canvas.drawCircle(o, 1 + rnd.nextDouble() * 1.8, Paint()..color = Colors.white.withOpacity(twinkle));
+    }
+    // الهلال
+    final m = Offset(46, s.height - 60);
+    canvas.drawCircle(m, 30, Paint()..color = AppColors.cream);
+    canvas.drawCircle(m + const Offset(12, -8), 27, Paint()..color = const Color(0xFF1E2A5A));
+  }
+
+  @override
+  bool shouldRepaint(covariant _NightPainter old) => old.t != t;
+}
+
+class _ButterflyView extends StatelessWidget {
+  const _ButterflyView({required this.word, required this.color, required this.flap});
+  final String word;
+  final Color color;
+  /// من 0 (الجناحات مقفولة) لـ 1 (مفتوحة).
+  final double flap;
+  static const width = 140.0;
+  @override
+  Widget build(BuildContext context) => SizedBox(
+        width: width,
+        height: 84,
+        child: Stack(alignment: Alignment.center, children: [
+          CustomPaint(size: const Size(width, 84), painter: _ButterflyPainter(color, .35 + flap * .65)),
+          Container(
+            constraints: const BoxConstraints(maxWidth: width - 20),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            decoration: BoxDecoration(color: Colors.white.withOpacity(.92), borderRadius: BorderRadius.circular(14)),
+            child: FittedBox(fit: BoxFit.scaleDown, child: Text(word, style: hadithStyle(size: 18))),
+          ),
+        ]),
+      );
+}
+
+class _ButterflyPainter extends CustomPainter {
+  _ButterflyPainter(this.color, this.open);
+  final Color color;
+  final double open;
+  @override
+  void paint(Canvas canvas, Size s) {
+    final cx = s.width / 2;
+    final wing = Paint()..color = color;
+    final spot = Paint()..color = Colors.white.withOpacity(.5);
+    for (final side in [-1.0, 1.0]) {
+      canvas.save();
+      canvas.translate(cx, 0);
+      canvas.scale(side * open, 1);
+      canvas.drawOval(const Rect.fromLTWH(2, 2, 62, 44), wing);
+      canvas.drawOval(const Rect.fromLTWH(4, 40, 44, 38), wing);
+      canvas.drawCircle(const Offset(42, 20), 8, spot);
+      canvas.restore();
+    }
+    final body = Paint()..color = AppColors.navy;
+    canvas.drawRRect(RRect.fromRectAndRadius(Rect.fromCenter(center: Offset(cx, s.height / 2), width: 8, height: 64), const Radius.circular(4)), body);
+    final antenna = Paint()
+      ..color = AppColors.navy
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2;
+    canvas.drawLine(Offset(cx, 12), Offset(cx - 10, 0), antenna);
+    canvas.drawLine(Offset(cx, 12), Offset(cx + 10, 0), antenna);
+  }
+
+  @override
+  bool shouldRepaint(covariant _ButterflyPainter old) => old.open != open || old.color != color;
+}
+
+class _GardenPainter extends CustomPainter {
+  _GardenPainter(this.t);
+  final double t;
+  static const _petals = [Color(0xFFF27BA6), AppColors.gold, Color(0xFF9B7BEA), AppColors.coral];
+  @override
+  void paint(Canvas canvas, Size s) {
+    canvas.drawRect(Rect.fromLTWH(0, s.height - 34, s.width, 34), Paint()..color = const Color(0xFF8FD16A));
+    final stem = Paint()
+      ..color = const Color(0xFF3E9B4F)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 4;
+    for (var i = 0; i < 7; i++) {
+      final x = s.width * (i + .5) / 7;
+      final sway = math.sin(t * 1.3 + i) * 6;
+      final top = Offset(x + sway, s.height - 70 - (i % 3) * 14);
+      canvas.drawLine(Offset(x, s.height - 20), top, stem);
+      final petal = Paint()..color = _petals[i % _petals.length];
+      for (var k = 0; k < 5; k++) {
+        final a = k * 2 * math.pi / 5 + t * .3;
+        canvas.drawCircle(top + Offset(math.cos(a) * 9, math.sin(a) * 9), 7, petal);
+      }
+      canvas.drawCircle(top, 6, Paint()..color = AppColors.goldDark);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant _GardenPainter old) => old.t != t;
+}
+
+/// "رتّب الحديث": الطفل يدوس على كلمات الجملة بالترتيب.
+class _OrderGame extends StatefulWidget {
+  const _OrderGame({super.key, required this.game, required this.onDone});
+  final GameData game;
+  final VoidCallback onDone;
+
+  static List<String> wordsOf(GameData g) => hadithWords(g);
+
+  static bool fits(GameData g) {
+    final n = wordsOf(g).length;
+    return n >= 3 && n <= 9;
+  }
+
+  @override
+  State<_OrderGame> createState() => _OrderGameState();
+}
+
+class _OrderGameState extends State<_OrderGame> with SingleTickerProviderStateMixin {
+  late final List<String> words = _OrderGame.wordsOf(widget.game);
+  late final List<int> pool = _shuffled();
+  final List<int> placed = [];
+  int? _shaking;
+  late final AnimationController _shake = AnimationController(vsync: this, duration: const Duration(milliseconds: 450));
+
+  bool get _done => placed.length == words.length;
+
+  @override
+  void dispose() {
+    _shake.dispose();
+    super.dispose();
+  }
+
+  List<int> _shuffled() {
+    final l = List.generate(words.length, (i) => i);
+    final r = math.Random();
+    for (var tries = 0; tries < 10; tries++) {
+      l.shuffle(r);
+      if (!List.generate(l.length, (i) => words[l[i]] == words[i]).every((x) => x)) break;
+    }
+    return l;
+  }
+
+  void _tap(int i) {
+    if (_done || placed.contains(i)) return;
+    // المقارنة بالكلمة نفسها عشان لو فيه كلمة متكررة أي نسخة منها تنفع.
+    if (words[i] == words[placed.length]) {
+      setState(() => placed.add(i));
+      if (_done) Future.delayed(const Duration(milliseconds: 1100), () => mounted ? widget.onDone() : null);
+    } else {
+      setState(() => _shaking = i);
+      _shake.forward(from: 0);
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(SnackBar(behavior: SnackBarBehavior.floating, backgroundColor: AppColors.coral, duration: const Duration(milliseconds: 1200), content: Text(S.of(context, 'tryAgain'))));
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) => ListView(padding: const EdgeInsets.all(16), children: [
+        Center(child: Fanoos(size: 70, mood: _done ? FanoosMood.happy : FanoosMood.talk)),
+        const SizedBox(height: 8),
+        Text(S.of(context, 'orderHint'), textAlign: TextAlign.center, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 18, color: AppColors.teal)),
+        const SizedBox(height: 12),
+        // الجملة اللي بتتبني
+        Stack(alignment: Alignment.center, children: [
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 400),
+            width: double.infinity,
+            padding: const EdgeInsets.all(16),
+            decoration: cardBox(color: _done ? AppColors.cream : Colors.white),
+            child: Directionality(
+              textDirection: TextDirection.rtl,
+              child: Wrap(alignment: WrapAlignment.center, spacing: 6, runSpacing: 8, children: [
+                for (var k = 0; k < words.length; k++)
+                  k < placed.length
+                      ? TweenAnimationBuilder<double>(
+                          tween: Tween(begin: .4, end: 1),
+                          duration: const Duration(milliseconds: 350),
+                          curve: Curves.elasticOut,
+                          builder: (_, v, child) => Transform.scale(scale: v, child: child),
+                          child: _chip(words[k], AppColors.gold),
+                        )
+                      : Container(
+                          width: 56,
+                          height: 44,
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), border: Border.all(color: AppColors.mintLine, width: 3)),
+                        ),
+              ]),
+            ),
+          ),
+          if (_done) const IgnorePointer(child: ConfettiBurst(size: 260)),
+        ]),
+        const SizedBox(height: 28),
+        // الكلمات المتلخبطة
+        Directionality(
+          textDirection: TextDirection.rtl,
+          child: Wrap(alignment: WrapAlignment.center, spacing: 12, runSpacing: 14, children: [
+            for (final i in pool)
+              AnimatedBuilder(
+                animation: _shake,
+                builder: (_, child) => Transform.translate(
+                  offset: Offset(_shaking == i ? math.sin(_shake.value * math.pi * 6) * 10 * (1 - _shake.value) : 0, 0),
+                  child: child,
+                ),
+                child: AnimatedOpacity(
+                  duration: const Duration(milliseconds: 250),
+                  opacity: placed.contains(i) ? 0 : 1,
+                  child: GestureDetector(
+                    onTap: () => _tap(i),
+                    child: _chip(words[i], _GameScreenState._palette[i % _GameScreenState._palette.length], raised: true),
+                  ),
+                ),
+              ),
+          ]),
+        ),
+      ]);
+
+  Widget _chip(String w, Color c, {bool raised = false}) => Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+        decoration: BoxDecoration(
+          color: c,
+          borderRadius: BorderRadius.circular(14),
+          boxShadow: raised ? [BoxShadow(color: Color.lerp(c, Colors.black, .3)!, offset: const Offset(0, 5))] : null,
+        ),
+        child: Text(w, style: hadithStyle(size: 22, color: onColor(c))),
       );
 }
 

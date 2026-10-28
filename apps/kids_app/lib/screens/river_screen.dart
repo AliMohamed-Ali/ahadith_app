@@ -21,7 +21,7 @@ class FlowCtx {
   final int index;
 
   Hadith get hadith => all[index];
-  bool get openTab => !tab.hasLevels;
+  bool get openTab => !tab.usesLevels;
   List<String> get levelHadithIds => all.map((h) => h.id).toList();
   FlowCtx? get next => index + 1 < all.length ? FlowCtx(tab: tab, level: level, all: all, index: index + 1) : null;
 }
@@ -77,7 +77,7 @@ class _RiverScreenState extends State<RiverScreen> with SingleTickerProviderStat
         final doneN = list.where((h) => p.isDone(h.id)).length;
         final firstUndone = list.indexWhere((h) => !p.isDone(h.id));
         final current = firstUndone == -1 ? list.length - 1 : firstUndone;
-        bool locked(int i) => widget.tab.hasLevels && firstUndone != -1 && i > firstUndone;
+        bool locked(int i) => widget.tab.usesLevels && firstUndone != -1 && i > firstUndone;
 
         return Column(children: [
           if (widget.showHeader && widget.embedded) SafeArea(bottom: false, child: const SizedBox(height: 4)),
