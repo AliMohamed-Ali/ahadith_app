@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hadith_core/hadith_core.dart';
 
 import '../l10n.dart';
+import '../services/sounds.dart';
 import '../widgets/fanoos.dart';
 import 'shell.dart';
 
@@ -16,11 +17,26 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
-  late final AnimationController _c = AnimationController(vsync: this, duration: const Duration(milliseconds: 3000))
+  late final AnimationController _c = AnimationController(vsync: this, duration: const Duration(milliseconds: 4800))
     ..forward()
+    ..addListener(_cue)
     ..addStatusListener((s) {
       if (s == AnimationStatus.completed) _go();
     });
+
+  // أصوات البداية متزامنة مع الأنيميشن: فانوس بينزل ← بيخبط في الأرض ← الكلمات بتطلع ← لحن الترحيب.
+  // بعد ما فانوس ينزل بيقول «السلام عليكم ورحمة الله وبركاته» (حوالي 3.7 ثانية).
+  static const _cues = <(double, Sfx)>[(0.05, Sfx.whoosh), (0.9, Sfx.land), (1.05, Sfx.pop), (1.1, Sfx.salam), (1.3, Sfx.pop)];
+  /// الوقت بالثواني من أول الشاشة.
+  double get _sec => _c.value * 4.8;
+  int _cueAt = 0;
+
+  void _cue() {
+    while (_cueAt < _cues.length && _sec >= _cues[_cueAt].$1) {
+      Sounds.play(_cues[_cueAt].$2);
+      _cueAt++;
+    }
+  }
   bool _left = false;
 
   @override
@@ -40,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   }
 
   /// جزء من الأنيميشن بين وقتين (بالثواني).
-  double _seg(double from, double to, [Curve curve = Curves.linear]) => curve.transform(((_c.value * 3 - from) / (to - from)).clamp(0.0, 1.0));
+  double _seg(double from, double to, [Curve curve = Curves.linear]) => curve.transform(((_sec - from) / (to - from)).clamp(0.0, 1.0));
 
   @override
   Widget build(BuildContext context) => GestureDetector(
@@ -50,10 +66,10 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
             animation: _c,
             builder: (context, _) {
               final drop = _seg(0, .9, Curves.bounceOut);
-              final landed = _c.value * 3 > .9;
+              final landed = _sec > .9;
               final words = 'أحاديث الصغار'.split(' ');
               return Stack(children: [
-                Positioned.fill(child: CustomPaint(painter: _NightPainter(_c.value * 3))),
+                Positioned.fill(child: CustomPaint(painter: _NightPainter(_sec))),
                 Center(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),

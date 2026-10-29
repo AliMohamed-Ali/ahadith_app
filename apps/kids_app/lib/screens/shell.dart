@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hadith_core/hadith_core.dart';
 import 'package:provider/provider.dart';
 
+import '../services/sounds.dart';
 import '../l10n.dart';
 import 'fanoos_screen.dart';
 import 'garden_screen.dart';
@@ -20,7 +21,10 @@ class _ShellState extends State<Shell> {
   int _index = 0;
   late final Stream<List<AppTab>> _tabs = context.read<ContentRepository>().tabs(onlyVisible: true);
 
-  void goTo(int i) => setState(() => _index = i);
+  void goTo(int i) {
+    if (i != _index) Sounds.play(Sfx.tap);
+    setState(() => _index = i);
+  }
 
   @override
   Widget build(BuildContext context) {

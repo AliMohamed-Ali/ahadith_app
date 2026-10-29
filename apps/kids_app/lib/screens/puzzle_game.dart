@@ -5,6 +5,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:hadith_core/hadith_core.dart';
 
 import '../l10n.dart';
+import '../services/sounds.dart';
 import '../theme.dart';
 import '../widgets/art.dart';
 import '../widgets/fanoos.dart';
@@ -80,17 +81,20 @@ class _PuzzleGameState extends State<PuzzleGame> with SingleTickerProviderStateM
   bool _exists(int r, int c) => r >= 0 && c >= 0 && c < _cols && r * _cols + (_cols - 1 - c) < _n;
 
   void _place(int piece) {
+    Sounds.play(Sfx.snap);
     setState(() {
       _placedAt[piece] = _t;
       _tray.remove(piece);
     });
     if (_won) {
       _wonAt = _t;
+      Sounds.play(Sfx.levelUp);
       Future.delayed(const Duration(milliseconds: 2400), () => mounted ? widget.onDone() : null);
     }
   }
 
   void _wrong({int? slot, int? piece}) {
+    Sounds.play(Sfx.wrong);
     setState(() {
       _shakeSlot = slot;
       _shakePiece = piece;

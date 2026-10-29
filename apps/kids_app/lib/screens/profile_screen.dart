@@ -4,6 +4,7 @@ import 'package:hadith_core/hadith_core.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
+import '../services/sounds.dart';
 import '../data/cities.dart';
 import '../l10n.dart';
 import '../state/progress_store.dart';
@@ -231,6 +232,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
             showSelectedIcon: false,
             onSelectionChanged: (s) => p.setLang(s.first),
           ),
+        ),
+        const Divider(height: 1),
+        SwitchListTile(
+          secondary: Icon(p.soundOn ? Icons.volume_up_rounded : Icons.volume_off_rounded, color: AppColors.coral),
+          title: Text(S.of(context, 'sounds')),
+          subtitle: Text(S.of(context, 'soundsSub')),
+          value: p.soundOn,
+          onChanged: (v) {
+            p.setSound(v);
+            if (v) Sounds.play(Sfx.correct);
+          },
         ),
         const Divider(height: 1),
         SwitchListTile(

@@ -12,7 +12,9 @@ import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'l10n.dart';
 import 'screens/splash_screen.dart';
+import 'services/sounds.dart';
 import 'state/progress_store.dart';
+import 'widgets/update_gate.dart';
 import 'theme.dart';
 
 Future<void> main() async {
@@ -36,7 +38,8 @@ Future<void> main() async {
       debugPrint('messaging setup failed: $e');
     }
   }
-  final progress = await ProgressStore.load();
+  // الأصوات بتتحمّل مع بيانات الطفل في نفس الوقت
+  final (progress, _) = await (ProgressStore.load(), Sounds.init()).wait;
   final repo = ContentRepository(FirebaseFirestore.instance);
 
   runApp(
@@ -45,6 +48,7 @@ Future<void> main() async {
         Provider<ContentRepository>.value(value: repo),
         ChangeNotifierProvider<ProgressStore>.value(value: progress),
         StreamProvider<AppConfig>(create: (_) => repo.config(), initialData: const AppConfig(), catchError: (_, __) => const AppConfig()),
+        StreamProvider<UpdateConfig>(create: (_) => repo.updateConfig(), initialData: const UpdateConfig(), catchError: (_, __) => const UpdateConfig()),
       ],
       child: const KidsApp(),
     ),
@@ -78,7 +82,7 @@ class KidsApp extends StatelessWidget {
       ],
       builder: (context, child) => MediaQuery(
         data: MediaQuery.of(context).copyWith(textScaler: appTextScaler(MediaQuery.of(context))),
-        child: RoyalStarListener(child: child ?? const SizedBox()),
+        child: UpdateGate(child: RoyalStarListener(child: child ?? const SizedBox())),
       ),
       home: const SplashScreen(),
     );

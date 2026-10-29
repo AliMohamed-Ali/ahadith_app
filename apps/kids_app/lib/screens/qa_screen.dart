@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hadith_core/hadith_core.dart';
 import 'package:provider/provider.dart';
 
+import '../services/sounds.dart';
 import '../l10n.dart';
 import '../state/progress_store.dart';
 import '../widgets/common.dart';
@@ -172,7 +173,10 @@ class _QaItemTileState extends State<_QaItemTile> {
                         showCheckmark: true,
                         selectedColor: const Color(0xFFBFE8CC),
                         label: Text(S.of(context, 'iKnowIt'), style: const TextStyle(fontWeight: FontWeight.w800)),
-                        onSelected: (_) => p.toggleKnown(key, sectionId: widget.section.id, sectionSize: widget.section.items.length),
+                        onSelected: (_) {
+                          if (!known) Sounds.play(Sfx.star);
+                          p.toggleKnown(key, sectionId: widget.section.id, sectionSize: widget.section.items.length);
+                        },
                       ),
                       ActionChip(
                         avatar: const Icon(Icons.copy_rounded, size: 18),

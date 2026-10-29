@@ -5,6 +5,7 @@ import 'package:hadith_core/hadith_core.dart';
 import 'package:provider/provider.dart';
 
 import '../l10n.dart';
+import '../services/sounds.dart';
 import '../state/progress_store.dart';
 import '../theme.dart';
 import '../widgets/art.dart';
@@ -269,6 +270,7 @@ class _PlacementScreenState extends State<PlacementScreen> {
   }
 
   void _finish(int start) {
+    Sounds.play(Sfx.win);
     context.read<ProgressStore>().setBukhariStart(start);
     setState(() => _result = start);
   }
@@ -276,6 +278,7 @@ class _PlacementScreenState extends State<PlacementScreen> {
   void _pick(String o) {
     if (_picked != null) return;
     final q = _qs![_i];
+    Sounds.play(o == q.hadith.game.answer ? Sfx.correct : Sfx.wrong);
     setState(() {
       _picked = o;
       if (o == q.hadith.game.answer) _right++;
@@ -288,6 +291,7 @@ class _PlacementScreenState extends State<PlacementScreen> {
           _picked = null;
         });
       } else if (_right >= 2) {
+        Sounds.play(Sfx.levelUp);
         setState(() => _yearPassed = true);
         Future.delayed(const Duration(milliseconds: 1500), () {
           if (!mounted) return;

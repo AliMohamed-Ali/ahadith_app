@@ -7,6 +7,8 @@ import 'package:hadith_core/hadith_core.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../services/sounds.dart';
+
 /// ملف الطفل — يُحفظ على الجهاز فقط.
 class KidProfile {
   KidProfile({required this.name, this.age = 6, this.avatar = 'cat', this.city = -1, this.area = '', this.photoPath = ''});
@@ -65,6 +67,8 @@ class ProgressStore extends ChangeNotifier {
   bool showMe = true;
   /// صحيح البخاري: السن اللي الطفل بيبدأ منها (من اختبار تحديد المستوى)، و null لو لسه ما اتحددتش.
   int? bukhariStart;
+  /// الأصوات والاهتزاز.
+  bool soundOn = true;
 
   bool get ar => lang == 'ar';
 
@@ -89,10 +93,12 @@ class ProgressStore extends ChangeNotifier {
         s.locOk = (j['locOk'] ?? false) as bool;
         s.showMe = (j['showMe'] ?? true) as bool;
         s.bukhariStart = j['bukhariStart'] as int?;
+        s.soundOn = (j['soundOn'] ?? true) as bool;
       } catch (e) {
         debugPrint('progress load failed: $e');
       }
     }
+    Sounds.enabled = s.soundOn;
     return s;
   }
 
@@ -114,6 +120,7 @@ class ProgressStore extends ChangeNotifier {
         'locOk': locOk,
         'showMe': showMe,
         'bukhariStart': bukhariStart,
+        'soundOn': soundOn,
       }),
     );
   }
@@ -196,6 +203,12 @@ class ProgressStore extends ChangeNotifier {
   void setLocOk(bool v) {
     locOk = v;
     if (v) showMe = true;
+    _changed();
+  }
+
+  void setSound(bool v) {
+    soundOn = v;
+    Sounds.enabled = v;
     _changed();
   }
 

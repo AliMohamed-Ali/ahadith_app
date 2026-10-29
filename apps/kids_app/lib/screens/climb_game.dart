@@ -5,6 +5,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:hadith_core/hadith_core.dart';
 
 import '../l10n.dart';
+import '../services/sounds.dart';
 import '../theme.dart';
 import '../widgets/art.dart';
 import '../widgets/kid.dart';
@@ -88,8 +89,10 @@ class _ClimbGameState extends State<ClimbGame> with SingleTickerProviderStateMix
           _jumpP = -1;
           _kidX = _target!.x;
           _at++;
+          Sounds.play(Sfx.land);
           if (_won) {
             _wonAt = _t;
+            Sounds.play(Sfx.levelUp);
             Future.delayed(const Duration(milliseconds: 2400), () => mounted ? widget.onDone() : null);
           }
         }
@@ -106,8 +109,12 @@ class _ClimbGameState extends State<ClimbGame> with SingleTickerProviderStateMix
       _fromX = _kidX;
       _faceLeft = r.x < _kidX - .01 || (r.x - _kidX).abs() <= .01 && _faceLeft;
       _jumpP = 0;
+      Sounds.play(Sfx.correct);
+      Future.delayed(const Duration(milliseconds: 140), () => Sounds.play(Sfx.jump));
     } else {
       setState(() => r.fall = _t);
+      Sounds.play(Sfx.wrong);
+      Future.delayed(const Duration(milliseconds: 300), () => Sounds.play(Sfx.crumble));
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(SnackBar(behavior: SnackBarBehavior.floating, backgroundColor: AppColors.coral, duration: const Duration(milliseconds: 1200), content: Text(S.of(context, 'tryAgain'))));

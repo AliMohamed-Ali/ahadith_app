@@ -6,6 +6,7 @@ import 'package:hadith_core/hadith_core.dart';
 import 'package:provider/provider.dart';
 
 import '../l10n.dart';
+import '../services/sounds.dart';
 import '../state/progress_store.dart';
 import '../theme.dart';
 import '../widgets/art.dart';
@@ -75,10 +76,13 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
   void _pick(String o) {
     if (_solved || _wrong.contains(o)) return;
     if (o == h.game.answer) {
+      Sounds.play(kind == GameKind.bubbles || kind == GameKind.balloons ? Sfx.pop : Sfx.correct);
       setState(() => _solved = true);
       _leave.forward();
+      Future.delayed(const Duration(milliseconds: 250), () => Sounds.play(Sfx.whoosh));
       Future.delayed(const Duration(milliseconds: 1200), _win);
     } else {
+      Sounds.play(Sfx.wrong);
       setState(() => _wrong.add(o));
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
@@ -787,9 +791,11 @@ class _OrderGameState extends State<_OrderGame> with SingleTickerProviderStateMi
     if (_done || placed.contains(i)) return;
     // المقارنة بالكلمة نفسها عشان لو فيه كلمة متكررة أي نسخة منها تنفع.
     if (words[i] == words[placed.length]) {
+      Sounds.play(placed.length == words.length - 1 ? Sfx.levelUp : Sfx.snap);
       setState(() => placed.add(i));
       if (_done) Future.delayed(const Duration(milliseconds: 1100), () => mounted ? widget.onDone() : null);
     } else {
+      Sounds.play(Sfx.wrong);
       setState(() => _shaking = i);
       _shake.forward(from: 0);
       ScaffoldMessenger.of(context)
@@ -892,6 +898,8 @@ class _MemorizeMode extends StatelessWidget {
 
 /// شاشة الفوز: نبتة الحديقة + النجمة + مهمة الحياة الحقيقية.
 Future<void> showWinSheet(BuildContext context, FlowCtx f) async {
+  Sounds.play(Sfx.win);
+  Future.delayed(const Duration(milliseconds: 900), () => Sounds.play(Sfx.star));
   final ar = S.ar(context);
   final p = context.read<ProgressStore>();
   final cfg = context.read<AppConfig>().rewards;

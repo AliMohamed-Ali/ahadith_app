@@ -8,6 +8,7 @@ import 'models.dart';
 ///
 /// الهيكل:
 ///   config/app        إعدادات الجوائز ومتجر فانوس
+///   config/update     إعدادات التحديث الإجباري لأبلكيشن الأطفال
 ///   tabs/{id}         التبويبات
 ///   levels/{id}       المستويات (tabId)
 ///   hadiths/{id}      الأحاديث (tabId, levelId)
@@ -109,6 +110,11 @@ class ContentRepository {
       });
 
   Stream<AppConfig> config() => _config.snapshots().map((d) => AppConfig.fromJson(d.data()));
+
+  /// إعدادات التحديث في مستند لوحده (عشان حفظ إعدادات الجوائز ما يمسحهاش).
+  DocumentReference<Json> get _update => db.collection('config').doc('update');
+  Stream<UpdateConfig> updateConfig() => _update.snapshots().map((d) => UpdateConfig.fromJson(d.data()));
+  Future<void> saveUpdateConfig(UpdateConfig c) => _update.set(c.toJson());
 
   // ---------------- كتابة (للمدير) ----------------
 

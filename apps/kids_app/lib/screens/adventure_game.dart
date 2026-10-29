@@ -5,6 +5,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:hadith_core/hadith_core.dart';
 
 import '../l10n.dart';
+import '../services/sounds.dart';
 import '../theme.dart';
 import '../widgets/art.dart';
 import '../widgets/kid.dart';
@@ -163,7 +164,10 @@ class _AdventureGameState extends State<AdventureGame> with SingleTickerProvider
   }
 
   void _tap() {
-    if (_jump < 0) _jump = 0;
+    if (_jump < 0) {
+      _jump = 0;
+      Sounds.play(Sfx.jump);
+    }
   }
 
   void _tick(Duration e) {
@@ -213,6 +217,7 @@ class _AdventureGameState extends State<AdventureGame> with SingleTickerProvider
     if (it.word == _next) {
       it.good = true;
       _got++;
+      Sounds.play(_won ? Sfx.levelUp : Sfx.coin);
       if (_won) {
         _jump = 0;
         Future.delayed(const Duration(milliseconds: 1600), () => mounted ? widget.onDone() : null);
@@ -220,6 +225,7 @@ class _AdventureGameState extends State<AdventureGame> with SingleTickerProvider
     } else {
       it.good = false;
       _hurt = .5;
+      Sounds.play(Sfx.bump);
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(SnackBar(behavior: SnackBarBehavior.floating, backgroundColor: AppColors.coral, duration: const Duration(milliseconds: 1200), content: Text(S.of(context, 'tryAgain'))));

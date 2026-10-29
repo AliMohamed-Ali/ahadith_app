@@ -5,6 +5,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:hadith_core/hadith_core.dart';
 
 import '../l10n.dart';
+import '../services/sounds.dart';
 import '../theme.dart';
 import '../widgets/art.dart';
 import '../widgets/kid.dart';
@@ -69,10 +70,17 @@ class _TrainRunGameState extends State<TrainRunGame> with SingleTickerProviderSt
     super.dispose();
   }
 
-  void _move(int dir) => _lane = (_lane + dir).clamp(-1, 1);
+  void _move(int dir) {
+    final next = (_lane + dir).clamp(-1, 1);
+    if (next != _lane) Sounds.play(Sfx.swish);
+    _lane = next;
+  }
 
   void _jump() {
-    if (_air < 0) _air = 0;
+    if (_air < 0) {
+      _air = 0;
+      Sounds.play(Sfx.jump);
+    }
   }
 
   void _tick(Duration e) {
@@ -131,6 +139,7 @@ class _TrainRunGameState extends State<TrainRunGame> with SingleTickerProviderSt
     if (k.word == _next) {
       k.good = true;
       _got++;
+      Sounds.play(_won ? Sfx.levelUp : Sfx.coin);
       if (_won) {
         _air = 0;
         Future.delayed(const Duration(milliseconds: 1800), () => mounted ? widget.onDone() : null);
@@ -138,6 +147,7 @@ class _TrainRunGameState extends State<TrainRunGame> with SingleTickerProviderSt
     } else if (_air < 0) {
       k.good = false;
       _stumble = .6;
+      Sounds.play(Sfx.bump);
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(SnackBar(behavior: SnackBarBehavior.floating, backgroundColor: AppColors.coral, duration: const Duration(milliseconds: 1200), content: Text(S.of(context, 'tryAgain'))));

@@ -513,6 +513,57 @@ class AppConfig {
   Json toJson() => {'rewards': rewards.toJson(), 'shop': shop.map((e) => e.toJson()).toList()};
 }
 
+/// إعدادات تحديث أبلكيشن الأطفال (config/update).
+/// الرقم هنا هو رقم البناء (اللي بعد + في version بتاع pubspec، مثلاً 1.0.0+3 يبقى 3).
+class UpdateConfig {
+  const UpdateConfig({
+    this.minBuildAndroid = 0,
+    this.minBuildIos = 0,
+    this.latestBuildAndroid = 0,
+    this.latestBuildIos = 0,
+    this.androidUrl = '',
+    this.iosUrl = '',
+    this.messageAr = '',
+    this.messageEn = '',
+  });
+
+  /// أقل نسخة مسموح بيها: أي نسخة أقدم بتتقفل لحد ما تتحدّث (تحديث إجباري).
+  final int minBuildAndroid;
+  final int minBuildIos;
+  /// آخر نسخة: أي نسخة أقدم بيظهرلها اقتراح تحديث تقدر تأجّله.
+  final int latestBuildAndroid;
+  final int latestBuildIos;
+  final String androidUrl;
+  final String iosUrl;
+  final String messageAr;
+  final String messageEn;
+
+  String message(bool ar) => ar || messageEn.isEmpty ? messageAr : messageEn;
+
+  factory UpdateConfig.fromJson(Json? j) => UpdateConfig(
+        minBuildAndroid: _i(j?['minBuildAndroid']),
+        minBuildIos: _i(j?['minBuildIos']),
+        latestBuildAndroid: _i(j?['latestBuildAndroid']),
+        latestBuildIos: _i(j?['latestBuildIos']),
+        androidUrl: _s(j?['androidUrl']),
+        iosUrl: _s(j?['iosUrl']),
+        messageAr: _s(j?['messageAr']),
+        messageEn: _s(j?['messageEn']),
+      );
+
+  Json toJson() => {
+        'minBuildAndroid': minBuildAndroid,
+        'minBuildIos': minBuildIos,
+        'latestBuildAndroid': latestBuildAndroid,
+        'latestBuildIos': latestBuildIos,
+        'androidUrl': androidUrl,
+        'iosUrl': iosUrl,
+        'messageAr': messageAr,
+        'messageEn': messageEn,
+        'updatedAt': FieldValue.serverTimestamp(),
+      };
+}
+
 /// صف في لوحة الشرف. لا يحتوي صورًا ولا مواقع دقيقة.
 class LeaderEntry {
   LeaderEntry({required this.uid, required this.nickname, required this.avatar, required this.city, this.area = '', this.stars = 0, this.royal = 0});

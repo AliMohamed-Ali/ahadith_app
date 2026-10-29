@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:hadith_core/hadith_core.dart';
 import 'package:share_plus/share_plus.dart';
 
+import '../services/sounds.dart';
 import '../l10n.dart';
 
 /// نجمة عادية (ذهبية).
@@ -113,7 +114,12 @@ class _BigTileState extends State<BigTile> {
       onTapDown: (_) => setState(() => _down = true),
       onTapCancel: () => setState(() => _down = false),
       onTapUp: (_) => setState(() => _down = false),
-      onTap: widget.onTap,
+      onTap: widget.onTap == null
+          ? null
+          : () {
+              Sounds.play(Sfx.tap);
+              widget.onTap!();
+            },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 120),
         transform: Matrix4.translationValues(0, _down ? 4 : 0, 0),

@@ -11,6 +11,7 @@ import 'media_screen.dart';
 import 'notify_screen.dart';
 import 'rewards_screen.dart';
 import 'tabs_screen.dart';
+import 'update_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -75,6 +76,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         _Tile(icon: Icons.menu_book_rounded, color: const Color(0xFF7558D6), title: 'صحيح البخاري', sub: 'استيراد، ومراجعة الأحاديث لكل سن، والنشر', onTap: () => _go(const BukhariAdminScreen())),
         _Tile(icon: Icons.workspace_premium_rounded, color: AppColors.royal, title: 'النجوم والجوائز', sub: 'النجوم العادية والملكية ومتجر فانوس', onTap: () => _go(const RewardsScreen())),
         _Tile(icon: Icons.perm_media_rounded, color: AppColors.coral, title: 'الوسائط', sub: 'رفع صوت وصور وفيديو', onTap: () => _go(const MediaScreen())),
+        _Tile(icon: Icons.system_update_rounded, color: AppColors.teal, title: 'تحديث الأبلكيشن', sub: 'تحديث إجباري أو اقتراح تحديث لأبلكيشن الأطفال', onTap: () => _go(const UpdateScreen())),
         _Tile(icon: Icons.notifications_active_rounded, color: AppColors.goldDark, title: 'الإشعارات', sub: 'ابعتي إشعار لكل الأطفال', onTap: () => _go(const NotifyScreen())),
         _Tile(icon: Icons.cloud_download_rounded, color: AppColors.navy, title: 'استيراد المحتوى الأولي', sub: 'مرة واحدة في البداية', onTap: _seed),
       ]),
