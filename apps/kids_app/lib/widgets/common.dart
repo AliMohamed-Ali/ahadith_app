@@ -110,16 +110,12 @@ class _BigTileState extends State<BigTile> {
   bool _down = false;
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTapDown: (_) => setState(() => _down = true),
-      onTapCancel: () => setState(() => _down = false),
-      onTapUp: (_) => setState(() => _down = false),
-      onTap: widget.onTap == null
-          ? null
-          : () {
-              Sounds.play(Sfx.tap);
-              widget.onTap!();
-            },
+    return Listener(
+      onPointerDown: (_) => setState(() => _down = true),
+      onPointerUp: (_) => setState(() => _down = false),
+      onPointerCancel: (_) => setState(() => _down = false),
+      child: Bouncy(
+      onTap: widget.onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 120),
         transform: Matrix4.translationValues(0, _down ? 4 : 0, 0),
@@ -131,8 +127,70 @@ class _BigTileState extends State<BigTile> {
         padding: const EdgeInsets.all(16),
         child: widget.child,
       ),
+      ),
     );
   }
+}
+
+/// أي حاجة بتندس: بتتضغط زي الجيلي (تعرض وتقصر) وترجع تنط بمرونة.
+class Bouncy extends StatefulWidget {
+  const Bouncy({super.key, required this.child, this.onTap, this.sound = true});
+  final Widget child;
+  final VoidCallback? onTap;
+  final bool sound;
+  @override
+  State<Bouncy> createState() => _BouncyState();
+}
+
+class _BouncyState extends State<Bouncy> with TickerProviderStateMixin {
+  late final AnimationController _press = AnimationController(vsync: this, duration: const Duration(milliseconds: 90));
+  late final AnimationController _spring = AnimationController(vsync: this, duration: const Duration(milliseconds: 650), value: 1);
+  double _from = 0;
+
+  @override
+  void dispose() {
+    _press.dispose();
+    _spring.dispose();
+    super.dispose();
+  }
+
+  void _down() {
+    _spring.stop();
+    _press.forward();
+  }
+
+  void _up() {
+    _from = _press.value;
+    _press.value = 0;
+    _spring.forward(from: 0);
+  }
+
+  @override
+  Widget build(BuildContext context) => GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTapDown: widget.onTap == null ? null : (_) => _down(),
+        onTapCancel: _up,
+        onTapUp: (_) => _up(),
+        onTap: widget.onTap == null
+            ? null
+            : () {
+                if (widget.sound) Sounds.play(Sfx.tap);
+                widget.onTap!();
+              },
+        child: AnimatedBuilder(
+          animation: Listenable.merge([_press, _spring]),
+          builder: (context, child) {
+            // مضغوط: بيعرض ويقصر. سايبه: بيرجع بنطة مرنة (بيعدّي الحجم الطبيعي شوية ويرجع)
+            final k = _press.value > 0 ? _press.value : _from * (1 - Curves.elasticOut.transform(_spring.value));
+            return Transform(
+              alignment: Alignment.bottomCenter,
+              transform: Matrix4.diagonal3Values(1 + k * .06, 1 - k * .1, 1),
+              child: child,
+            );
+          },
+          child: widget.child,
+        ),
+      );
 }
 
 /// ظهور متدرّج (يُستخدم لتتابع العناصر عند فتح الشاشات).
@@ -148,7 +206,12 @@ class RiseIn extends StatelessWidget {
       curve: Curves.easeOutBack,
       builder: (context, v, child) {
         final t = ((v * (450 + delay) - delay) / 450).clamp(0.0, 1.0);
-        return Opacity(opacity: t.clamp(0.0, 1.0), child: Transform.translate(offset: Offset(0, (1 - t) * 20), child: child));
+        // بيطلع وهو بينط: بيكبر من صغير ويعدّي حجمه شوية ويرجع
+        final pop = Curves.easeOutBack.transform(t);
+        return Opacity(
+          opacity: t.clamp(0.0, 1.0),
+          child: Transform.translate(offset: Offset(0, (1 - t) * 24), child: Transform.scale(scale: .82 + .18 * pop, child: child)),
+        );
       },
       child: child,
     );

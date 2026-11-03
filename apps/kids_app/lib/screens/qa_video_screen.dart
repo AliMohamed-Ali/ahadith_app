@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -39,7 +40,8 @@ class _QaVideoScreenState extends State<QaVideoScreen> with SingleTickerProvider
   Future<void> _initAudio() async {
     if (widget.section.audioUrl.isEmpty) return;
     try {
-      await _player.setUrl(widget.section.audioUrl);
+      final uri = Uri.parse(widget.section.audioUrl);
+      await _player.setAudioSource(kIsWeb ? AudioSource.uri(uri) : LockCachingAudioSource(uri));
       if (_playing) unawaited(_player.play());
     } catch (_) {}
   }

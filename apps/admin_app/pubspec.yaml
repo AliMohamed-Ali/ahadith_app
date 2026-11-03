@@ -1,6 +1,6 @@
 name: admin_app
 description: لوحة تحكم «أحاديث الصغار» — إدارة المحتوى والجوائز والإشعارات.
-version: 1.0.0+1
+version: 1.0.0+2
 publish_to: none
 
 environment:
@@ -34,3 +34,5 @@ flutter:
     - assets/seed_content.json
     # صحيح البخاري متجهز للأطفال (tools/bukhari/build_bukhari.py)
     - assets/bukhari_kids.json
+    # المستويات ١-٥: آداب يومية من البخاري ومسلم (tools/levels/build_adab_levels.py)
+    - assets/adab_levels.json

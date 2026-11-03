@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:hadith_core/hadith_core.dart';
 import 'package:provider/provider.dart';
 
+import '../widgets/treasures.dart';
 import '../l10n.dart';
 import '../state/progress_store.dart';
 import '../widgets/animated_dropdown.dart';
 import '../widgets/common.dart';
 import '../widgets/fanoos.dart';
 import '../widgets/my_fanoos.dart';
+import '../widgets/world_map.dart';
 import '../theme.dart';
 import 'intro_screen.dart';
 import 'missions_screen.dart';
@@ -36,31 +38,22 @@ class HomeScreen extends StatelessWidget {
       SliverPadding(
         padding: const EdgeInsets.fromLTRB(16, 14, 16, 32),
         sliver: SliverList.list(children: [
+          // خريطة العالم: كل قسم مَعلم على الجزيرة
           RiseIn(
             delay: next(),
-            child: _WideCard(
-              color: AppColors.teal,
-              shadow: AppColors.tealDark,
-              icon: Icons.auto_stories_rounded,
-              title: S.of(context, 'introTitle'),
-              sub: S.of(context, 'introSub'),
-              onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const IntroScreen())),
-            ),
-          ),
-          for (final t in qaTabs)
-            RiseIn(
-              delay: next(),
-              child: _WideCard(
-                color: hexColor(t.color, AppColors.royal),
-                shadow: Colors.black26,
-                icon: Icons.lightbulb_rounded,
-                title: t.name(ar),
-                sub: S.of(context, 'qaSub'),
-                onTap: () => openTab(context, t),
+            child: WorldMap(places: [
+              WorldPlace(
+                kind: Landmark.house,
+                title: S.of(context, 'introTitle'),
+                color: AppColors.teal,
+                onOpen: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const IntroScreen())),
               ),
-            ),
-          for (final t in homeHadith)
-            RiseIn(delay: next(), child: t.hasLevels ? _LevelsCard(tab: t) : _OpenTabCard(tab: t)),
+              for (final t in [...qaTabs, ...homeHadith]) WorldPlace(kind: WorldPlace.forTab(t), title: t.name(ar), color: hexColor(t.color, AppColors.teal), onOpen: () => openTab(context, t)),
+            ]),
+          ),
+          const SizedBox(height: 16),
+          // الأماكن كلها على الخريطة؛ تحتها قايمة المستويات بالنبذة
+          // for (final t in homeHadith.where((t) => t.hasLevels)) RiseIn(delay: next(), child: _LevelsCard(tab: t)),
           if (p.pendingMissions.isNotEmpty)
             RiseIn(
               delay: next(),
@@ -73,6 +66,18 @@ class HomeScreen extends StatelessWidget {
                 onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const MissionsScreen())),
               ),
             ),
+          // واحتي: الكنوز اللي الطفل جمعها
+          RiseIn(
+            delay: next(),
+            child: _WideCard(
+              color: const Color(0xFFE9A23B),
+              shadow: const Color(0xFFB0741C),
+              icon: Icons.park_rounded,
+              title: S.of(context, 'oasisTitle'),
+              sub: S.of(context, 'oasisSub', {'n': arNum(p.doneCount.length, arabic: ar)}),
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const OasisScreen())),
+            ),
+          ),
           RiseIn(delay: next(), child: _GiftsCard(stars: stars, royal: royal, onTap: onOpenFanoos)),
         ]),
       ),
@@ -180,49 +185,36 @@ class _LevelsCardState extends State<_LevelsCard> {
       padding: const EdgeInsets.all(16),
       decoration: cardBox(shadow: c.withOpacity(.6)),
       child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-        Row(children: [
-          Icon(Icons.stairs_rounded, color: c, size: 30),
-          const SizedBox(width: 8),
-          Expanded(child: Text(tab.name(ar), style: const TextStyle(fontSize: 21, fontWeight: FontWeight.w800))),
-        ]),
-        const SizedBox(height: 4),
+        // اسم القسم مكتوب على لافتة الجبال في الجزيرة، فمش بنكرره هنا
         Text(S.of(context, 'chooseLevel'), style: const TextStyle(color: AppColors.muted)),
         const SizedBox(height: 10),
         StreamBuilder<List<Level>>(
           stream: _levels,
           builder: (context, snap) {
-            final levels = snap.data ?? const <Level>[];
+            final levels = (snap.data ?? const <Level>[]).where((l) => l.parentId == null).toList();
             return AnimatedDropdown<Level>(
               items: levels,
+              // الخمس مستويات بنبذتهم يبانوا من غير سكرول
+              maxListHeight: 420,
               icon: Icons.stairs_rounded,
               placeholder: S.of(context, 'chooseLevelPh'),
               labelOf: (l) {
+                final i = levels.indexOf(l);
+                if (levelLocked(levels, i, p)) return '🔒 ${l.name(ar)}';
                 final done = p.completedLevels.contains(l.id) ? ' 👑' : '';
-                final age = l.age(ar).isEmpty ? '' : ' · ${l.age(ar)}';
+                final age = l.age(ar).isEmpty || l.isMap ? '' : ' · ${l.age(ar)}';
                 return '${l.name(ar)}$age$done';
               },
-              onChanged: (l) => openLevel(context, tab, l),
+              // نبذة عن المستوى فيه إيه تحت اسمه
+              subOf: (l) => l.isMap ? l.age(ar) : '',
+              onChanged: (l) {
+                final i = levels.indexOf(l);
+                levelLocked(levels, i, p) ? showLevelLocked(context, levels[i - 1]) : openLevel(context, tab, l);
+              },
             );
           },
         ),
       ]),
-    );
-  }
-}
-
-class _OpenTabCard extends StatelessWidget {
-  const _OpenTabCard({required this.tab});
-  final AppTab tab;
-  @override
-  Widget build(BuildContext context) {
-    final c = hexColor(tab.color, AppColors.navy);
-    return _WideCard(
-      color: c,
-      shadow: Color.lerp(c, Colors.black, .35)!,
-      icon: Icons.menu_book_rounded,
-      title: tab.name(S.ar(context)),
-      sub: S.of(context, tab.isAges ? 'bkSub' : 'openTabSub'),
-      onTap: () => openTab(context, tab),
     );
   }
 }

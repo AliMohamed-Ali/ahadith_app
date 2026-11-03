@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hadith_core/hadith_core.dart';
 import 'package:provider/provider.dart';
 
+import '../services/adab_service.dart';
 import '../services/seed_service.dart';
 import '../ui.dart';
 import 'bukhari_screen.dart';
@@ -32,7 +33,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
       context: context,
       builder: (c) => AlertDialog(
         title: const Text('استيراد المحتوى الأولي'),
-        content: const Text('هيضيف: المستويات (١٠ أحاديث)، الأربعين النووية كاملة (٤٢)، أقسام «ما لا يسع أطفال المسلمين جهله» (٧ أقسام)، وإعدادات النجوم والمتجر.\n\nلو فيه حاجات عدلتيها قبل كده، اختاري «المحتوى الناقص بس» عشان ما يتكتبش فوقها.'),
+        content: const Text(
+          'هيضيف كل المحتوى مرة واحدة:\n'
+          '• المستويات: ٥ مستويات آداب (كل مستوى خريطة جبال، ٥٥ حديث)، وأي مستوى قديم بيتمسح.\n'
+          '• الأربعين النووية كاملة (٤٢).\n'
+          '• أقسام «ما لا يسع أطفال المسلمين جهله» (٧ أقسام).\n'
+          '• إعدادات النجوم والمتجر.\n\n'
+          'لو فيه حاجات عدلتيها قبل كده، اختاري «المحتوى الناقص بس» عشان ما يتكتبش فوقها.',
+        ),
         actions: [
           TextButton(onPressed: () => Navigator.pop(c), child: const Text('إلغاء')),
           OutlinedButton(onPressed: () => Navigator.pop(c, true), child: const Text('استبدال الكل')),
@@ -43,10 +51,46 @@ class _DashboardScreenState extends State<DashboardScreen> {
     if (overwrite == null || !mounted) return;
     try {
       final r = await SeedService(FirebaseFirestore.instance).import(overwrite: overwrite);
-      if (mounted) toast(context, 'تم ✓ اتكتب ${r['written']} مستند');
+      // مستويات الآداب الخمسة جزء من المحتوى الأولي
+      final adab = AdabService(repo);
+      await adab.import(await adab.load(), overwrite: overwrite);
+      if (mounted) toast(context, 'تم ✓ اتكتب ${r['written']} مستند + ٥ مستويات آداب');
     } catch (e) {
       if (mounted) toast(context, 'حصل خطأ: $e', error: true);
     }
+  }
+
+  Future<void> _adab() async {
+    final svc = AdabService(repo);
+    final j = await svc.load();
+    final old = await svc.leftovers(j);
+    if (!mounted) return;
+    final cats = (j['levels'] as List).cast<Map>();
+    final levels = (j['parents'] as List).cast<Map>().map((p) {
+      final mine = cats.where((c) => c['parentId'] == p['id']).map((c) => '${c['icon']} ${c['nameAr']}').join(' · ');
+      return '• ${p['nameAr']}: $mine';
+    }).join('\n');
+    final overwrite = await showDialog<bool>(
+      context: context,
+      builder: (c) => AlertDialog(
+        title: const Text('قسم المستويات: ٥ مستويات آداب'),
+        content: SingleChildScrollView(
+          child: Text(
+            'المصدر: ${j['source']}\n\n'
+            'كل مستوى خريطة جبال، وكل جبل نهر أحاديث (${(j['hadiths'] as List).length} حديث):\n$levels\n\n'
+            '${old.levels + old.hadiths == 0 ? 'مفيش حاجة قديمة في قسم المستويات.' : '⚠️ هيتمسح من قسم المستويات: ${old.levels} مستوى قديم و${old.hadiths} حديث قديم.'}\n\n'
+            'لو عدّلتي في أحاديث الآداب قبل كده اختاري «الناقص بس» عشان تعديلاتك تفضل.',
+          ),
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(c), child: const Text('إلغاء')),
+          OutlinedButton(onPressed: () => Navigator.pop(c, true), child: const Text('استبدال الكل')),
+          FilledButton(onPressed: () => Navigator.pop(c, false), child: const Text('الناقص بس')),
+        ],
+      ),
+    );
+    if (overwrite == null || !mounted) return;
+    await run(context, () => svc.import(j, overwrite: overwrite), done: 'تم ✓ قسم المستويات بقى ٥ مستويات آداب');
   }
 
   @override
@@ -79,6 +123,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         _Tile(icon: Icons.system_update_rounded, color: AppColors.teal, title: 'تحديث الأبلكيشن', sub: 'تحديث إجباري أو اقتراح تحديث لأبلكيشن الأطفال', onTap: () => _go(const UpdateScreen())),
         _Tile(icon: Icons.notifications_active_rounded, color: AppColors.goldDark, title: 'الإشعارات', sub: 'ابعتي إشعار لكل الأطفال', onTap: () => _go(const NotifyScreen())),
         _Tile(icon: Icons.cloud_download_rounded, color: AppColors.navy, title: 'استيراد المحتوى الأولي', sub: 'مرة واحدة في البداية', onTap: _seed),
+        _Tile(icon: Icons.bedtime_rounded, color: const Color(0xFF9B7BEA), title: 'المستويات: ٥ مستويات آداب', sub: 'بينضّف قسم المستويات ويحط ٥ خرايط جبال', onTap: _adab),
       ]),
     );
   }

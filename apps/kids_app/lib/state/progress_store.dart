@@ -69,6 +69,9 @@ class ProgressStore extends ChangeNotifier {
   int? bukhariStart;
   /// الأصوات والاهتزاز.
   bool soundOn = true;
+  /// «كيس» الألعاب: كل الألعاب متلخبطة وبتطلع واحدة واحدة، ومفيش لعبة بتتكرر غير لما الكيس يخلص.
+  List<String> gameBag = [];
+  String lastGame = '';
 
   bool get ar => lang == 'ar';
 
@@ -94,6 +97,8 @@ class ProgressStore extends ChangeNotifier {
         s.showMe = (j['showMe'] ?? true) as bool;
         s.bukhariStart = j['bukhariStart'] as int?;
         s.soundOn = (j['soundOn'] ?? true) as bool;
+        s.gameBag = List<String>.from((j['gameBag'] ?? const []) as List);
+        s.lastGame = (j['lastGame'] ?? '') as String;
       } catch (e) {
         debugPrint('progress load failed: $e');
       }
@@ -121,6 +126,8 @@ class ProgressStore extends ChangeNotifier {
         'showMe': showMe,
         'bukhariStart': bukhariStart,
         'soundOn': soundOn,
+        'gameBag': gameBag,
+        'lastGame': lastGame,
       }),
     );
   }
@@ -165,6 +172,11 @@ class ProgressStore extends ChangeNotifier {
     _changed();
   }
 
+  /// مستوى خريطة (زي الآداب) بيكمل لما كل أقسامه تخلص.
+  void completeLevel(String id) {
+    if (completedLevels.add(id)) _changed();
+  }
+
   void toggleKnown(String key, {required String sectionId, required int sectionSize}) {
     if (known.contains(key)) {
       known.remove(key);
@@ -192,6 +204,18 @@ class ProgressStore extends ChangeNotifier {
     _changed();
   }
 
+  /// أي حديث الطفل خلّصه وليه مهمة بتتسجله مهمته، حتى لو كسبه قبل ما المدير يضيف المهمة.
+  void syncMissions(Iterable<Hadith> hadiths) {
+    var changed = false;
+    for (final h in hadiths) {
+      if (isDone(h.id) && h.mission(true).trim().isNotEmpty && !missions.containsKey(h.id)) {
+        missions[h.id] = 'pending';
+        changed = true;
+      }
+    }
+    if (changed) _changed();
+  }
+
   /// كل المهمات المعلّقة.
   List<String> get pendingMissions => missions.entries.where((e) => e.value == 'pending').map((e) => e.key).toList();
 
@@ -204,6 +228,29 @@ class ProgressStore extends ChangeNotifier {
     locOk = v;
     if (v) showMe = true;
     _changed();
+  }
+
+  /// اللعبة الجاية من الكيس.
+  /// all: كل أسامي الألعاب. allowed: اللعبة تنفع مع الحديث ده ولا لأ. avoid: ألعاب ما تطلعش دلوقتي (زي لعبة الحديث الأولى).
+  /// (من غير notifyListeners عشان بتتنده وقت بناء شاشة اللعبة)
+  String nextGame(List<String> all, {required bool Function(String) allowed, Set<String> avoid = const {}}) {
+    for (var attempt = 0; attempt < 2; attempt++) {
+      if (gameBag.isEmpty || attempt == 1) {
+        final fresh = [...all]..shuffle();
+        // أول لعبة في الكيس الجديد ما تبقاش نفس آخر لعبة اتلعبت
+        if (fresh.length > 1 && fresh.first == lastGame) fresh.add(fresh.removeAt(0));
+        gameBag = attempt == 1 ? [...gameBag, ...fresh] : fresh;
+      }
+      final i = gameBag.indexWhere((g) => all.contains(g) && allowed(g) && !avoid.contains(g) && g != lastGame);
+      if (i != -1) {
+        lastGame = gameBag.removeAt(i);
+        _save();
+        return lastGame;
+      }
+    }
+    lastGame = all.firstWhere((g) => allowed(g) && !avoid.contains(g), orElse: () => all.first);
+    _save();
+    return lastGame;
   }
 
   void setSound(bool v) {
@@ -256,6 +303,8 @@ class ProgressStore extends ChangeNotifier {
     locOk = false;
     showMe = true;
     bukhariStart = null;
+    gameBag = [];
+    lastGame = '';
     await _prefs.remove(_key);
     notifyListeners();
   }

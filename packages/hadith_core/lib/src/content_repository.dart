@@ -40,6 +40,13 @@ class ContentRepository {
         return list;
       });
 
+  /// أقسام مستوى (زي جبال خريطة الآداب).
+  Stream<List<Level>> childLevels(String parentId) => _levels.where('parentId', isEqualTo: parentId).snapshots().map((s) {
+        final list = s.docs.map(Level.fromDoc).toList();
+        list.sort((a, b) => a.order.compareTo(b.order));
+        return list;
+      });
+
   Stream<List<Level>> allLevels() => _levels.snapshots().map((s) {
         final list = s.docs.map(Level.fromDoc).toList();
         list.sort((a, b) => a.order.compareTo(b.order));

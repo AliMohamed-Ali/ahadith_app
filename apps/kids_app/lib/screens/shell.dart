@@ -1,9 +1,13 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:hadith_core/hadith_core.dart';
 import 'package:provider/provider.dart';
 
-import '../services/sounds.dart';
 import '../l10n.dart';
+import '../services/sounds.dart';
+import '../state/progress_store.dart';
+import '../widgets/fanoos.dart';
 import 'fanoos_screen.dart';
 import 'garden_screen.dart';
 import 'home_screen.dart';
@@ -20,6 +24,49 @@ class Shell extends StatefulWidget {
 class _ShellState extends State<Shell> {
   int _index = 0;
   late final Stream<List<AppTab>> _tabs = context.read<ContentRepository>().tabs(onlyVisible: true);
+
+  @override
+  void initState() {
+    super.initState();
+    // الطفل راجع تاني: فانوس بيرحّب بيه
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final p = context.read<ProgressStore>();
+      if (mounted && (p.profile != null || p.doneCount.isNotEmpty)) _welcomeBack(p);
+      // مهمات الأحاديث اللي الطفل خلّصها قبل ما المهمة تتضاف
+      if (p.doneCount.isNotEmpty) {
+        context.read<ContentRepository>().hadithsByIds(p.doneCount.keys).then(p.syncMissions).catchError((Object e) => debugPrint('missions sync failed: $e'));
+      }
+    });
+  }
+
+  Future<void> _welcomeBack(ProgressStore p) async {
+    final ar = S.ar(context);
+    final name = p.profile?.name.trim() ?? '';
+    final line = S.of(context, 'welcomeBack${math.Random().nextInt(5) + 1}', {'name': name.isEmpty ? S.of(context, 'champ') : name});
+    Sounds.play(Sfx.star);
+    await showDialog<void>(
+      context: context,
+      builder: (c) => Dialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(22, 22, 22, 16),
+          child: Column(mainAxisSize: MainAxisSize.min, children: [
+            const Fanoos(size: 100, mood: FanoosMood.happy),
+            const SizedBox(height: 10),
+            Text(S.of(c, 'welcomeBackTitle'), textAlign: TextAlign.center, style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w800, color: AppColors.teal)),
+            const SizedBox(height: 6),
+            Text(line, textAlign: TextAlign.center, style: const TextStyle(fontSize: 18, height: 1.5)),
+            if (p.doneCount.isNotEmpty) ...[
+              const SizedBox(height: 8),
+              Text(S.of(c, 'welcomeBackCount', {'n': arNum(p.doneCount.length, arabic: ar)}), textAlign: TextAlign.center, style: const TextStyle(fontSize: 15, color: AppColors.muted)),
+            ],
+            const SizedBox(height: 14),
+            FilledButton(style: FilledButton.styleFrom(minimumSize: const Size.fromHeight(50)), onPressed: () => Navigator.pop(c), child: Text(S.of(c, 'letsContinue'))),
+          ]),
+        ),
+      ),
+    );
+  }
 
   void goTo(int i) {
     if (i != _index) Sounds.play(Sfx.tap);

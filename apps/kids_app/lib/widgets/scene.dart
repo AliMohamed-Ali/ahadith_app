@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -25,7 +26,8 @@ class SceneArt extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (url.isNotEmpty) {
-      return Image.network(url, fit: fit, errorBuilder: (_, __, ___) => fallback, loadingBuilder: (c, child, p) => p == null ? child : const Center(child: CircularProgressIndicator()));
+      // الصورة بتتحفظ على الموبايل فبتفتح بعد كده من غير نت
+      return CachedNetworkImage(imageUrl: url, fit: fit, errorWidget: (_, __, ___) => fallback, placeholder: (_, __) => const Center(child: CircularProgressIndicator()));
     }
     if (asset.isEmpty) return fallback;
     return FutureBuilder<String?>(

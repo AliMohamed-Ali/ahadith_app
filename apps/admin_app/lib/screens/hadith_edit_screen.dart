@@ -242,7 +242,14 @@ class _HadithEditScreenState extends State<HadithEditScreen> {
         builder: (context, ls) {
           final tabs = (ts.data ?? const <AppTab>[]).where((x) => x.isHadith).toList();
           final cur = tabs.where((x) => x.id == _tabId).firstOrNull;
-          final levels = (ls.data ?? const <Level>[]).where((l) => l.tabId == _tabId).toList();
+          // الحديث بيتحط في جبل أو مستوى عادي، مش في مستوى الخريطة نفسه
+          final all = (ls.data ?? const <Level>[]).where((l) => l.tabId == _tabId).toList();
+          final levels = all.where((l) => !l.isMap).toList();
+          String label(Level l) {
+            if (l.parentId == null) return l.nameAr;
+            final p = all.where((x) => x.id == l.parentId).firstOrNull;
+            return '${l.icon.isEmpty ? '' : '${l.icon} '}${l.nameAr}${p == null ? '' : ' (${p.nameAr})'}';
+          }
           _needsLevel = cur?.hasLevels ?? false;
           return FormSection(title: 'مكان الحديث', icon: Icons.place_rounded, children: [
             Choice<String>(
@@ -260,7 +267,7 @@ class _HadithEditScreenState extends State<HadithEditScreen> {
                   : Choice<String?>(
                       label: 'المستوى',
                       value: _levelId,
-                      options: {for (final l in levels) l.id: l.nameAr},
+                      options: {for (final l in levels) l.id: label(l)},
                       onChanged: (v) => setState(() => _levelId = v),
                     ),
           ]);

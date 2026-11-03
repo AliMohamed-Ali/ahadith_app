@@ -179,7 +179,7 @@ class _AdventureGameState extends State<AdventureGame> with SingleTickerProvider
       _dist += _speed * dt;
       _hurt = math.max(0, _hurt - dt);
       if (_jump >= 0) {
-        _jump += dt / .85;
+        _jump += dt / _jumpTime;
         // بعد الفوز الطفل يفضل ينط من الفرحة
         if (_jump >= 1) _jump = _won ? 0 : -1;
       }
@@ -194,14 +194,27 @@ class _AdventureGameState extends State<AdventureGame> with SingleTickerProvider
           continue;
         }
         it.x += _speed * dt;
-        if (!_won && (it.x - _kidX).abs() < 46 && (_itemY(it.air) - kidY).abs() < 58) _hit(it);
+        if (!_won && _touches(it, kidY)) _hit(it);
       }
       _items.removeWhere((it) => it.fx >= 1 || it.x > _size.width + 100);
     });
   }
 
+  /// مدة النطة بالثواني.
+  static const _jumpTime = 1.0;
+
+  /// الكلمة الصح سهلة المسك، والغلط بتتحسب بس لو الطفل فعلًا خبط فيها:
+  /// اللي على الأرض لو رجليه قريبة من الأرض، واللي فوق لو هو عالي.
+  bool _touches(_Item it, double kidY) {
+    final dx = (it.x - _kidX).abs();
+    if (it.word == _next) return dx < 52 && (_itemY(it.air) - kidY).abs() < 70;
+    if (dx > 26) return false;
+    return it.air ? _kidLift > _jumpH * .45 : _kidLift < 24;
+  }
+
   void _spawn() {
-    _nextSpawn = 1.25 + _rnd.nextDouble() * .5;
+    // مسافة كفاية بين الكلمات: الطفل ينط وينزل ويلحق يجهز للي بعدها
+    _nextSpawn = 2.0 + _rnd.nextDouble() * .6;
     final first = _got == 0 && _items.isEmpty;
     final nextAlive = _items.any((it) => it.good == null && it.word == _next);
     final others = _decoys.where((w) => w != _next).toList();

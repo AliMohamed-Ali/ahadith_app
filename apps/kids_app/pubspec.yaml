@@ -1,6 +1,6 @@
 name: kids_app
 description: أحاديث الصغار — أبلكيشن الأطفال.
-version: 1.0.0+3
+version: 1.0.0+4
 publish_to: none
 
 environment:
@@ -29,6 +29,7 @@ dependencies:
   audioplayers: ^6.7.1
   package_info_plus: ^9.0.1
   url_launcher: ^6.3.2
+  cached_network_image: ^3.4.1
 
 dev_dependencies:
   flutter_test:

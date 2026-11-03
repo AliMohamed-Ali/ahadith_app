@@ -26,9 +26,24 @@ class _NotifyScreenState extends State<NotifyScreen> {
     final ok = await confirm(context, 'إرسال لكل الأطفال؟', '«${_title.text.trim()}»\n${_body.text.trim()}', ok: 'ابعتي');
     if (!ok || !mounted) return;
     setState(() => _busy = true);
-    final sent = await run(context, () async {
+    var sent = false;
+    try {
       await FirebaseFunctions.instanceFor(region: 'europe-west1').httpsCallable('sendKidsNotification').call({'title': _title.text.trim(), 'body': _body.text.trim()});
-    }, done: 'اتبعت ✓');
+      sent = true;
+      if (mounted) toast(context, 'اتبعت ✓');
+    } on FirebaseFunctionsException catch (e) {
+      // رسالة واضحة بدل كلام Firebase
+      final why = switch (e.code) {
+        'not-found' || 'unimplemented' || 'internal' || 'unavailable' =>
+          'دالة الإشعارات مش مرفوعة على Firebase لسه. محتاجة باقة Blaze وبعدين firebase deploy --only functions (التفاصيل في FIREBASE_CHECKLIST.md).',
+        'permission-denied' => 'الحساب ده مش مدير.',
+        'unauthenticated' => 'سجّلي الدخول تاني.',
+        _ => 'حصل خطأ: ${e.message ?? e.code}',
+      };
+      if (mounted) toast(context, why, error: true);
+    } catch (e) {
+      if (mounted) toast(context, 'حصل خطأ: $e', error: true);
+    }
     if (!mounted) return;
     setState(() => _busy = false);
     if (sent) {

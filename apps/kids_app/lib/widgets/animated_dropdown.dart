@@ -3,9 +3,11 @@ import 'package:hadith_core/hadith_core.dart';
 
 /// قائمة منسدلة متحركة (نفس شكل النموذج): تفتح بنعومة والسهم يلف والاختيارات تنزل ورا بعض.
 class AnimatedDropdown<T> extends StatefulWidget {
-  const AnimatedDropdown({super.key, required this.items, required this.labelOf, required this.onChanged, this.value, this.placeholder = '', this.icon, this.maxListHeight = 260});
+  const AnimatedDropdown({super.key, required this.items, required this.labelOf, required this.onChanged, this.value, this.placeholder = '', this.icon, this.maxListHeight = 260, this.subOf});
   final List<T> items;
   final String Function(T) labelOf;
+  /// سطر صغير تحت كل اختيار (مثلًا نبذة عن المستوى).
+  final String Function(T)? subOf;
   final ValueChanged<T> onChanged;
   final T? value;
   final String placeholder;
@@ -87,12 +89,18 @@ class _AnimatedDropdownState<T> extends State<AnimatedDropdown<T>> {
                             widget.onChanged(it);
                             setState(() => _open = false);
                           },
-                          child: SizedBox(
-                            height: 46,
+                          child: ConstrainedBox(
+                            constraints: const BoxConstraints(minHeight: 46),
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 12),
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                               child: Row(children: [
-                                Expanded(child: Text(widget.labelOf(it), style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700))),
+                                Expanded(
+                                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisSize: MainAxisSize.min, children: [
+                                    Text(widget.labelOf(it), style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
+                                    if ((widget.subOf?.call(it) ?? '').isNotEmpty)
+                                      Text(widget.subOf!(it), style: const TextStyle(fontSize: 13, color: AppColors.muted, height: 1.3)),
+                                  ]),
+                                ),
                                 if (sel) const Icon(Icons.check_rounded, color: AppColors.teal),
                               ]),
                             ),

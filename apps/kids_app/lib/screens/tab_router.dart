@@ -6,6 +6,7 @@ import '../l10n.dart';
 import '../state/progress_store.dart';
 import '../widgets/common.dart';
 import 'bukhari_screen.dart';
+import 'mountain_map_screen.dart';
 import 'qa_screen.dart';
 import 'river_screen.dart';
 
@@ -19,8 +20,18 @@ void openTab(BuildContext context, AppTab tab) {
   ));
 }
 
+/// المستوى بيتفتح بس لما اللي قبله يخلص كله.
+bool levelLocked(List<Level> levels, int i, ProgressStore p) => i > 0 && !p.completedLevels.contains(levels[i - 1].id);
+
+void showLevelLocked(BuildContext context, Level previous) {
+  ScaffoldMessenger.of(context)
+    ..hideCurrentSnackBar()
+    ..showSnackBar(SnackBar(behavior: SnackBarBehavior.floating, content: Text(S.of(context, 'levelLocked', {'name': previous.name(S.ar(context))}))));
+}
+
 void openLevel(BuildContext context, AppTab tab, Level level) {
-  Navigator.of(context).push(MaterialPageRoute(builder: (_) => RiverScreen(tab: tab, level: level)));
+  // مستوى فيه أقسام (زي الآداب) بيفتح خريطة الجبال، والباقي بيفتح النهر على طول
+  Navigator.of(context).push(MaterialPageRoute(builder: (_) => level.isMap ? MountainMapScreen(tab: tab, level: level) : RiverScreen(tab: tab, level: level)));
 }
 
 /// محتوى التبويب نفسه (يُستخدم داخل الشريط السفلي أو في صفحة مستقلة).
@@ -59,7 +70,8 @@ class _LevelsListState extends State<LevelsList> {
     return StreamBuilder<List<Level>>(
       stream: _levels,
       builder: (context, snap) {
-        final levels = snap.data ?? const <Level>[];
+        // الأقسام اللي جوه مستوى (زي جبال الآداب) مش بتظهر هنا
+        final levels = (snap.data ?? const <Level>[]).where((l) => l.parentId == null).toList();
         return ListView(
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
           children: [
@@ -75,16 +87,18 @@ class _LevelsListState extends State<LevelsList> {
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 14),
                   child: BigTile(
-                    color: hexColor(levels[i].color, AppColors.gold),
+                    color: levelLocked(levels, i, p) ? const Color(0xFFC9CED6) : hexColor(levels[i].color, AppColors.gold),
                     shadow: Colors.black12,
-                    onTap: () => openLevel(context, tab, levels[i]),
+                    onTap: () => levelLocked(levels, i, p) ? showLevelLocked(context, levels[i - 1]) : openLevel(context, tab, levels[i]),
                     child: Row(children: [
                       CircleAvatar(
                         radius: 26,
                         backgroundColor: Colors.white,
                         child: p.completedLevels.contains(levels[i].id)
                             ? const RoyalStarIcon(size: 28)
-                            : Text(arNum(i + 1, arabic: ar), style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w800, color: AppColors.navy)),
+                            : (levelLocked(levels, i, p)
+                                ? const Icon(Icons.lock_rounded, color: AppColors.muted, size: 28)
+                                : Text(arNum(i + 1, arabic: ar), style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w800, color: AppColors.navy))),
                       ),
                       const SizedBox(width: 14),
                       Expanded(

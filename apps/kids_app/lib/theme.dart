@@ -9,6 +9,10 @@ ThemeData buildKidsTheme() {
     scaffoldBackgroundColor: AppColors.mint,
   );
   return base.copyWith(
+    pageTransitionsTheme: const PageTransitionsTheme(builders: {
+      TargetPlatform.android: PopPageTransitionsBuilder(),
+      TargetPlatform.iOS: PopPageTransitionsBuilder(),
+    }),
     textTheme: GoogleFonts.balooBhaijaan2TextTheme(base.textTheme).apply(bodyColor: AppColors.navy, displayColor: AppColors.navy),
     appBarTheme: AppBarTheme(
       backgroundColor: AppColors.navy,
@@ -41,6 +45,22 @@ ThemeData buildKidsTheme() {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
     ),
   );
+}
+
+/// انتقال مرح بين الشاشات: الجديدة بتكبر بنطة وبتظهر، والقديمة بتصغر شوية ورا.
+class PopPageTransitionsBuilder extends PageTransitionsBuilder {
+  const PopPageTransitionsBuilder();
+  @override
+  Widget buildTransitions<T>(PageRoute<T> route, BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+    final inCurve = CurvedAnimation(parent: animation, curve: Curves.easeOutBack, reverseCurve: Curves.easeIn);
+    return FadeTransition(
+      opacity: CurvedAnimation(parent: animation, curve: const Interval(0, .6)),
+      child: ScaleTransition(
+        scale: Tween(begin: .88, end: 1.0).animate(inCurve),
+        child: ScaleTransition(scale: Tween(begin: 1.0, end: .96).animate(secondaryAnimation), child: child),
+      ),
+    );
+  }
 }
 
 /// خط نصوص الأحاديث.

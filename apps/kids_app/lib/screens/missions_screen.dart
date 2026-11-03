@@ -23,7 +23,12 @@ class _MissionsScreenState extends State<MissionsScreen> {
     final k = (ids.toList()..sort()).join(',');
     if (_future == null || k != _key) {
       _key = k;
-      _future = context.read<ContentRepository>().hadithsByIds(ids);
+      final p = context.read<ProgressStore>();
+      _future = context.read<ContentRepository>().hadithsByIds(ids).then((hs) {
+        // مهمات الأحاديث اللي اتلعبت قبل ما المهمة تتضاف
+        WidgetsBinding.instance.addPostFrameCallback((_) => p.syncMissions(hs));
+        return hs;
+      });
     }
     return _future!;
   }
@@ -35,7 +40,7 @@ class _MissionsScreenState extends State<MissionsScreen> {
     return Scaffold(
       appBar: AppBar(title: Text(S.of(context, 'missions')), backgroundColor: AppColors.coral),
       body: FutureBuilder<List<Hadith>>(
-        future: _byIds(p.missions.keys),
+        future: _byIds({...p.missions.keys, ...p.doneCount.keys}),
         builder: (context, snap) {
           final byId = {for (final h in snap.data ?? const <Hadith>[]) h.id: h};
           final entries = p.missions.entries.where((e) => byId.containsKey(e.key)).toList()

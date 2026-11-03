@@ -87,7 +87,22 @@ class AppTab {
 
 /// مستوى داخل تبويب أحاديث بمستويات. عددها غير محدود.
 class Level {
-  Level({required this.id, required this.tabId, required this.nameAr, this.nameEn = '', this.ageAr = '', this.ageEn = '', this.color = '#FFD465', this.order = 0, this.ageYear = 0, this.hadithIds = const []});
+  Level({
+    required this.id,
+    required this.tabId,
+    required this.nameAr,
+    this.nameEn = '',
+    this.ageAr = '',
+    this.ageEn = '',
+    this.color = '#FFD465',
+    this.order = 0,
+    this.ageYear = 0,
+    this.hadithIds = const [],
+    this.parentId,
+    this.style = '',
+    this.icon = '',
+    this.descAr = '',
+  });
 
   final String id;
   final String tabId;
@@ -99,8 +114,18 @@ class Level {
   final int order;
   /// لدروس البخاري: السن (4 لـ 12)، و0 للمستويات العادية.
   final int ageYear;
-  /// لدروس البخاري: أحاديث الدرس (عشان التقدم يتحسب من غير ما نحمّلها).
+  /// لدروس البخاري وأقسام الخريطة: أحاديث الدرس (عشان التقدم يتحسب من غير ما نحمّلها).
   final List<String> hadithIds;
+  /// لو المستوى قسم جوه مستوى تاني (زي أقسام خريطة الآداب).
+  final String? parentId;
+  /// 'mountains' = المستوى بيفتح خريطة جبال، وكل جبل قسم (مستوى ابن) بنهر أحاديثه.
+  final String style;
+  /// إيموجي القسم على الخريطة.
+  final String icon;
+  /// وصف أو ملحوظة بتظهر فوق الخريطة أو جوه القسم.
+  final String descAr;
+
+  bool get isMap => style == 'mountains';
 
   String name(bool ar) => ar || nameEn.isEmpty ? nameAr : nameEn;
   String age(bool ar) => ar || ageEn.isEmpty ? ageAr : ageEn;
@@ -116,6 +141,10 @@ class Level {
         order: _i(j['order']),
         ageYear: _i(j['ageYear']),
         hadithIds: ((j['hadithIds'] as List?) ?? const []).map(_s).toList(),
+        parentId: _s(j['parentId']).isEmpty ? null : _s(j['parentId']),
+        style: _s(j['style']),
+        icon: _s(j['icon']),
+        descAr: _s(j['descAr']),
       );
 
   factory Level.fromDoc(DocumentSnapshot<Json> d) => Level.fromJson(d.id, d.data() ?? {});
@@ -130,6 +159,10 @@ class Level {
         'order': order,
         if (ageYear > 0) 'ageYear': ageYear,
         if (hadithIds.isNotEmpty) 'hadithIds': hadithIds,
+        if (parentId != null) 'parentId': parentId,
+        if (style.isNotEmpty) 'style': style,
+        if (icon.isNotEmpty) 'icon': icon,
+        if (descAr.isNotEmpty) 'descAr': descAr,
       };
 
   Level copyWith({String? nameAr, String? nameEn, String? ageAr, String? ageEn, String? color, int? order}) => Level(
@@ -143,6 +176,10 @@ class Level {
         order: order ?? this.order,
         ageYear: ageYear,
         hadithIds: hadithIds,
+        parentId: parentId,
+        style: style,
+        icon: icon,
+        descAr: descAr,
       );
 }
 
@@ -262,7 +299,8 @@ class Hadith {
   String shareText(bool ar) {
     if (isnadInText) return '$text${sourceAr.isNotEmpty ? '\n$sourceAr' : ''}';
     final ref = ar
-        ? (narratorGenAr.isNotEmpty ? 'عن $narratorGenAr رضي الله عنه · $sourceAr' : sourceAr)
+        // لو الترضّي مكتوب مع الاسم (عنه/عنها/عنهما) بيتساب زي ما هو
+        ? (narratorGenAr.isNotEmpty ? 'عن $narratorGenAr${narratorGenAr.contains('رضي') ? '' : ' رضي الله عنه'} · $sourceAr' : sourceAr)
         : (narratorEn.isNotEmpty ? 'Narrated by $narratorEn · $sourceEn' : sourceEn);
     return 'قال رسول الله ﷺ: «$text»\n$ref';
   }

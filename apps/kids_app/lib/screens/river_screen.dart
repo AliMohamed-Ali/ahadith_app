@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hadith_core/hadith_core.dart';
 import 'package:provider/provider.dart';
 
+import '../widgets/world_map.dart';
 import '../l10n.dart';
 import '../state/progress_store.dart';
 import '../widgets/common.dart';
@@ -105,6 +106,18 @@ class _RiverScreenState extends State<RiverScreen> with SingleTickerProviderStat
               Text('${arNum(doneN, arabic: ar)} / ${arNum(list.length, arabic: ar)}', style: const TextStyle(fontWeight: FontWeight.w800)),
             ]),
           ),
+          // ملحوظة القسم (زي «ومن القرآن» في الاستئذان)
+          if ((widget.level?.descAr ?? '').isNotEmpty)
+            Container(
+              margin: const EdgeInsets.fromLTRB(16, 6, 16, 0),
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(color: AppColors.cream, borderRadius: BorderRadius.circular(16)),
+              child: Row(children: [
+                const Text('📖', style: TextStyle(fontSize: 22)),
+                const SizedBox(width: 8),
+                Expanded(child: Text(widget.level!.descAr, style: const TextStyle(fontSize: 14, height: 1.5))),
+              ]),
+            ),
           Expanded(
             child: LayoutBuilder(builder: (context, box) {
               final w = box.maxWidth;
@@ -141,11 +154,22 @@ class _RiverScreenState extends State<RiverScreen> with SingleTickerProviderStat
                           ),
                         ),
                       ),
-                    // فانوس واقف عند المحطة الحالية
+                    // فانوس واقف عند المحطة الحالية وبيكلّم الطفل
                     Positioned(
                       left: points[current].dx + (points[current].dx > w / 2 ? -110 : 44),
                       top: points[current].dy - 60,
                       child: const IgnorePointer(child: MyFanoos(size: 52)),
+                    ),
+                    Positioned(
+                      left: (points[current].dx + (points[current].dx > w / 2 ? -110 : 44) - 70).clamp(8.0, w - 198),
+                      top: points[current].dy - 120,
+                      width: 190,
+                      child: IgnorePointer(
+                        child: TalkBubble(lines: [
+                          for (final k in ['riverTalk1', 'riverTalk2', 'riverTalk3'])
+                            S.of(context, k, {'name': (p.profile?.name.trim().isEmpty ?? true) ? S.of(context, 'champ') : p.profile!.name.trim()}),
+                        ]),
+                      ),
                     ),
                   ]),
                 ),
@@ -223,7 +247,7 @@ class _StopState extends State<_Stop> with SingleTickerProviderStateMixin {
         AnimatedBuilder(
           animation: _pulse,
           builder: (_, child) => Transform.scale(scale: 1 + _pulse.value * 0.08, child: child),
-          child: GestureDetector(
+          child: Bouncy(
             onTap: widget.onTap,
             child: Container(
               width: 76,

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 
-/// يستورد المحتوى الأولي (المستويات + الأربعون النووية كاملة + ما لا يسع أطفال المسلمين جهله + الإعدادات)
+/// يستورد المحتوى الأولي (الأربعون النووية كاملة + ما لا يسع أطفال المسلمين جهله + الإعدادات)
 /// من ملف assets/seed_content.json إلى Firestore. يُستخدم مرة واحدة في البداية.
 class SeedService {
   SeedService(this.db);

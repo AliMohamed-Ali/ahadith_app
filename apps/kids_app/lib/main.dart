@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -12,8 +14,10 @@ import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'l10n.dart';
 import 'screens/splash_screen.dart';
+import 'services/offline_cache.dart';
 import 'services/sounds.dart';
 import 'state/progress_store.dart';
+import 'widgets/cheer_overlay.dart';
 import 'widgets/update_gate.dart';
 import 'theme.dart';
 
@@ -22,25 +26,13 @@ Future<void> main() async {
   // الخطوط متخزنة في assets/google_fonts، فمش محتاجين نحمّلها من النت.
   GoogleFonts.config.allowRuntimeFetching = false;
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  // تسجيل مجهول: لا يطلب أي بيانات من الطفل، ويُستخدم فقط للوحة الشرف.
-  try {
-    if (FirebaseAuth.instance.currentUser == null) {
-      await FirebaseAuth.instance.signInAnonymously();
-    }
-  } catch (e) {
-    debugPrint('anonymous sign-in failed: $e');
-  }
-  if (!kIsWeb) {
-    try {
-      await FirebaseMessaging.instance.requestPermission();
-      await FirebaseMessaging.instance.subscribeToTopic('kids');
-    } catch (e) {
-      debugPrint('messaging setup failed: $e');
-    }
-  }
+  // كاش على الموبايل من غير حد: أي حاجة اتفتحت قبل كده بتفتح من غير نت
+  if (!kIsWeb) FirebaseFirestore.instance.settings = const Settings(persistenceEnabled: true, cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED);
   // الأصوات بتتحمّل مع بيانات الطفل في نفس الوقت
   final (progress, _) = await (ProgressStore.load(), Sounds.init()).wait;
   final repo = ContentRepository(FirebaseFirestore.instance);
+  // الحاجات اللي محتاجة نت بتشتغل في الخلفية، عشان الأبلكيشن يفتح على طول حتى من غير نت
+  unawaited(_online(progress));
 
   runApp(
     MultiProvider(
@@ -63,6 +55,27 @@ TextScaler appTextScaler(MediaQueryData mq) {
   return TextScaler.linear((byScreen * bySystem.clamp(.9, 1.2)).clamp(.85, 1.35));
 }
 
+/// تسجيل مجهول + اشتراك الإشعارات + تحميل المحتوى للكاش. كله في الخلفية وبحد أقصى للوقت.
+Future<void> _online(ProgressStore progress) async {
+  // تسجيل مجهول: لا يطلب أي بيانات من الطفل، ويُستخدم فقط للوحة الشرف.
+  try {
+    if (FirebaseAuth.instance.currentUser == null) {
+      await FirebaseAuth.instance.signInAnonymously().timeout(const Duration(seconds: 15));
+    }
+  } catch (e) {
+    debugPrint('anonymous sign-in failed: $e');
+  }
+  if (!kIsWeb) {
+    try {
+      await FirebaseMessaging.instance.requestPermission();
+      await FirebaseMessaging.instance.subscribeToTopic('kids').timeout(const Duration(seconds: 15));
+    } catch (e) {
+      debugPrint('messaging setup failed: $e');
+    }
+  }
+  await OfflineCache.warm(FirebaseFirestore.instance, bukhariYear: progress.bukhariStart);
+}
+
 class KidsApp extends StatelessWidget {
   const KidsApp({super.key});
 
@@ -82,7 +95,7 @@ class KidsApp extends StatelessWidget {
       ],
       builder: (context, child) => MediaQuery(
         data: MediaQuery.of(context).copyWith(textScaler: appTextScaler(MediaQuery.of(context))),
-        child: UpdateGate(child: RoyalStarListener(child: child ?? const SizedBox())),
+        child: UpdateGate(child: CheerOverlay(child: RoyalStarListener(child: child ?? const SizedBox()))),
       ),
       home: const SplashScreen(),
     );

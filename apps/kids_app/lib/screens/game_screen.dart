@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:hadith_core/hadith_core.dart';
 import 'package:provider/provider.dart';
 
+import '../widgets/treasures.dart';
 import '../l10n.dart';
 import '../services/sounds.dart';
 import '../state/progress_store.dart';
@@ -27,10 +28,15 @@ extension on GameKind {
 
 /// ألعاب الحديث: صيد السمك، الفقاعات، القطار، البالونات، رتّب الحديث، النجوم، الفراشات،
 /// و10 مغامرات الطفل بيجري فيها ويجمع كلمات الحديث.
-/// تتبدل حسب ترتيب الحديث.
+/// تتبدل حسب ترتيب الحديث، وكل حديث ليه لعبتين مختلفتين ورا بعض.
 class GameScreen extends StatefulWidget {
-  const GameScreen({super.key, required this.flow});
+  const GameScreen({super.key, required this.flow, this.round = 0, this.previous});
   final FlowCtx flow;
+  /// رقم اللعبة على الحديث ده (من 0).
+  final int round;
+  /// اللعبة اللي اتلعبت قبلها على نفس الحديث (عشان التانية تبقى مختلفة).
+  final GameKind? previous;
+  static const rounds = 2;
   @override
   State<GameScreen> createState() => _GameScreenState();
 }
@@ -38,20 +44,36 @@ class GameScreen extends StatefulWidget {
 class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
   late GameKind kind = _chooseKind();
   late final List<String> options = [...widget.flow.hadith.game.options]..shuffle(math.Random());
-  late final AnimationController _clock = AnimationController(vsync: this, duration: const Duration(seconds: 60))..repeat();
-  late final AnimationController _leave = AnimationController(vsync: this, duration: const Duration(milliseconds: 1100));
+  // بيتعملوا في initState (مش lazy) عشان ما يتعملوش لأول مرة وقت dispose في الألعاب اللي مش بتستخدمهم
+  late final AnimationController _clock;
+  late final AnimationController _leave;
   final Set<String> _wrong = {};
   bool _solved = false;
 
   Hadith get h => widget.flow.hadith;
   double get _sec => _clock.value * 60;
 
+  @override
+  void initState() {
+    super.initState();
+    _clock = AnimationController(vsync: this, duration: const Duration(seconds: 60))..repeat();
+    _leave = AnimationController(vsync: this, duration: const Duration(milliseconds: 1100));
+  }
+
+  /// اللعبة بتطلع من «كيس» الطفل: كل الألعاب بتتلف عليها بالدور ومفيش تكرار غير لما كلها تطلع،
+  /// واللعبة التانية على نفس الحديث دايمًا غير الأولى.
   GameKind _chooseKind() {
-    final k = GameKind.values[widget.flow.index % GameKind.values.length];
-    // لعبة الترتيب محتاجة جملة مش طويلة قوي ولا قصيرة قوي.
-    if (k == GameKind.order && !_OrderGame.fits(h.game)) return GameKind.balloons;
-    if (k == GameKind.puzzle && !PuzzleGame.fits(h.game)) return GameKind.bubbles;
-    return k;
+    final name = context.read<ProgressStore>().nextGame(
+      [for (final k in GameKind.values) k.name],
+      // لعبة الترتيب والبازل محتاجين جملة مناسبة
+      allowed: (g) => switch (GameKind.values.byName(g)) {
+        GameKind.order => _OrderGame.fits(h.game),
+        GameKind.puzzle => PuzzleGame.fits(h.game),
+        _ => true,
+      },
+      avoid: {if (widget.previous != null) widget.previous!.name},
+    );
+    return GameKind.values.byName(name);
   }
 
   /// للتجربة بس (Debug): ينقل للعبة اللي بعدها على نفس الحديث.
@@ -90,8 +112,39 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
     }
   }
 
-  void _win() {
+  Future<void> _win() async {
     if (!mounted) return;
+    // لسه فيه لعبة تانية على نفس الحديث
+    if (h.game.isValid && widget.round < GameScreen.rounds - 1) {
+      Sounds.play(Sfx.levelUp);
+      await showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (c) {
+          Future.delayed(const Duration(milliseconds: 1500), () {
+            if (c.mounted) Navigator.of(c).pop();
+          });
+          return Dialog(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
+            child: Padding(
+              padding: const EdgeInsets.all(24),
+              child: Column(mainAxisSize: MainAxisSize.min, children: [
+                const Fanoos(size: 90, mood: FanoosMood.happy),
+                const SizedBox(height: 10),
+                Text(S.of(context, 'nextGame'), textAlign: TextAlign.center, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: AppColors.teal)),
+              ]),
+            ),
+          );
+        },
+      );
+      if (!mounted) return;
+      Navigator.of(context).pushReplacement(PageRouteBuilder(
+        transitionDuration: const Duration(milliseconds: 400),
+        pageBuilder: (_, __, ___) => GameScreen(flow: widget.flow, round: widget.round + 1, previous: kind),
+        transitionsBuilder: (_, a, __, child) => FadeTransition(opacity: a, child: child),
+      ));
+      return;
+    }
     final p = context.read<ProgressStore>();
     final f = widget.flow;
     p.winGame(h, openTab: f.openTab, levelId: f.level?.id, levelHadithIds: f.tab.usesLevels ? f.levelHadithIds : null);
@@ -126,7 +179,16 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
     };
     return Scaffold(
       backgroundColor: bg,
-      appBar: AppBar(title: Text(S.of(context, titleKey)), actions: [
+      appBar: AppBar(
+          title: Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisSize: MainAxisSize.min, children: [
+            Text(S.of(context, titleKey)),
+            if (g.isValid)
+              Text(
+                S.of(context, 'gameRound', {'i': arNum(widget.round + 1, arabic: ar), 'n': arNum(GameScreen.rounds, arabic: ar)}),
+                style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: Colors.white70),
+              ),
+          ]),
+          actions: [
         if (kDebugMode) IconButton(tooltip: 'Next game (debug)', icon: const Icon(Icons.skip_next_rounded), onPressed: _debugNextKind),
       ]),
       body: !g.isValid
@@ -923,9 +985,16 @@ Future<void> showWinSheet(BuildContext context, FlowCtx f) async {
             Column(children: [
               Text(S.of(ctx, 'winTitle'), style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w800, color: AppColors.teal)),
               const SizedBox(height: 6),
-              PlantView(stage: stage, petal: const Color(0xFFF27BA6), size: 80),
+              // أول مرة يخلّص الحديث: كنز جديد لواحته. مراجعة: النبتة بتكبر
+              if (wins == 1) TreasureReveal(treasure: treasureAt(p.doneCount.length - 1)) else PlantView(stage: stage, petal: const Color(0xFFF27BA6), size: 80),
               const SizedBox(height: 6),
-              Text(S.of(ctx, stage >= 3 ? 'winTree' : 'winPlant'), textAlign: TextAlign.center, style: const TextStyle(fontSize: 17)),
+              Text(
+                wins == 1
+                    ? S.of(ctx, 'winTreasure', {'t': '${treasureAt(p.doneCount.length - 1).emoji} ${treasureAt(p.doneCount.length - 1).name(ar)}'})
+                    : S.of(ctx, stage >= 3 ? 'winTree' : 'winPlant'),
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w700),
+              ),
               const SizedBox(height: 8),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Text('+${arNum(cfg.perGame, arabic: ar)} ', style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w800)),

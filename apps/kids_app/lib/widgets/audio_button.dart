@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hadith_core/hadith_core.dart';
 import 'package:just_audio/just_audio.dart';
@@ -27,7 +28,8 @@ class _AudioButtonState extends State<AudioButton> {
   Future<void> _toggle() async {
     try {
       if (!_loaded) {
-        await _player.setUrl(widget.url);
+        // الصوت بيتحفظ على الموبايل أول ما يتشغّل، فبيشتغل بعد كده من غير نت
+        await _player.setAudioSource(kIsWeb ? AudioSource.uri(Uri.parse(widget.url)) : LockCachingAudioSource(Uri.parse(widget.url)));
         _loaded = true;
       }
       if (_player.playing) {
